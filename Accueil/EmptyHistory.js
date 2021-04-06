@@ -11,7 +11,7 @@ export default class EmptyHistory extends Component {
         return (
             <View style={styles.container}>
                 <Image style={{ resizeMode: 'contain', justifyContent: 'center', alignSelf: 'center', marginTop : 60 }} source={require('../assets/2.png')} />
-                <Image style={{ resizeMode: 'contain', justifyContent: 'center', alignSelf: 'center', marginTop: 211 }} source={require('../assets/4.png')} />
+                <Image style={{ resizeMode: 'contain', justifyContent: 'center', alignSelf: 'center', marginTop: 150 }} source={require('../assets/4.png')} />
                 <Image style={{ resizeMode: 'contain', justifyContent: 'center', alignSelf: 'center', marginTop: 18 }} source={require('../assets/3.png')} />
                 <Image style={{ resizeMode: 'contain', justifyContent: 'center', alignSelf: 'center', marginTop: 18 }} source={require('../assets/aaz.png')} />
                 <TouchableOpacity activeOpacity={0.8} style={styles.btnContainer} >

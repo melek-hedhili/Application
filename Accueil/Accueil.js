@@ -1,6 +1,8 @@
 import React, { Component, state } from 'react';
 import { StyleSheet, Text, View, Image, TouchableOpacity, ScrollView, Dimensions } from 'react-native';
 import Slider from './Slider.js'
+import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
+
 export default class Accueil extends Component {
 
     render() {
@@ -14,7 +16,7 @@ export default class Accueil extends Component {
                 </View>
                 <Text style={{ fontSize: 16, color: '#D05A0B', fontWeight: 'bold', marginLeft: 25, marginTop: -40 }}>The best taste</Text>     
                 
-                <TouchableOpacity activeOpacity={0.8} style={styles.btnContainer} >
+                    <TouchableOpacity onPress={() => this.props.navigation.navigate('Commande')} activeOpacity={0.8} style={styles.btnContainer} >
                     <Text style={{ color: 'white', fontSize: 15, fontWeight: 'bold', letterSpacing: 0.7 }} >Personnaliser votre tacos</Text>
 
                 </TouchableOpacity>
@@ -50,6 +52,40 @@ export default class Accueil extends Component {
                             alignSelf: "center"
                         }}
                     />
+                    <Text style={{ fontSize: 18, color: '#000000', fontWeight: 'bold', marginLeft: 10, marginTop: 15 }}>Notre position</Text>
+                    <View style={styles.specialSection}>
+
+                        <Image style={{ resizeMode: 'contain', justifyContent: 'center', width: 330, height: 310, alignSelf: 'center', borderRadius: 10 }} source={require('../assets/local.png')} />
+
+                 
+
+                    </View>
+                    <View
+                        style={{
+                            marginTop: 20,
+                            borderBottomColor: 'grey',
+                            borderBottomWidth: 1,
+                            width: 250,
+                            alignSelf: "center"
+                        }}
+                    />
+                    <View>
+                        <Text style={{ fontSize: 13, color: '#000000', fontWeight: 'bold', alignSelf: 'center' }} option>Contactez-nous</Text>
+                        <View style={{ flexDirection: 'row', alignItems: 'center', justifyContent: 'center', marginTop: 10 }}>
+                            <MaterialCommunityIcons name="phone" size={18} color={ "green"} />
+                            <Text style={{ fontSize: 8, color: '#000000', fontWeight: 'bold' }} option>+21631185183</Text>
+                        </View>
+                        <View style={{ flexDirection: 'row', alignItems: 'center', justifyContent: 'center', marginTop: 10 }}>
+                            <MaterialCommunityIcons name="facebook" size={18} color={"blue"} />
+                            <Text style={{ fontSize: 8, color: '#000000', fontWeight: 'bold' }} option>Tacos 619</Text>
+                        </View>
+                        <View style={{ flexDirection: 'row', alignItems: 'center', justifyContent: 'center', marginTop: 10 }}>
+                            <MaterialCommunityIcons name="instagram" size={18} color={"orange"} />
+                            <Text style={{ fontSize: 8, color: '#000000', fontWeight: 'bold' }} option>Tacos 619</Text>
+                        </View>
+
+
+                    </View>
 
                 </ScrollView>
             </View>

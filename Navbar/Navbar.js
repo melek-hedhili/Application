@@ -2,28 +2,13 @@ import * as React from 'react';
 import { Text, View } from 'react-native';
 import { NavigationContainer } from '@react-navigation/native';
 import { createMaterialBottomTabNavigator } from '@react-navigation/material-bottom-tabs';
-import { MaterialCommunityIcons } from '@expo/vector-icons';
+import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
+
 import EmptyHistory from '../Accueil/EmptyHistory.js'
 import Profile from '../Accueil/Profile.js'
 import Accueil from '../Accueil/Accueil.js';
 
-function Feed() {
-    return (
-        <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center', backgroundColor:'#F5F5F8' }}>
-            <Text>Feed!</Text>
-        </View>
-    );
-}
 
-
-
-function Notifications() {
-    return (
-        <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center', backgroundColor: '#F5F5F8'}}>
-            <Text>Accueil!</Text>
-        </View>
-    );
-}
 
 const Tab = createMaterialBottomTabNavigator();
 
@@ -72,8 +57,9 @@ function MyTabs() {
 
 export default function Navbar() {
     return (
-        <NavigationContainer>
+
             <MyTabs/>
-        </NavigationContainer>
+
+        
     );
 }

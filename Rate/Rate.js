@@ -1,7 +1,7 @@
 import React, { Component, state } from 'react';
 import { StyleSheet, Text, View, Image, TouchableOpacity, } from 'react-native';
-import { MaterialCommunityIcons } from '@expo/vector-icons';
-import { AntDesign } from '@expo/vector-icons';
+import { MaterialCommunityIcons } from 'react-native-vector-icons/MaterialCommunityIcons';
+import { AntDesign } from 'react-native-vector-icons/AntDesign';
 
 export default class Rate extends Component {
     render() {

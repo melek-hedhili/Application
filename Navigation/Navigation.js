@@ -14,6 +14,9 @@ import Recovery from "../PasswordRecovery/Recovery.js"
 import InputOTPScreen from "../PasswordRecovery/InputOTPScreen.js"
 import PasswordVerificationCode from "../PasswordRecovery/PasswordVerificationCode.js"
 import NewPassword from "../PasswordRecovery/NewPassword.js"
+import MyTabs from '../Navbar/Navbar.js'
+import Commande from '../Order/Commande.js'
+import Panier from '../Panier/Panier.js'
 const Stack = createStackNavigator();
 
 class Navigation extends React.Component {
@@ -67,8 +70,10 @@ class Navigation extends React.Component {
                         options={{ headerShown: false }}
                     />
 
+
                 </Stack.Navigator>
             </NavigationContainer>
+          
         );
     }
 }

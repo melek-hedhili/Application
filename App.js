@@ -11,12 +11,17 @@ import EmptyHistory from './Accueil/EmptyHistory';
 import Accueil from './Accueil/Accueil.js'
 import Slider from './Accueil/Slider.js'
 import Rate from './Rate/Rate.js'
+import Commande from './Order/Commande.js'
+import Checkout from './Panier/Checkout.js'
+import Paiment from './Panier/Paiment.js'
+import Panier from './Panier/Panier.js'
+import Navigation2 from './Navigation/Navigation2.js';
 
 
 class App extends React.Component {
     render() {
         return (
-            <Navbar />
+            <Navigation2 />
         );
     }
 }

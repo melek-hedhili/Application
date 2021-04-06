@@ -117,7 +117,8 @@ const styles = StyleSheet.create({
                         style={styles.mdp}
                     >Mot de passe oublie  ?</Text>
                 </TouchableOpacity>
-                <TouchableOpacity activeOpacity={0.8} style={styles.btnContainer}>
+                <TouchableOpacity onPress={() =>
+                    navigation.navigate('MyTabs')} activeOpacity={0.8} style={styles.btnContainer}>
                     <Text style={{ color: 'white', fontSize: 15, fontWeight: 'bold', letterSpacing: 0.7, }} >Connexion</Text>
 
                 </TouchableOpacity>
