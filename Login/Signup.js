@@ -17,30 +17,34 @@ const Signup = ({ navigation }) => {
                 <TextInput
                     style={styles.input}
                     placeholder="Nom "
+                    placeholderTextColor={'#9FA5C0'}
 
                 />
                 <TextInput
                     style={styles.inputContainer}
-                    placeholder="Prenom" />
+                    placeholder="Prenom"
+                    placeholderTextColor={'#9FA5C0'}/>
                 <TextInput
                     style={styles.inputContainer}
-                    placeholder="Email " />
+                    placeholder="Email "
+                    placeholderTextColor={'#9FA5C0'}/>
 
                 <TextInput
                     style={styles.inputContainerPassword}
                     secureTextEntry={true}
-                    placeholder="Mot de passe" />
+                    placeholder="Mot de passe"
+                    placeholderTextColor={'#9FA5C0'}/>
                 <Text style={{ color: "#3E5481", fontSize: 17, fontFamily: 'arial', fontWeight: 'bold', marginTop: 78, marginLeft: 20 }}>Votre mot de passe doit avoir :</Text>
                 
 
                 <View style={{ flexDirection: "row", backgroundColor: '#F5F5F8', marginTop:16, marginLeft:20 }}>
                     <Image style={styles.tinyLogo}
-                        source={require('../assets/Group 28.png')} />
+                        source={require('../assets/verif.png')} />
                     <Text style={{ color: "#9FA5C0", fontSize: 15, fontFamily: 'arial', fontWeight: 'bold' }}>Au moins 6 characteres</Text>
                 </View>
                 <View style={{ flexDirection: "row", backgroundColor: '#F5F5F8', marginTop: 10, marginLeft: 20}}>
                 <Image style={styles.tinyLogo}
-                    source={require('../assets/Group 28.png')} />
+                    source={require('../assets/verif.png')} />
                     <Text style={{ color: "#9FA5C0", fontSize: 15, fontFamily: 'arial', fontWeight: 'bold' }}>Contient au moins un chiffre</Text>
                 </View>
                 <TouchableOpacity activeOpacity={0.8} style={styles.btnContainer}>
@@ -69,8 +73,8 @@ const styles = StyleSheet.create({
     },
     btnContainer: {
         backgroundColor: "#CB5C17",
-        height: 60,
-        width: '90%',
+        height: 56,
+        width: 327,
         //resizeMode: 'contain',
         borderRadius: 30,
         justifyContent: 'center',
@@ -83,7 +87,7 @@ const styles = StyleSheet.create({
     },
     text: {
         textAlign: 'center',
-        color: "#2E3E5C",
+        color: "#3E5481",
         fontSize: 22,
         fontFamily: 'arial',
         fontWeight: 'bold',
@@ -94,8 +98,8 @@ const styles = StyleSheet.create({
     },
     inputContainerPassword: {
        
-        height: 50,
-        width: '90%',
+        height: 56,
+        width: 327,
         borderRadius: 30,
         flexDirection: 'column',
         backgroundColor: '#FFFFFF',
@@ -105,21 +109,18 @@ const styles = StyleSheet.create({
         //resizeMode: 'contain',
         marginTop: 16,
         paddingHorizontal: 20,
+        borderWidth: 1,
+        borderColor: '#D0DBEA',
     },
     tinyLogo: {
-
-        width: 20,
-
-        
-        
-       
-       
-
+        resizeMode: 'contain',
+        width: 24,
+        height:24
     },
     inputContainer: {
         
-        height: 50,
-        width: '90%',
+        height: 56,
+        width: 327,
         borderRadius: 30,
         flexDirection: 'column',
         backgroundColor: '#FFFFFF',
@@ -129,12 +130,14 @@ const styles = StyleSheet.create({
         //resizeMode: 'contain',
         marginTop: 16,
         paddingHorizontal: 20,
+        borderWidth: 1,
+        borderColor: '#D0DBEA',
     },
     input: {
 
 
-        height: 50,
-        width: '90%',
+        height: 56,
+        width: 327,
         borderRadius: 30,
         flexDirection: 'column',
         backgroundColor: '#FFFFFF',
@@ -144,5 +147,7 @@ const styles = StyleSheet.create({
         //resizeMode: 'contain',
         marginTop: 44,
         paddingHorizontal: 20,
+        borderWidth: 1,
+        borderColor: '#D0DBEA',
     },
 });

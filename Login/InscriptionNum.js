@@ -1,22 +1,24 @@
 import React from 'react';
 import { StyleSheet, Text, View, Image, TouchableOpacity, SafeAreaView, TextInput, Alert } from 'react-native';
-import Icon from 'react-native-vector-icons/FontAwesome';
+import Feather from 'react-native-vector-icons/Feather';
 
 const InscriptionNum = ({ navigation }) => {
 
         return (
             <View style={styles.container}>
                 <Text style={styles.text}>Validation numero de telephone</Text>
-                <Text style={{ textAlign: 'center', color: "#9FA5C0", fontSize: 15, fontFamily: 'arial', fontWeight: 'bold', marginTop: 20, letterSpacing: 1 }}>Veuillez renseigner le numero de telephone que
+                <Text style={{ textAlign: 'center', color: "#9FA5C0", fontSize: 15, fontFamily: 'arial', fontWeight: 'bold', marginTop: 20, letterSpacing: 1, lineHeight:25 }}>Veuillez renseigner le numero de telephone que
                 vous voulez utililiser pour la creation de votre
                 compte.Vous recevrez le code temporaire
 sous forme un SMS pour valider votre numero</Text>
-                <Icon style={styles.searchIcon} name="phone" size={20} color="#2E3E5C" />
+                
                 <TextInput
                     style={styles.inputContainer}
                     placeholder="Numero du telephone"
+                    placeholderTextColor={'#9FA5C0'}
 
                 />
+                <Feather name="phone" color={'#2E3E5C'} size={26} style={{ alignSelf: 'flex-start', marginTop: -40, marginLeft: 48, }} />
                 <TouchableOpacity activeOpacity={0.8} style={styles.btnContainer} onPress={() =>
                     navigation.navigate('InputOTPScreen')}>
                     <Text style={{ color: 'white', fontSize: 15, fontWeight: 'bold', letterSpacing: 0.7, fontFamily: 'arial' }} >Envoyer</Text>
@@ -42,8 +44,8 @@ const styles = StyleSheet.create({
     },
     btnContainer: {
         backgroundColor: "#CB5C17",
-        height: 60,
-        width: '90%',
+        height: 56,
+        width: 327,
         resizeMode: 'contain',
         borderRadius: 30,
         justifyContent: 'center',
@@ -56,8 +58,8 @@ const styles = StyleSheet.create({
     },
     btnContainerRetour: {
         backgroundColor: "#FFFFFF",
-        height: 60,
-        width: '90%',
+        height: 56,
+        width: 327,
         resizeMode: 'contain',
         borderRadius: 30,
         justifyContent: 'center',
@@ -73,7 +75,7 @@ const styles = StyleSheet.create({
     },
     text: {
         textAlign: 'center',
-        color: "#2E3E5C",
+        color: "#3E5481",
         fontSize: 22,
         fontFamily: 'arial',
         fontWeight: 'bold',
@@ -83,9 +85,10 @@ const styles = StyleSheet.create({
 
     },
     inputContainer: {
-        
-        height: 50,
-        width: '90%',
+        borderWidth: 1,
+        borderColor: '#D0DBEA',
+        height: 56,
+        width: 327,
         borderRadius: 30,
         flexDirection: 'column',
         backgroundColor: '#FFFFFF',

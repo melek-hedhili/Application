@@ -5,7 +5,9 @@ import 'react-native-gesture-handler';
 import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
 import Recovery from "../PasswordRecovery/Recovery.js"
-
+import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
+import SimpleLineIcons from 'react-native-vector-icons/SimpleLineIcons';
+import Feather from 'react-native-vector-icons/Feather';
 const styles = StyleSheet.create({
     container: {
         flex: 1,
@@ -13,21 +15,20 @@ const styles = StyleSheet.create({
     },
     text: {
         textAlign: 'center',
-        color: "#2E3E5C",
+        color: "#3E5481",
         fontSize: 22,
-        //fontFamily: 'arial',
+        letterSpacing:0.5,
         fontWeight: 'bold',
         width: "100%",
-        //resizeMode: 'contain',
-        marginTop: 50
+
+        marginTop: 107
 
     },
     mdp: {
         width: '90%',
         color: "#2E3E5C",
         fontSize: 15,
-        //fontFamily: 'arial',
-       // resizeMode: 'contain',
+
         fontWeight: 'bold',
         marginTop: 60,
         textAlign: 'right',
@@ -35,9 +36,9 @@ const styles = StyleSheet.create({
     },
     inputContainer: {
         borderWidth: 1,
-        //borderColor: 'red',
-        height: 50,
-        width:'90%',
+        borderColor:'#D0DBEA',
+        height: 56,
+        width:327,
         borderRadius: 30,
         flexDirection: 'column',
         backgroundColor: '#FFFFFF',
@@ -46,13 +47,14 @@ const styles = StyleSheet.create({
         justifyContent:'center',
         //resizeMode: 'contain',
         marginTop: 32,
-        paddingHorizontal:20,
+        paddingHorizontal: 20,
+        textAlign: 'center'
     },
     inputContainerPassword: {
         borderWidth: 1,
-        //borderBottomColor: 'red',
-        height: 50,
-        width: '90%',
+        borderColor: '#D0DBEA',
+        height: 56,
+        width: 327,
         borderRadius: 30,
         flexDirection: 'column',
         backgroundColor: '#FFFFFF',
@@ -60,8 +62,9 @@ const styles = StyleSheet.create({
         alignSelf: 'center',
         justifyContent: 'center',
         //resizeMode: 'contain',
-        marginTop: 16,
+        marginTop: 25,
         paddingHorizontal: 20,
+        textAlign: 'center'
     },
     btnContainer: {
         backgroundColor: "#CB5C17",
@@ -93,24 +96,29 @@ const styles = StyleSheet.create({
 
 
             <View style={styles.container} >
-                <Text style={styles.text}>Bienvenu!</Text>
-                <Text style={{ textAlign: 'center', color: "#9FA5C0", fontSize: 15,  fontWeight: 'bold', marginTop: 8, letterSpacing: 1 }}>Veuillez entrer votre compte ici!</Text>
-
+                <Text style={styles.text}>Bienvenu</Text>
+                <Text style={{ textAlign: 'center', color: "#9FA5C0", fontSize: 15, fontFamily: 'arial', fontWeight: 'bold', marginTop: 20, letterSpacing: 1 }}>Veuillez entrer votre compte ici</Text>
 
                 <TextInput
 
                    style={styles.inputContainer}
                     placeholder="Email ou numero du telephone"
-
+                    placeholderTextColor={'#9FA5C0'}
+                   
                 />
+                <Feather name="mail" color={'#2E3E5C'} size={26} style={{ alignSelf: 'flex-start', marginTop: -40, marginLeft: 48,  }} />
+                   
+                    
 
                 <TextInput
 
                     style={styles.inputContainerPassword}
                     secureTextEntry={true}
                     placeholder="Mot de passe"
+                    placeholderTextColor={'#9FA5C0'}
 
                 />
+                <SimpleLineIcons name="lock" color={'#2E3E5C'} size={26} style={{ alignSelf: 'flex-start', marginTop: -42, marginLeft: 48, }} />
                 <TouchableOpacity onPress={() =>
                     navigation.navigate('Recovery')}>
                     <Text

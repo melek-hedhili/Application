@@ -21,7 +21,7 @@ import Navigation2 from './Navigation/Navigation2.js';
 class App extends React.Component {
     render() {
         return (
-            <Navigation2 />
+            <Commande />
         );
     }
 }

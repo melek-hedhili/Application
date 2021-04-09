@@ -9,7 +9,7 @@ import Login from "../Login/Login.js";
 import InscriptionNum from "../Login/InscriptionNum.js";
 import Splash from "../Login/Splash.js"
 import Signup from "../Login/Signup.js"
-
+import Paiment from '../Panier/Paiment.js'
 import Recovery from "../PasswordRecovery/Recovery.js"
 import InputOTPScreen from "../PasswordRecovery/InputOTPScreen.js"
 import PasswordVerificationCode from "../PasswordRecovery/PasswordVerificationCode.js"
@@ -17,6 +17,8 @@ import NewPassword from "../PasswordRecovery/NewPassword.js"
 import MyTabs from '../Navbar/Navbar.js'
 import Commande from '../Order/Commande.js'
 import Panier from '../Panier/Panier.js'
+import Checkout from '../Panier/Checkout.js'
+
 const Stack = createStackNavigator();
 
 class Navigation extends React.Component {
@@ -67,6 +69,31 @@ class Navigation extends React.Component {
                     <Stack.Screen
                         name="NewPassword"
                         component={NewPassword}
+                        options={{ headerShown: false }}
+                    />
+                    <Stack.Screen
+                        name="MyTabs"
+                        component={MyTabs}
+                        options={{ headerShown: false }}
+                    />
+                    <Stack.Screen
+                        name="Commande"
+                        component={Commande}
+                        options={{ headerShown: false }}
+                    />
+                    <Stack.Screen
+                        name="Panier"
+                        component={Panier}
+                        options={{ headerShown: false }}
+                    />
+                    <Stack.Screen
+                        name="Paiment"
+                        component={Paiment}
+                        options={{ headerShown: false }}
+                    />
+                    <Stack.Screen
+                        name="Checkout"
+                        component={Checkout}
                         options={{ headerShown: false }}
                     />
 

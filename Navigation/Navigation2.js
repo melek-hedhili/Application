@@ -5,6 +5,7 @@ import { createStackNavigator } from '@react-navigation/stack';
 import React from 'react';
 import { StyleSheet, Text, View, Alert, Animated } from 'react-native';
 import Navbar from '../Navbar/Navbar.js'
+import MyTabs from '../Navbar/Navbar.js'
 
 import Commande from '../Order/Commande.js'
 import Panier from '../Panier/Panier.js'
@@ -18,8 +19,8 @@ class Navigation2 extends React.Component {
             <NavigationContainer>
                 <Stack.Navigator>
                     <Stack.Screen
-                        name="Navbar"
-                        component={Navbar}
+                        name="MyTabs"
+                        component={MyTabs}
                         options={{ headerShown: false }}
                     />
                     <Stack.Screen

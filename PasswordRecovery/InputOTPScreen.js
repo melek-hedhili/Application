@@ -34,7 +34,7 @@ export default class InputOTPScreen extends Component {
             
             <View style={styles.container}>
                 
-                <Text style={{ textAlign: 'center', color: "#9FA5C0", fontSize: 15, fontFamily: 'arial', fontWeight: 'bold', marginTop: 83, letterSpacing: 1 }}>Nous avons envoye un code de ferification</Text>
+                <Text style={{ textAlign: 'center', color: "#9FA5C0", fontSize: 15, fontFamily: 'arial', fontWeight: 'bold', marginTop: 60, letterSpacing: 1 }}>Nous avons envoye un code de verification</Text>
                 <View style={{  justifyContent: 'space-evenly', flexDirection: 'row', marginTop:32 }}>
                 <TextInput
                     maxLength={1}
@@ -50,9 +50,9 @@ export default class InputOTPScreen extends Component {
                             fontSize: 34,
                             height: 72,
                             width: 72,
-                            borderRadius: 10,
-                            borderWidth: 0.5,
-                            borderColor:  this.state.borderColor,
+                            borderRadius: 20,
+                            borderWidth: 1,
+                            borderColor: '#D0DBEA',
                             textAlign: 'center'}}
                     onChangeText={(pin1) => {
                         this.setState({ pin1: pin1 })
@@ -138,16 +138,16 @@ const styles = StyleSheet.create({
         fontSize: 34,
         height: 72,
         width: 72,
-        borderRadius: 10,
-        borderWidth: 0.5,
-        borderColor: 'grey',
+        borderRadius: 20,
+        borderWidth: 1,
+        borderColor: '#D0DBEA',
         textAlign: 'center'
 
     },
     btnContainer: {
         backgroundColor: "#CB5C17",
-        height: 60,
-        width: '90%',
+        height: 56,
+        width: 327,
         resizeMode: 'contain',
         borderRadius: 30,
         justifyContent: 'center',
@@ -160,8 +160,8 @@ const styles = StyleSheet.create({
     },
     btnContainerRetour: {
         backgroundColor: "#FFFFFF",
-        height: 60,
-        width: '90%',
+        height: 56,
+        width: 327,
         resizeMode: 'contain',
         borderRadius: 30,
         justifyContent: 'center',

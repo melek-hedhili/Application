@@ -17,7 +17,7 @@ export default class Splash extends React.Component {
         return (
             <View>
                 <Image style={styles.tinyLogo}
-                    source={require('../assets/logo.png')} />
+                    source={require('../assets/TacosLogo.png')} />
             </View>
         );
     }
@@ -33,10 +33,11 @@ const styles = StyleSheet.create({
     },
     tinyLogo: {
 
-        width: '100%',
+        width: 308,
         resizeMode: 'contain',
-        height: 300,
-        marginTop:170,
+        height: 286,
+        marginTop: 170,
+        alignSelf: 'center'
         
 
         

@@ -2,16 +2,23 @@
 
   {
     "id": 0,
-    "key":" Viande hachee",
+    "key": " Algerienne",
     "checked": false,
-    "image": "https://i.imgur.com/RuVD8qi.png   "
+    "image": "https://i.imgur.com/ZRMBYLZ.png  "
 
   },
   {
     "id": 1,
-    "key": " Escalope pane",
+    "key": " Barbacue",
     "checked": false,
-    "image": "https://i.imgur.com/WNeYn6d.png"
+    "image": "https://i.imgur.com/kizbniG.png"
+
+  },
+  {
+    "id": 2,
+    "key": " Harissa",
+    "checked": false,
+    "image": "https://i.imgur.com/6M3bHme.png "
 
   }
 

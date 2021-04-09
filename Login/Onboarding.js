@@ -11,10 +11,11 @@ const styles = StyleSheet.create({
     },
     tinyLogo: {
 
-        width: '100%',
+        width: 308,
+        height: 282,
         resizeMode: 'contain',
-        height: 500,
-        top: -50
+        alignSelf:'center',
+        top: 80
 
     },
     logo: {
@@ -29,26 +30,35 @@ const styles = StyleSheet.create({
         fontFamily: 'arial',
         fontWeight: 'bold',
         width: "100%",
+        marginTop:70
 
     },
     btnContainer: {
         backgroundColor: "#CB5C17",
         height: 60,
-
+        width:327,
         borderRadius: 30,
         justifyContent: 'center',
         alignItems: 'center',
         marginTop: 99
 
 
-}
+    },
+        headline: {
+
+        justifyContent: 'center',
+        alignItems: 'center',
+        marginTop: 100
+
+
+    }
     
 });
 const OnBoarding = ({ navigation }) => {
     return (
         <View style={ styles.container }>
             <Image style={styles.tinyLogo}
-                source={require('../assets/logo.png')} />
+                source={require('../assets/TacosLogo.png')} />
             <View style={styles.headline}>
                 
                 <Text style={styles.text} >HOT AND FRENCH TACOS</Text>

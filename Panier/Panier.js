@@ -1,6 +1,7 @@
 import React, { Component} from 'react';
 import { StyleSheet, Text, View, Image, TouchableOpacity, ScrollView, } from 'react-native';
 import Paiment from '../Panier/Paiment.js'
+import Feather from 'react-native-vector-icons/Feather';
 
 export default class Panier extends Component {
     render() {
@@ -14,19 +15,20 @@ return (
         </View>
         <View style={styles.rectangle}>
             <View style={{flexDirection:'row',alignSelf:'center',}}>
-            <Image style={{width:200,height:64,alignSelf:'center',marginLeft:-60,}} source ={require("../assets/Tacos-M.png")}></Image>
-            <Text style={{alignSelf:'center'}}> Escalope grillé</Text>
-            <TouchableOpacity>
-                <Text style={{fontSize:25,color:'#D05A0B',marginTop:13,marginLeft:40,}}>x</Text>
+                    <Image style={{ width: 200, height: 64, alignSelf: 'center', marginLeft: -60, }} source={require("../assets/Tacos-M.png")}></Image>
+                    <Text style={{ alignSelf: 'center', fontSize:17 }}> Escalope grillé</Text>
+                    <TouchableOpacity>
+                        <Feather name="x" color={'#D05A0B'} size={25} style={{ alignSelf: 'flex-start', marginTop: 20, marginLeft: 40, }} />
+                
             </TouchableOpacity>
             </View>
-            <View style={{flexDirection:'row',alignSelf:'center',marginLeft:100,marginTop:-12}}>
-                <TouchableOpacity>
-                    <Text style={styles.btnMoin}>-</Text>
-                    </TouchableOpacity> 
-                <Text style={{fontSize:15,marginTop:3,}}>2</Text>
-                <TouchableOpacity>
-                <Text style={styles.btnPlus}>+</Text>
+            <View style={{flexDirection:'row',alignSelf:'center',marginLeft:100,marginTop:20}}>
+                    <TouchableOpacity>
+                        <Feather name="minus" color={'#D05A0B'} size={20} style={styles.btnMoin} />
+                    </TouchableOpacity>
+                    <Text style={{ fontSize: 15, marginLeft:15 }}>2</Text>
+                    <TouchableOpacity>
+                        <Feather name="plus" color={'#D05A0B'} size={20} style={styles.btnPlus} />
                 </TouchableOpacity>
             </View>
             <View style={styles.prix} >
@@ -37,31 +39,31 @@ return (
         <View style={styles.rectangle}>
             <View style={{flexDirection:'row',alignSelf:'center',}}>
             <Image style={{width:200,height:64,alignSelf:'center',marginLeft:-60,}} source ={require("../assets/Tacos-M.png")}></Image>
-            <Text style={{alignSelf:'center'}}> Escalope grillé</Text>
+                    <Text style={{ alignSelf: 'center', fontSize: 17 }}> Escalope grillé</Text>
             <TouchableOpacity>
-                <Text style={{fontSize:25,color:'#D05A0B',marginTop:13,marginLeft:40,}}>x</Text>
+                        <Feather name="x" color={'#D05A0B'} size={25} style={{ alignSelf: 'flex-start', marginTop: 20, marginLeft: 40, }} />
             </TouchableOpacity>
             </View>
-            <View style={{flexDirection:'row',alignSelf:'center',marginLeft:100,marginTop:-12}}>
+            <View style={{flexDirection:'row',alignSelf:'center',marginLeft:100,marginTop:20}}>
 
                 <TouchableOpacity>
-                    <Text style={styles.btnMoin}>-</Text>
+                        <Feather name="minus" color={'#D05A0B'} size={20} style={styles.btnMoin} />
                     </TouchableOpacity> 
-                <Text style={{fontSize:15,marginTop:3,}}>2</Text>
+                    <Text style={{ fontSize: 15, marginLeft: 15}}>2</Text>
                 <TouchableOpacity>
-                <Text style={styles.btnPlus}>+</Text>
+                        <Feather name="plus" color={'#D05A0B'} size={20} style={styles.btnPlus} />
                 </TouchableOpacity>
             </View>
             <View style={styles.prix} >
             <Text>14</Text>
             <Text>DT</Text>
             </View>
-        </View>
-        <View style={styles.btnAjouteAutre}>
-            <Text style={{color:'white',alignSelf:'center',marginTop:10}}> Ajouter autre </Text>
-        </View>
-        <View style={{flexDirection:'row',marginTop:45}}>
-            <Text style={{color:'#667C8A',fontSize:14,}}>Total</Text>
+            </View>
+            <TouchableOpacity style={styles.btnAjouteAutre}>
+                <Text style={{ color: 'white', alignSelf: 'center', fontSize:17 }}> Ajouter autre  </Text>
+            </TouchableOpacity>
+            <View style={{ flexDirection: 'row', marginTop: 45 }}>
+                <Text style={{ color: '#667C8A', fontSize: 14, marginLeft:10 }}>Total</Text>
             <View style={{flexDirection:'row'}}>
             <Text style={{marginLeft:300}}>14</Text>
             <Text>DT</Text>
@@ -69,32 +71,36 @@ return (
         </View>
 
         <View style={{flexDirection:'row',marginTop:17}}>
-            <Text style={{color:'#667C8A',fontSize:14,}}>Frais de livraison </Text>
+                <Text style={{ color: '#667C8A', fontSize: 14, marginLeft:10 }}>Frais de livraison </Text>
             <View style={{flexDirection:'row'}}>
-            <Text style={{marginLeft:225}}>14</Text>
+            <Text style={{marginLeft:223}}>14</Text>
             <Text>DT</Text>
             </View>
         </View>
         
-        <View style={{flexDirection:'row',marginTop:17}}>
+            <View style={{ flexDirection: 'row', marginTop: 17, marginLeft: 10 }}>
             <Text style={{color:'#667C8A',fontSize:14}}>Tax</Text>
             <View style={{flexDirection:'row'}}>
             <Text style={{marginLeft:310}}>33</Text>
             <Text>DT</Text>
             </View>
         </View>
-        <View style={{flexDirection:'row',marginTop:27}}>
+        <View style={{flexDirection:'row',marginTop:27, marginLeft:10 }}>
             <Text style={{color:'black',fontSize:18,}}>Total</Text>
             <View style={{flexDirection:'row'}}>
-            <Text style={{marginLeft:300}}>15</Text>
+            <Text style={{marginLeft:292}}>15</Text>
             <Text>DT</Text>
             </View>
         </View>
             <View style={styles.btnProceder}>
                 <TouchableOpacity onPress={() => this.props.navigation.navigate('Paiment')}>
-                <Text style={{alignSelf:'center',marginTop:15,color:'white'}}>Procéder avec le payement</Text>
+                <Text style={{alignSelf:'center',color:'white'}}>Procéder avec le payement</Text>
             </TouchableOpacity>
-        </View>
+            </View>
+            <View>
+                <Text></Text>
+            </View>
+      
         
 
     </ScrollView>
@@ -114,46 +120,53 @@ const styles = StyleSheet.create({
         backgroundColor:'white',
         borderRadius:10,
         width:345,
-        height:100,
+        height:127,
         alignSelf:'center',
         marginTop:20,
         
         
     },
     btnPlus:{
-        fontSize:20,
+
         color:'#D05A0B',
-        marginLeft:20,
+        marginLeft:15,
     },
     btnMoin:{
-        fontSize:20,
+
         color:'#D05A0B',
-        marginLeft:-20,
+        marginLeft:-15,
     },
     prix:{
         flexDirection:'row',
-        alignSelf:'flex-end',
-        fontSize:20,
-        marginTop:-15,
+
+        fontSize: 20,
+        marginTop: -20,
+        marginLeft:300
         
         
     },
 
     btnAjouteAutre:{
         backgroundColor:'black',
-        borderRadius:10,
+        borderRadius:5,
         width:345,
-        height:50,
-        alignSelf:'center',
-        marginTop:20,
+        height:60,
+
+        marginTop: 20,
+        justifyContent: 'center',
+        alignItems: 'center',
+        alignSelf: 'center',
     },
     btnProceder:{
         backgroundColor:'#D05A0B',
         borderRadius:10,
-        width:345,
-        height:50,
-        alignSelf:'center',
-        marginTop:20,
+        width:341,
+        height:61,
+
+        marginTop: 20,
+        justifyContent: 'center',
+        alignItems: 'center',
+        alignSelf: 'center',
 
     }
 });

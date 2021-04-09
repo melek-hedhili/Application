@@ -1,5 +1,6 @@
 import React, { useState, useEffect, useRef, Component } from 'react';
-import { StyleSheet, Text, View, Image, TouchableOpacity,  TextInput, Alert } from 'react-native';
+
+import { StyleSheet, Text, View, Image, TouchableOpacity, TextInput, Alert } from 'react-native';
 
 export default class PasswordVerificationCode extends Component {
     constructor(props) {
@@ -26,17 +27,15 @@ export default class PasswordVerificationCode extends Component {
 
 
 
-
-
-
     render() {
 
         const { pin1, pin2, pin3, pin4 } = this.state
         return (
 
             <View style={styles.container}>
-                <Text style={styles.text}>Verifier votre code de restoration</Text>
-                <Text style={{ textAlign: 'center', color: "#9FA5C0", fontSize: 15, fontFamily: 'arial', fontWeight: 'bold', marginTop:40, letterSpacing: 1 }}>Nous avons envoye un code de ferification</Text>
+
+
+                <Text style={{ textAlign: 'center', color: "#9FA5C0", fontSize: 15, fontFamily: 'arial', fontWeight: 'bold', marginTop: 60, letterSpacing: 1, lineHeight: 25 }}>Nous avons envoye un code { "\n"}a votre adresse email</Text>
                 <View style={{ justifyContent: 'space-evenly', flexDirection: 'row', marginTop: 32 }}>
                     <TextInput
                         maxLength={1}
@@ -52,9 +51,9 @@ export default class PasswordVerificationCode extends Component {
                             fontSize: 34,
                             height: 72,
                             width: 72,
-                            borderRadius: 10,
-                            borderWidth: 0.5,
-                            borderColor: this.state.borderColor,
+                            borderRadius: 20,
+                            borderWidth: 1,
+                            borderColor: '#D0DBEA',
                             textAlign: 'center'
                         }}
                         onChangeText={(pin1) => {
@@ -74,20 +73,7 @@ export default class PasswordVerificationCode extends Component {
                         keyboardType='numeric'
                         ref={"pin2ref"}
 
-                        style={{
-                            backgroundColor: 'white',
-                            fontWeight: '600',
-                            alignSelf: 'center',
-                            padding: 10,
-                            fontSize: 34,
-                            height: 72,
-                            width: 72,
-                            borderRadius: 10,
-                            borderWidth: 0.5,
-
-                            borderColor: this.state.borderColor,
-
-                        }}
+                        style={styles.Input}
                         onChangeText={(pin2) => {
                             this.setState({ pin2: pin2 })
                             if (pin2 != "") {
@@ -154,28 +140,17 @@ const styles = StyleSheet.create({
         fontSize: 34,
         height: 72,
         width: 72,
-        borderRadius: 10,
-        borderWidth: 0.5,
-        borderColor: 'grey',
+        borderRadius: 20,
+        borderWidth: 1,
+        borderColor: '#D0DBEA',
         textAlign: 'center'
-
-    },
-    text: {
-        textAlign: 'center',
-        color: "#2E3E5C",
-        fontSize: 22,
-        fontFamily: 'arial',
-        fontWeight: 'bold',
-        width: "100%",
-        //resizeMode: 'contain',
-        marginTop: 70
 
     },
     btnContainer: {
         backgroundColor: "#CB5C17",
-        height: 60,
-        width: '90%',
-        //resizeMode: 'contain',
+        height: 56,
+        width: 327,
+        resizeMode: 'contain',
         borderRadius: 30,
         justifyContent: 'center',
         alignItems: 'center',
@@ -187,8 +162,8 @@ const styles = StyleSheet.create({
     },
     btnContainerRetour: {
         backgroundColor: "#FFFFFF",
-        height: 60,
-        width: '90%',
+        height: 56,
+        width: 327,
         resizeMode: 'contain',
         borderRadius: 30,
         justifyContent: 'center',

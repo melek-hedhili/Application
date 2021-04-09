@@ -1,0 +1,19 @@
+[
+
+  {
+    "id": 0,
+    "key":" Viande hachee",
+    "checked": false,
+    "image": "https://i.imgur.com/RuVD8qi.png   "
+
+  },
+  {
+    "id": 1,
+    "key": " Escalope pane",
+    "checked": false,
+    "image": "https://i.imgur.com/WNeYn6d.png"
+
+  }
+
+
+]

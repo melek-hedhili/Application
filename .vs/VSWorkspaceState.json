@@ -1,16 +1,16 @@
 {
   "ExpandedNodes": [
     "",
-    "\\android\\app",
-    "\\android\\app\\src",
-    "\\android\\app\\src\\main",
-    "\\android\\gradle",
-    "\\android\\gradle\\wrapper",
-    "\\ios\\application",
+    "\\Accueil",
+    "\\JSON",
+    "\\Login",
+    "\\Navbar",
+    "\\Navigation",
+    "\\Order",
     "\\Panier",
     "\\PasswordRecovery",
     "\\Rate"
   ],
-  "SelectedNode": "\\Panier\\Paiment.js",
+  "SelectedNode": "\\Order\\Commande.js",
   "PreviewInSolutionExplorer": false
 }
