@@ -8,16 +8,23 @@ export default class Checkout extends Component {
     render() {
         
 return ( 
-    <View style={styles.container}> 
+    <View style={styles.container}>
+        <View style={{ flexDirection: 'row',  }}>
 
-        <TouchableOpacity onPress={() => this.props.navigation.goBack()}><Image style={{resizeMode:'contain'}}source={require("../assets/Back.png")}/></TouchableOpacity>
+            <TouchableOpacity onPress={() => this.props.navigation.goBack()}><Image style={{ resizeMode: 'contain' }} source={require("../assets/Back.png")} /></TouchableOpacity>
+
+                <Text style={styles.title}>Checkout</Text>
+
+            
+        </View>
+        
     <ScrollView>
-    <Text style={styles.title}>Checkout</Text>
-        <Text style={{fontSize:34,marginLeft:20,marginTop:9,}}>
+
+        <Text style={{fontSize:34,marginLeft:20,marginTop:85,}}>
        Paiement
         </Text>
         <Text style={{fontSize:18,marginTop:22,marginLeft:20}}>
-            Payé avec:
+            Payez avec:
         </Text>
         <View style={styles.rectangle1}>
                 <View style={{flexDirection:'row',marginLeft:80}}>
@@ -35,7 +42,7 @@ return (
          </View>
         
          <TouchableOpacity activeOpacity={0.8} style={styles.btnSuivant} >
-                    <Text style={{ color: 'white', fontSize: 15, fontWeight: 'bold', letterSpacing: 0.7, }} >Appuyez ici</Text>
+                    <Text style={{ color: 'white', fontSize: 15, fontWeight: 'bold', letterSpacing: 0.7, }} >Suivant</Text>
 
                 </TouchableOpacity>
     </ScrollView>
@@ -52,8 +59,10 @@ const styles = StyleSheet.create({
     title:{
         alignSelf: 'center',
         fontWeight:'bold',
-        fontSize:18,
-        marginTop:-6,
+        fontSize: 18,
+        marginLeft: 90
+
+
 
     },
     rectangle:{
@@ -81,33 +90,34 @@ const styles = StyleSheet.create({
         marginTop:10
     },
     rectangle1:{
-        backgroundColor:'white',
-        borderRadius:10,
-        width:310,
-        height:201,
-        alignSelf:'center',
-        marginTop:10,
-        marginLeft:-35,
+        backgroundColor: 'white',
+        borderRadius: 20,
+        width: 341,
+        height: 202,
+        alignSelf: 'center',
+        alignSelf: 'center',
+        marginTop: 32,
     
     },
-    rectangle2:{
+    rectangle2: {
+        marginTop:32,
         backgroundColor:'white',
-        borderRadius:10,
-        width:310,
-        height:174,
-        alignSelf:'center',
-        marginTop:2,
-        marginLeft:-35,
+        borderRadius:20,
+        width:315,
+        height:202,
+        alignSelf: 'center',
+        alignSelf: 'center'
+
     
     },
     btnSuivant:{
         backgroundColor: "#CB5C17",
-        height: 60,
-        width:300,
+        height: 61,
+        width:341,
         borderRadius: 10,
         alignSelf:'center',
         justifyContent: 'center',
         alignItems: 'center',
-        marginTop: 99
+        marginTop: 120
     }
 });

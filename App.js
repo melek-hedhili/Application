@@ -16,12 +16,13 @@ import Checkout from './Panier/Checkout.js'
 import Paiment from './Panier/Paiment.js'
 import Panier from './Panier/Panier.js'
 import Navigation2 from './Navigation/Navigation2.js';
+import Te from './te.js'
 
 
 class App extends React.Component {
     render() {
         return (
-            <Commande />
+            <Paiment />
         );
     }
 }

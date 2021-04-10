@@ -1,24 +1,52 @@
-import React, { Component} from 'react';
+import React from 'react';
 import { StyleSheet, Text, View, Image, TouchableOpacity, ScrollView, } from 'react-native';
-import { RadioButton } from 'react-native-paper';
+import RadioButtonRN from 'radio-buttons-react-native';
 
 
 
-export default class Paiment extends Component {
+export default class Paiment extends React.Component {
+    constructor(props) {
+        super(props);
+
+        this.state = {
+            res: {},
+            example: 1
+        };
+
+        this.colors = [
+            {
+                label: 'red'
+            },
+
+
+        ];
+
+    }
+
     render() {
 
 return ( 
     <View style={styles.container}> 
-        <TouchableOpacity onPress={() => this.props.navigation.goBack()}><Image style={{resizeMode:'contain'}}source={require("../assets/Back.png")}/></TouchableOpacity>
+        <View style={styles.container}>
+            <View style={{ flexDirection: 'row', }}>
+
+                <TouchableOpacity onPress={() => this.props.navigation.goBack()}><Image style={{ resizeMode: 'contain' }} source={require("../assets/Back.png")} /></TouchableOpacity>
+
+                <Text style={styles.title}>Paiement</Text>
+
+
+            </View>
+        </View>
+        
     <ScrollView>
-        <Text style={styles.title}>Paiement</Text>
+        
         <Text style={styles.titeAdresse} >Adresse</Text>
         <View style={styles.rectangle}>
             <Text style={styles.adresse}>
-                Sousse , Hamam sousse
-                Rue Farhat Hached
+                    Sousse , Hamam sousse
+                    Rue Farhat Hached
              </Text>
-             <Image  style={{width:300,height:1,alignSelf:'center',}} source ={require("../assets/line.png")}>
+                <Image style={{ width: 300, height: 1, alignSelf: 'center', marginTop:20 }} source={require("../assets/line.png")}>
 
              </Image>
              <Text style={styles.nbrTel}>
@@ -36,15 +64,42 @@ return (
         <Text style={{fontSize:18,marginLeft:20,marginTop:10,}}> Outils de paiements :</Text>
         
             <View style={styles.rectangle2}>
+                <View style={{ flexDirection: 'row', alignItems: 'center' }}>
+                    
+                    <RadioButtonRN
+
+
+                        style={{marginLeft:30}}
+                        data={this.colors}
+                        initial={1}
+                        box={false}
+                        selectedBtn={(e) => this.setState({ res: e })}
+                        circleSize={11}
+                    />
+                    <Text style={{ fontSize: 18, marginLeft: 60, justifyContent: 'center' ,marginTop:10 }}>Livraison à domicile</Text>
+
+                </View>
+
+
+                <Image style={{ width: 300, height: 1, alignSelf: 'center', marginTop: 25 }} source={require("../assets/line.png")}></Image>
+
+                <View style={{ flexDirection: 'row', alignItems: 'center', }}>
+                    <Text style={{ marginLeft:35 }}> </Text>
+                    <RadioButtonRN
+
+
+                        style={{ marginLeft: 30 }}
+                        data={this.colors}
+                        initial={1}
+                        box={false}
+                        selectedBtn={(e) => this.setState({ res: e })}
+                        circleSize={11}
+                    />
+
+                    <Text style={{ fontSize: 18, marginLeft: 60, justifyContent: 'center' ,marginTop:10 }}>Surplace</Text>
+                </View>
                 
-                <Text style={{fontSize:18,marginTop:21,marginLeft:5,alignSelf:'center'}}>
-                Livraison à domicile
-                </Text>
-                <Image style={{width:300,height:1,alignSelf:'center',marginTop:40}} source ={require("../assets/line.png")}></Image>
                 
-                <Text style={{fontSize:18,marginTop:25,marginLeft:5,alignSelf:'center'}}>
-                Surplace
-                </Text>
                 
             </View>
             <View style={{flexDirection:'row',marginLeft:20,marginTop:2}}>
@@ -68,24 +123,27 @@ const styles = StyleSheet.create({
         backgroundColor: '#F5F5F8',
 
     },
-    title:{
-        alignSelf:'center',
-        fontSize:18,
-        marginTop: -6,
+    title: {
+        alignSelf: 'center',
         fontWeight: 'bold',
+        fontSize: 18,
+        marginLeft: 90
+
+
 
     },
     rectangle:{
         backgroundColor:'white',
         borderRadius:10,
-        width:345,
-        height:100,
+        width:334,
+        height:126,
         alignSelf:'center',
         marginTop:10,
     },
     titeAdresse:{
         fontSize:18,
-        marginLeft:20,
+        marginLeft: 20,
+        marginTop:70
         
     },
     adresse:{
@@ -95,28 +153,26 @@ const styles = StyleSheet.create({
 
     },nbrTel:{
         color:'#667C8A',
-        fontSize:18,
-        alignSelf:'center',
-        marginTop:10
+        fontSize: 18,
+        marginLeft:20,
+        marginTop:20
     },
     rectangle1:{
         backgroundColor:'white',
         borderRadius:10,
-        width:310,
+        width:334,
         height:201,
         alignSelf:'center',
-        marginTop:0,
-        marginLeft:-35,
+
     
     },
     rectangle2:{
         backgroundColor:'white',
         borderRadius:10,
-        width:310,
+        width:334,
         height:174,
         alignSelf:'center',
-        marginTop:2,
-        marginLeft:-35,
+
     
     },
     btnSuivant:{
