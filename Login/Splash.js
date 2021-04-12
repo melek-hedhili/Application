@@ -3,6 +3,7 @@ import 'react-native-gesture-handler';
 import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
 import { StyleSheet, Text, View, Image, TouchableOpacity } from 'react-native';
+import normalize from 'react-native-normalize';
 
 export default class Splash extends React.Component {
     constructor(props) {
@@ -33,10 +34,10 @@ const styles = StyleSheet.create({
     },
     tinyLogo: {
 
-        width: 308,
+        width: normalize( 308),
         resizeMode: 'contain',
-        height: 286,
-        marginTop: 170,
+        height: normalize( 286),
+        marginTop: normalize(170),
         alignSelf: 'center'
         
 

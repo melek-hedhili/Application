@@ -17,12 +17,14 @@ import Paiment from './Panier/Paiment.js'
 import Panier from './Panier/Panier.js'
 import Navigation2 from './Navigation/Navigation2.js';
 import Te from './te.js'
+import OnBoarding from './Login/Onboarding';
+import Login from './Login/Login';
 
 
 class App extends React.Component {
     render() {
         return (
-            <Paiment />
+            <Navigation />
         );
     }
 }

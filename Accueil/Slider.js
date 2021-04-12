@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { StyleSheet, Text, View, Image, TouchableOpacity, ScrollView, Dimensions } from 'react-native';
-
-
+import 'react-native-gesture-handler';
+import normalize from 'react-native-normalize';
 const { width } = Dimensions.get("window");
 const height = width * 0.6;
 const images = [
@@ -24,7 +24,7 @@ export default class Slider extends Component {
         const bullet = "\u{2022}"; 
         return (
 
-            <View style={{ marginTop: 50, width, height }}>
+            <View style={{ marginTop: normalize(50), width, height }}>
                 <ScrollView
                     onScroll={this.change}
                     showsHorizontalScrollIndicator={false}
@@ -70,11 +70,11 @@ const styles = StyleSheet.create({
     },
 
     pagingText: {
-        fontSize: 50,
+        fontSize: normalize(50),
         color: '#D05A0B'
     },
     pagingActiveText: {
-        fontSize: 50,
+        fontSize: normalize(50),
         color: 'white'
     },
 

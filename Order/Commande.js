@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { StyleSheet, Text, View, Image, TouchableOpacity, ScrollView, Alert, Dimensions } from 'react-native';
 import CheckBox from '@react-native-community/checkbox';
 var { height, width } = Dimensions.get("window")
+import normalize from 'react-native-normalize';
 const TacosData = require("../JSON/TacosViande.json")
 const TacosData2 = require("../JSON/TacosViande2.json")
 
@@ -108,8 +109,8 @@ export default class Commande extends Component {
             return (
              
                 <TouchableOpacity style={{ alignItems: 'center' }} key={key} onPress={() => { this.onchecked(item.id) }}>
-                    <Image style={{ width: 50, height: 50, alignSelf: 'center', }} source={{ uri: item.image }} ></Image>
-                    <Text style={{ fontSize: 18, fontStyle: 'normal', alignItems: 'center' }}>{item.key}</Text>
+                    <Image style={styles.rednerImg} source={{ uri: item.image }} ></Image>
+                    <Text style={styles.rednertext}>{item.key}</Text>
                     <CheckBox value={item.checked}
                         style={{ transform: [{ scaleX: 0.8 }, { scaleY: 0.8 }], }}
                         onValueChange={() => { this.onchecked(item.id) }}
@@ -125,8 +126,8 @@ export default class Commande extends Component {
         return this.state.data2.map((item, key) => {
             return (
                 <TouchableOpacity style={{ alignItems: 'center' }} key={key} onPress={() => { this.onchecked2(item.id) }}>
-                    <Image style={{ width: 50, height: 50, alignSelf: 'center', }} source={{ uri: item.image }} ></Image>
-                    <Text style={{ fontSize: 18, fontStyle: 'normal', alignItems: 'center' }}>{item.key}</Text>
+                    <Image style={styles.rednerImg} source={{ uri: item.image }} ></Image>
+                    <Text style={styles.rednertext}>{item.key}</Text>
                     <CheckBox value={item.checked}
                         style={{ transform: [{ scaleX: 0.8 }, { scaleY: 0.8 }], }}
                         onValueChange={() => { this.onchecked2(item.id) }}
@@ -141,8 +142,8 @@ export default class Commande extends Component {
         return this.state.sauce.map((item, key) => {
             return (
                 <TouchableOpacity style={{ alignItems: 'center' }} key={key} onPress={() => { this.oncheckedSauce(item.id) }}>
-                    <Image style={{ width: 50, height: 50, alignSelf: 'center', }} source={{ uri: item.image }} ></Image>
-                    <Text style={{ fontSize: 18, fontStyle: 'normal', alignItems: 'center' }}>{item.key}</Text>
+                    <Image style={styles.rednerImg} source={{ uri: item.image }} ></Image>
+                    <Text style={styles.rednertext}>{item.key}</Text>
                     <CheckBox value={item.checked}
                         style={{ transform: [{ scaleX: 0.8 }, { scaleY: 0.8 }], }}
                         onValueChange={() => { this.oncheckedSauce(item.id) }}
@@ -157,8 +158,8 @@ export default class Commande extends Component {
         return this.state.sauce2.map((item, key) => {
             return (
                 <TouchableOpacity style={{ alignItems: 'center' }} key={key} onPress={() => { this.oncheckedSauce2(item.id) }}>
-                    <Image style={{ width: 50, height: 50, alignSelf: 'center', }} source={{ uri: item.image }} ></Image>
-                    <Text style={{ fontSize: 18, fontStyle: 'normal', alignItems: 'center' }}>{item.key}</Text>
+                    <Image style={styles.rednerImg} source={{ uri: item.image }} ></Image>
+                    <Text style={styles.rednertext}>{item.key}</Text>
                     <CheckBox value={item.checked}
                         style={{ transform: [{ scaleX: 0.8 }, { scaleY: 0.8 }], }}
                         onValueChange={() => { this.oncheckedSauce2(item.id) }}
@@ -174,8 +175,8 @@ export default class Commande extends Component {
         return this.state.extra.map((item, key) => {
             return (
                 <TouchableOpacity style={{ alignItems: 'center' }} key={key} onPress={() => { this.oncheckedExtra(item.id) }}>
-                    <Image style={{ width: 50, height: 50, alignSelf: 'center', }} source={{ uri: item.image }} ></Image>
-                    <Text style={{ fontSize: 18, fontStyle: 'normal', alignItems: 'center' }}>{item.key}</Text>
+                    <Image style={styles.rednerImg}source={{ uri: item.image }} ></Image>
+                    <Text style={styles.rednertext}>{item.key}</Text>
                     <CheckBox value={item.checked}
                         style={{ transform: [{ scaleX: 0.8 }, { scaleY: 0.8 }], }}
                         onValueChange={() => { this.oncheckedExtra(item.id) }}
@@ -190,8 +191,8 @@ export default class Commande extends Component {
         return this.state.extra2.map((item, key) => {
             return (
                 <TouchableOpacity style={{ alignItems: 'center' }} key={key} onPress={() => { this.oncheckedExtra2(item.id) }}>
-                    <Image style={{ width: 50, height: 50, alignSelf: 'center', }} source={{ uri: item.image }} ></Image>
-                    <Text style={{ fontSize: 18, fontStyle: 'normal', alignItems: 'center' }}>{item.key}</Text>
+                    <Image style={styles.rednerImg} source={{ uri: item.image }} ></Image>
+                    <Text style={styles.rednertext}>{item.key}</Text>
                     <CheckBox value={item.checked}
                         style={{ transform: [{ scaleX: 0.8 }, { scaleY: 0.8 }], }}
                         onValueChange={() => { this.oncheckedExtra2(item.id) }}
@@ -206,8 +207,8 @@ export default class Commande extends Component {
         return this.state.extra3.map((item, key) => {
             return (
                 <TouchableOpacity style={{ alignItems: 'center' }} key={key} onPress={() => { this.oncheckedExtra3(item.id) }}>
-                    <Image style={{ width: 50, height: 50, alignSelf: 'center', }} source={{ uri: item.image }} ></Image>
-                    <Text style={{ fontSize: 18, fontStyle: 'normal', alignItems: 'center' }}>{item.key}</Text>
+                    <Image style={styles.rednerImg} source={{ uri: item.image }} ></Image>
+                    <Text style={styles.rednertext}>{item.key}</Text>
                     <CheckBox value={item.checked}
                         style={{ transform: [{ scaleX: 0.8 }, { scaleY: 0.8 }], }}
                         onValueChange={() => { this.oncheckedExtra3(item.id) }}
@@ -222,8 +223,8 @@ export default class Commande extends Component {
         return this.state.boisson.map((item, key) => {
             return (
                 <TouchableOpacity style={{ alignItems: 'center' }} key={key} onPress={() => { this.oncheckedBoisson(item.id) }}>
-                    <Image style={{ width: 50, height: 50, alignSelf: 'center', }} source={{ uri: item.image }} ></Image>
-                    <Text style={{ fontSize: 18, fontStyle: 'normal', alignItems: 'center' }}>{item.key}</Text>
+                    <Image style={styles.rednerImg} source={{ uri: item.image }} ></Image>
+                    <Text style={styles.rednertext}>{item.key}</Text>
                     <CheckBox value={item.checked}
                         style={{ transform: [{ scaleX: 0.8 }, { scaleY: 0.8 }], }}
                         onValueChange={() => { this.oncheckedBoisson(item.id) }}
@@ -238,8 +239,8 @@ export default class Commande extends Component {
         return this.state.boisson2.map((item, key) => {
             return (
                 <TouchableOpacity style={{ alignItems: 'center' }} key={key} onPress={() => { this.oncheckedBoisson2(item.id) }}>
-                    <Image style={{ width: 50, height: 50, alignSelf: 'center', }} source={{ uri: item.image }} ></Image>
-                    <Text style={{ fontSize: 18, fontStyle: 'normal', alignItems: 'center' }}>{item.key}</Text>
+                    <Image style={styles.rednerImg}source={{ uri: item.image }} ></Image>
+                    <Text style={styles.rednertext}>{item.key}</Text>
                     <CheckBox value={item.checked}
                         style={{ transform: [{ scaleX: 0.8 }, { scaleY: 0.8 }], }}
                         onValueChange={() => { this.oncheckedBoisson2(item.id) }}
@@ -254,8 +255,8 @@ export default class Commande extends Component {
         return this.state.supp.map((item, key) => {
             return (
                 <TouchableOpacity style={{ alignItems: 'center', margin:37 }} key={key} onPress={() => { this.oncheckedSupp(item.id) }}>
-                    <Image style={{ width: 50, height: 50, alignSelf: 'center', }} source={{ uri: item.image }} ></Image>
-                    <Text style={{ fontSize: 18, fontStyle: 'normal', alignItems: 'center' }}>{item.key}</Text>
+                    <Image style={styles.rednerImg} source={{ uri: item.image }} ></Image>
+                    <Text style={styles.rednertext}>{item.key}</Text>
                     <CheckBox value={item.checked}
                         style={{ transform: [{ scaleX: 0.8 }, { scaleY: 0.8 }], }}
                         onValueChange={() => { this.oncheckedSupp(item.id) }}
@@ -373,28 +374,28 @@ export default class Commande extends Component {
 
                 <ScrollView>
                     <Text style={styles.text}>french Tacos </Text>
-                    <Text style={{ color: '#435D6B', fontSize: 18, alignSelf: 'center', }}>Choisissez votre choix !</Text>
-                    <Image style={{ width: 450, height: 450, alignSelf: 'center', marginTop: -130, }} source={require("../assets/Tacos-M.png")}></Image>
+                    <Text style={{ color: '#435D6B', fontSize: normalize(18), alignSelf: 'center', }}>Choisissez votre choix !</Text>
+                    <Image style={{ width: normalize(450), height: normalize(450), alignSelf: 'center', marginTop: normalize(-130), }} source={require("../assets/Tacos-M.png")}></Image>
 
-                    <View style={{ flexDirection: 'row', marginLeft: 100, marginTop: -130 }}>
-                        <TouchableOpacity style={styles.button_S}><Text style={{ color: '#000000', alignSelf: 'center', marginTop: 9, }}>XL</Text></TouchableOpacity>
-                        <TouchableOpacity style={styles.button_L}><Text style={{ color: '#000000', alignSelf: 'center', marginTop: 9 }}>L</Text></TouchableOpacity>
+                    <View style={{ flexDirection: 'row', marginLeft: normalize(100), marginTop: normalize(-130) }}>
+                        <TouchableOpacity style={styles.button_S}><Text style={{ color: '#000000', alignSelf: 'center', marginTop: normalize(9), fontSize: normalize(15) }}>XL</Text></TouchableOpacity>
+                        <TouchableOpacity style={styles.button_L}><Text style={{ color: '#000000', alignSelf: 'center', marginTop: normalize(9), fontSize: normalize(15)  }}>L</Text></TouchableOpacity>
                     </View>
-                    <TouchableOpacity style={styles.button_M}><Text style={{ color: '#FFFFFF', alignSelf: 'center', marginTop: 9 }}>M</Text></TouchableOpacity>
+                    <TouchableOpacity style={styles.button_M}><Text style={{ color: '#FFFFFF', alignSelf: 'center', marginTop: normalize(9), fontSize: normalize(15)  }}>M</Text></TouchableOpacity>
 
-                    <View style={{ flexDirection: 'row', alignSelf: 'center', marginTop: 50, }}>
-                        <TouchableOpacity style={styles.button_moins}><Text style={{ color: '#FFFFFF', alignSelf: 'center', marginTop: 3 }}>-</Text></TouchableOpacity>
-                        <Text style={{ fontSize: 24, color: '#000000', alignSelf: 'center', marginTop: 3, marginLeft: 40 }}>2</Text>
-                        <TouchableOpacity style={styles.button_plus}><Text style={{ color: '#FFFFFF', alignSelf: 'center', marginTop: 3 }}>+</Text></TouchableOpacity>
+                    <View style={{ flexDirection: 'row', alignSelf: 'center', marginTop: normalize(50), }}>
+                        <TouchableOpacity style={styles.button_moins}><Text style={{ color: '#FFFFFF', alignSelf: 'center',fontSize: normalize(13) }}>-</Text></TouchableOpacity>
+                        <Text style={{ fontSize: normalize(24), color: '#000000', alignSelf: 'center',  marginLeft: normalize(40),fontSize: normalize(15) }}>2</Text>
+                        <TouchableOpacity style={styles.button_plus}><Text style={{ color: '#FFFFFF', alignSelf: 'center', fontSize: normalize(15)}}>+</Text></TouchableOpacity>
                     </View>
 
 
                     <Text style={styles.text_titre}>La viande</Text>
                     <View style={{ flexDirection: 'row', alignItems: 'center', justifyContent: 'center', }}>
-                        <View style={{ marginTop: 25, marginLeft: -20 }}>
+                        <View style={{ marginTop: normalize(25), marginLeft: normalize(-20) }}>
                             {this.renderTacos()}
                         </View>
-                        <View style={{ marginTop: 25, marginLeft: 20 }}>
+                        <View style={{ marginTop: normalize(25), marginLeft: normalize(20 )}}>
                             {this.renderTacos2()}
                         </View>
 
@@ -404,10 +405,10 @@ export default class Commande extends Component {
                     <Text style={styles.text_titre}>Sauces</Text>
 
                     <View style={{ flexDirection: 'row', alignSelf: 'center', justifyContent: 'center',}}>
-                        <View style={{ marginTop: 25, marginLeft: -15 }}>
+                        <View style={{ marginTop: normalize(25), marginLeft: normalize( -15) }}>
                             {this.renderSauce()}
                         </View>
-                        <View style={{ marginTop: 25, marginLeft: 50 }}>
+                        <View style={{ marginTop: normalize(25), marginLeft: normalize(50 )}}>
                             {this.renderSauce2()}
                         </View>
 
@@ -421,10 +422,10 @@ export default class Commande extends Component {
                     <Text style={styles.text_titre}>Extra</Text>
 
                     <View style={{ flexDirection: 'row', alignSelf: 'center' }}>
-                        <View style={{ marginTop: 25, marginLeft: -10 }}>
+                        <View style={{ marginTop: normalize(25), marginLeft: normalize(-10) }}>
                             {this.renderExtra()}
                         </View>
-                        <View style={{ marginTop: 25, marginLeft: 55 }}>
+                        <View style={{ marginTop: normalize(25), marginLeft: normalize(55) }}>
                             {this.renderExtra2()}
                         </View>
                     </View>
@@ -436,10 +437,10 @@ export default class Commande extends Component {
                     <Text style={styles.text_titre}>LES BOISSONS</Text>
 
                     <View style={{ flexDirection: 'row', alignSelf: 'center',  }}>
-                        <View style={{ marginTop: 25, marginLeft: 30 }}>
+                        <View style={{ marginTop: normalize(25), marginLeft: normalize(30 )}}>
                             {this.renderBoisson()}
                         </View>
-                        <View style={{ marginTop: 25, marginLeft: 80 }}>
+                        <View style={{ marginTop: normalize(25), marginLeft: normalize(80) }}>
                             {this.renderBoisson2()}
                         </View>
 
@@ -463,9 +464,9 @@ export default class Commande extends Component {
 
 
 
-                    <View style={{ marginTop: 80, }}>
+                    <View style={{ marginTop: normalize( 80), }}>
                         <TouchableOpacity style={styles.btnAjout} onPress={() => { this.getSelectedItem() }}>
-                            <Text style={{ fontSize: 17, color: '#FFFFFF', alignSelf: 'center', marginTop: 12, }} >Ajouter</Text>
+                            <Text style={{ fontSize: normalize(17), color: '#FFFFFF', alignSelf: 'center', marginTop: normalize(12), }} >Ajouter</Text>
                         </TouchableOpacity>
 
 
@@ -474,13 +475,13 @@ export default class Commande extends Component {
                 </ScrollView>
                 <View style={{ flexDirection: 'row' }}>
                     <View >
-                        <Text style={{ color: "#435D6B", fontSize: 16, marginLeft: 15, }}>Prix</Text>
-                        <Text style={{ color: "#000000", fontSize: 24, alignSelf: 'flex-start', marginLeft: 10, }}>7DT</Text>
+                        <Text style={{ color: "#435D6B", fontSize: normalize(16), marginLeft: normalize(15), }}>Prix</Text>
+                        <Text style={{ color: "#000000", fontSize: normalize(24), alignSelf: 'flex-start', marginLeft: normalize(10), }}>7DT</Text>
                     </View>
                     <TouchableOpacity style={styles.button} onPress={() =>
                         this.props.navigation.navigate('Panier')}>
-                        <Text style={{ color: "#FFFFFF", fontSize: 17, alignSelf: 'center', marginTop: 10, marginLeft: 10 }}>Aller au panier</Text>
-                        <Image style={{ alignSelf: 'flex-start', marginLeft: 15, marginTop: -22, }} source={require("../assets/Group.png")} ></Image>
+                        <Text style={{ color: "#FFFFFF", fontSize: normalize(17), alignSelf: 'center', marginTop: normalize(10), marginLeft: normalize(10) }}>Aller au panier</Text>
+                        <Image style={{ alignSelf: 'flex-start', marginLeft: normalize(15), marginTop: normalize(-22), }} source={require("../assets/Group.png")} ></Image>
                     </TouchableOpacity>
 
                 </View>
@@ -499,11 +500,11 @@ const styles = StyleSheet.create({
     button: {
         backgroundColor: '#D05A0B',
         borderRadius: 10,
-        width: 200,
-        height: 50,
+        width: normalize(200),
+        height: normalize(50),
         alignSelf: 'flex-end',
-        marginLeft: 140,
-        marginTop:10
+        marginLeft: normalize(140),
+        marginTop: normalize(10)
 
 
 
@@ -511,28 +512,18 @@ const styles = StyleSheet.create({
 
     text: {
         alignSelf: 'center',
-        fontSize: 24,
+        fontSize: normalize(24),
         fontWeight: 'bold',
         color: '#000000',
 
 
     },
-    elips: {
-        backgroundColor: 'red',
-        borderRadius: 800,
-        width: 450,
-        height: 450,
-        alignSelf: 'center',
-        marginLeft: 0,
-        marginTop: -250,
-        opacity: 1,
 
-    },
     button_M: {
         backgroundColor: '#D05A0B',
         borderRadius: 10,
-        width: 40,
-        height: 40,
+        width: normalize(40),
+        height: normalize(40),
         alignSelf: 'center',
         marginLeft: 0,
 
@@ -540,8 +531,8 @@ const styles = StyleSheet.create({
     }, button_S: {
         backgroundColor: '#FFFFFF',
         borderRadius: 10,
-        width: 40,
-        height: 40,
+        width: normalize(40),
+        height: normalize( 40),
         alignSelf: 'center',
 
 
@@ -552,10 +543,10 @@ const styles = StyleSheet.create({
     button_L: {
         backgroundColor: '#FFFFFF',
         borderRadius: 10,
-        width: 40,
-        height: 40,
+        width: normalize(40),
+        height: normalize(40),
         alignSelf: 'center',
-        marginLeft: 100,
+        marginLeft: normalize(100),
 
 
 
@@ -564,8 +555,8 @@ const styles = StyleSheet.create({
     button_moins: {
         backgroundColor: '#D05A0B',
         borderRadius: 13,
-        width: 25,
-        height: 25,
+        width: normalize(25),
+        height: normalize(25),
         alignSelf: 'center',
 
 
@@ -576,10 +567,10 @@ const styles = StyleSheet.create({
     button_plus: {
         backgroundColor: '#D05A0B',
         borderRadius: 13,
-        width: 25,
-        height: 25,
+        width: normalize(25),
+            height: normalize(25),
         alignSelf: 'center',
-        marginLeft: 40,
+        marginLeft: normalize(40),
 
 
 
@@ -587,21 +578,32 @@ const styles = StyleSheet.create({
     },
     text_titre: {
         alignSelf: 'center',
-        fontSize: 24,
+        fontSize: normalize(24),
         fontWeight: 'bold',
         color: '#000000',
-        marginTop: 70,
+        marginTop: normalize(70),
 
 
     },
     btnAjout: {
         backgroundColor: '#000000',
         borderRadius: 10,
-        width: 354,
-        height: 60,
+        width: normalize( 354),
+        height:normalize( 60),
         alignSelf: 'center',
 
-    }
+    },
+    rednerImg: {
+        width: normalize(50),
+        height: normalize(50),
+        alignSelf: 'center', 
+    },
+    rednertext: {
+        fontSize: normalize(18),
+        fontStyle: 'normal',
+        alignItems: 'center'
+    },
+
 
 
 

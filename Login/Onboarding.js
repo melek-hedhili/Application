@@ -4,6 +4,7 @@ import {StyleSheet, Text, View, Image, TouchableOpacity } from 'react-native';
 import 'react-native-gesture-handler';
 import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
+import normalize from 'react-native-normalize';
 const styles = StyleSheet.create({
     container: {
         flex: 1,
@@ -11,36 +12,32 @@ const styles = StyleSheet.create({
     },
     tinyLogo: {
 
-        width: 308,
-        height: 282,
+        width: normalize(308),
+        height: normalize(282),
         resizeMode: 'contain',
         alignSelf:'center',
-        top: 80
+        top: normalize(80)
 
-    },
-    logo: {
-        width: 66,
-        height: 58,
     },
 
     text: {
         textAlign: 'center',
         color: "#2E3E5C",
-        fontSize: 22,
+        fontSize: normalize(22),
         fontFamily: 'arial',
         fontWeight: 'bold',
         width: "100%",
-        marginTop:70
+        marginTop: normalize(70)
 
     },
     btnContainer: {
         backgroundColor: "#CB5C17",
-        height: 60,
-        width:327,
+        height: normalize(60),
+        width: normalize(327),
         borderRadius: 30,
         justifyContent: 'center',
         alignItems: 'center',
-        marginTop: 99
+        marginTop: normalize(99)
 
 
     },
@@ -48,8 +45,8 @@ const styles = StyleSheet.create({
 
         justifyContent: 'center',
         alignItems: 'center',
-        marginTop: 100
-
+            marginTop: normalize(100)
+        
 
     }
     
@@ -62,11 +59,11 @@ const OnBoarding = ({ navigation }) => {
             <View style={styles.headline}>
                 
                 <Text style={styles.text} >HOT AND FRENCH TACOS</Text>
-                <Text style={{ textAlign: 'center', color: "#9FA5C0", fontSize: 17, fontFamily: 'arial', fontWeight: 'bold', marginTop: 16, letterSpacing: 1 }} >The best taste</Text>
+                <Text style={{ textAlign: 'center', color: "#9FA5C0", fontSize: normalize(17), fontFamily: 'arial', fontWeight: 'bold', marginTop: normalize(16), letterSpacing: 1 }} >The best taste</Text>
                 <TouchableOpacity activeOpacity={0.8} style={styles.btnContainer} onPress={() =>
                     navigation.navigate('Login')
                 }>
-                    <Text style={{ color: 'white', fontSize: 15, fontWeight: 'bold', letterSpacing: 0.7, fontFamily: 'arial'}} >Commencer</Text>
+                    <Text style={{ color: 'white', fontSize: normalize(15), fontWeight: 'bold', letterSpacing: 0.7, fontFamily: 'arial'}} >Commencer</Text>
 
                 </TouchableOpacity>
                 

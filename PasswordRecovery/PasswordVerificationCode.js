@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useRef, Component } from 'react';
-
+import normalize from 'react-native-normalize';
 import { StyleSheet, Text, View, Image, TouchableOpacity, TextInput, Alert } from 'react-native';
 
 export default class PasswordVerificationCode extends Component {
@@ -35,8 +35,8 @@ export default class PasswordVerificationCode extends Component {
             <View style={styles.container}>
 
 
-                <Text style={{ textAlign: 'center', color: "#9FA5C0", fontSize: 15, fontFamily: 'arial', fontWeight: 'bold', marginTop: 60, letterSpacing: 1, lineHeight: 25 }}>Nous avons envoye un code { "\n"}a votre adresse email</Text>
-                <View style={{ justifyContent: 'space-evenly', flexDirection: 'row', marginTop: 32 }}>
+                <Text style={{ textAlign: 'center', color: "#9FA5C0", fontSize: normalize(15), fontFamily: 'arial', fontWeight: 'bold', marginTop: normalize(60), letterSpacing: 1, lineHeight: normalize(25) }}>Nous avons envoye un code { "\n"}a votre adresse email</Text>
+                <View style={{ justifyContent: 'space-evenly', flexDirection: 'row', marginTop: normalize(32) }}>
                     <TextInput
                         maxLength={1}
                         keyboardType='numeric'
@@ -47,11 +47,11 @@ export default class PasswordVerificationCode extends Component {
                             backgroundColor: 'white',
                             fontWeight: '600',
                             alignSelf: 'center',
-                            padding: 10,
-                            fontSize: 34,
-                            height: 72,
-                            width: 72,
-                            borderRadius: 20,
+                            padding: normalize(10),
+                            fontSize: normalize(34),
+                            height: normalize(72),
+                            width: normalize(72),
+                            borderRadius: normalize(20),
                             borderWidth: 1,
                             borderColor: '#D0DBEA',
                             textAlign: 'center'
@@ -114,11 +114,11 @@ export default class PasswordVerificationCode extends Component {
                 </View>
                 <TouchableOpacity activeOpacity={0.8} style={styles.btnContainer} onPress={() =>
                     this.props.navigation.navigate('NewPassword')}>
-                    <Text style={{ color: 'white', fontSize: 15, fontWeight: 'bold', letterSpacing: 0.7, fontFamily: 'arial' }} >Suivant</Text>
+                    <Text style={{ color: 'white', fontSize:  normalize(15), fontWeight: 'bold', letterSpacing: 0.7, fontFamily: 'arial' }} >Suivant</Text>
 
                 </TouchableOpacity>
                 <TouchableOpacity activeOpacity={0.8} style={styles.btnContainerRetour} >
-                    <Text style={{ color: '#9FA5C0', fontSize: 15, fontWeight: 'bold', letterSpacing: 0.7, fontFamily: 'arial' }} >Envoyer a nouveau</Text>
+                    <Text style={{ color: '#9FA5C0', fontSize: normalize( 15), fontWeight: 'bold', letterSpacing: 0.7, fontFamily: 'arial' }} >Envoyer a nouveau</Text>
 
                 </TouchableOpacity>
             </View>
@@ -136,10 +136,10 @@ const styles = StyleSheet.create({
         backgroundColor: 'white',
         fontWeight: '600',
         alignSelf: 'center',
-        padding: 10,
-        fontSize: 34,
-        height: 72,
-        width: 72,
+        padding: normalize(10),
+        fontSize: normalize(34),
+        height: normalize(72),
+        width: normalize(72),
         borderRadius: 20,
         borderWidth: 1,
         borderColor: '#D0DBEA',
@@ -148,22 +148,22 @@ const styles = StyleSheet.create({
     },
     btnContainer: {
         backgroundColor: "#CB5C17",
-        height: 56,
-        width: 327,
+        height: normalize(56),
+        width: normalize(327),
         resizeMode: 'contain',
         borderRadius: 30,
         justifyContent: 'center',
         alignItems: 'center',
         alignSelf: 'center',
 
-        marginTop: 97
+        marginTop: normalize(97)
 
 
     },
     btnContainerRetour: {
         backgroundColor: "#FFFFFF",
-        height: 56,
-        width: 327,
+        height: normalize(56),
+        width: normalize(327),
         resizeMode: 'contain',
         borderRadius: 30,
         justifyContent: 'center',
@@ -173,7 +173,7 @@ const styles = StyleSheet.create({
         borderWidth: 1,
 
 
-        marginTop: 30
+        marginTop: normalize(30)
 
 
     },

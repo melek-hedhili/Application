@@ -8,6 +8,8 @@ import Recovery from "../PasswordRecovery/Recovery.js"
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 import SimpleLineIcons from 'react-native-vector-icons/SimpleLineIcons';
 import Feather from 'react-native-vector-icons/Feather';
+import 'react-native-gesture-handler';
+import normalize from 'react-native-normalize';
 const styles = StyleSheet.create({
     container: {
         flex: 1,
@@ -16,29 +18,29 @@ const styles = StyleSheet.create({
     text: {
         textAlign: 'center',
         color: "#3E5481",
-        fontSize: 22,
+        fontSize: normalize(22),
         letterSpacing:0.5,
         fontWeight: 'bold',
-        width: "100%",
+
 
         marginTop: 107
 
     },
     mdp: {
-        width: '90%',
+        
         color: "#2E3E5C",
-        fontSize: 15,
-
+        fontSize: normalize(15),
+        marginLeft:normalize(180),
         fontWeight: 'bold',
-        marginTop: 60,
-        textAlign: 'right',
-        height: 100
+        marginTop: normalize(60),
+
+
     },
     inputContainer: {
         borderWidth: 1,
         borderColor:'#D0DBEA',
-        height: 56,
-        width:327,
+        height: normalize(56),
+        width: normalize(327),
         borderRadius: 30,
         flexDirection: 'column',
         backgroundColor: '#FFFFFF',
@@ -46,15 +48,16 @@ const styles = StyleSheet.create({
         alignSelf:'center',
         justifyContent:'center',
         //resizeMode: 'contain',
-        marginTop: 32,
-        paddingHorizontal: 20,
-        textAlign: 'center'
+        marginTop: normalize(32),
+        paddingHorizontal: normalize(20),
+        textAlign: 'center',
+        fontSize: normalize(14)
     },
     inputContainerPassword: {
         borderWidth: 1,
         borderColor: '#D0DBEA',
-        height: 56,
-        width: 327,
+        height: normalize(56),
+        width: normalize(327),
         borderRadius: 30,
         flexDirection: 'column',
         backgroundColor: '#FFFFFF',
@@ -62,28 +65,29 @@ const styles = StyleSheet.create({
         alignSelf: 'center',
         justifyContent: 'center',
         //resizeMode: 'contain',
-        marginTop: 25,
-        paddingHorizontal: 20,
-        textAlign: 'center'
+        marginTop: normalize(25),
+        paddingHorizontal: normalize(20),
+        textAlign: 'center',
+        fontSize: normalize(14)
     },
     btnContainer: {
         backgroundColor: "#CB5C17",
-        height: 60,
-        width:'90%',
+        height: normalize(56),
+        width: normalize(327),
         resizeMode: 'contain',
         borderRadius: 30,
         justifyContent: 'center',
         alignItems: 'center',
         alignSelf: 'center',
        
-        marginTop:30
+        marginTop: normalize(84)
 
 
     },
 
     Icon: {
-        height: 25,
-        width: 25,
+        height: normalize( 25),
+        width: normalize(25),
     }
 
 });
@@ -97,7 +101,7 @@ const styles = StyleSheet.create({
 
             <View style={styles.container} >
                 <Text style={styles.text}>Bienvenu</Text>
-                <Text style={{ textAlign: 'center', color: "#9FA5C0", fontSize: 15, fontFamily: 'arial', fontWeight: 'bold', marginTop: 20, letterSpacing: 1 }}>Veuillez entrer votre compte ici</Text>
+                <Text style={{ textAlign: 'center', color: "#9FA5C0", fontSize: normalize(15), fontFamily: 'arial', fontWeight: 'bold', marginTop: normalize(20), letterSpacing: 1 }}>Veuillez entrer votre compte ici</Text>
 
                 <TextInput
 
@@ -106,7 +110,7 @@ const styles = StyleSheet.create({
                     placeholderTextColor={'#9FA5C0'}
                    
                 />
-                <Feather name="mail" color={'#2E3E5C'} size={26} style={{ alignSelf: 'flex-start', marginTop: -40, marginLeft: 48,  }} />
+                <Feather name="mail" color={'#2E3E5C'} size={normalize(26)} style={{ alignSelf: 'flex-start', marginTop: normalize(- 36), marginLeft: normalize(47), }} />
                    
                     
 
@@ -118,16 +122,16 @@ const styles = StyleSheet.create({
                     placeholderTextColor={'#9FA5C0'}
 
                 />
-                <SimpleLineIcons name="lock" color={'#2E3E5C'} size={26} style={{ alignSelf: 'flex-start', marginTop: -42, marginLeft: 48, }} />
+                <SimpleLineIcons name="lock" color={'#2E3E5C'} size={normalize(26)} style={{ alignSelf: 'flex-start', marginTop: normalize(-38), marginLeft: normalize( 47), }} />
                 <TouchableOpacity onPress={() =>
                     navigation.navigate('Recovery')}>
                     <Text
                         style={styles.mdp}
-                    >Mot de passe oublie  ?</Text>
+                    >Mot de passe oublie?</Text>
                 </TouchableOpacity>
                 <TouchableOpacity onPress={() =>
                     navigation.navigate('MyTabs')} activeOpacity={0.8} style={styles.btnContainer}>
-                    <Text style={{ color: 'white', fontSize: 15, fontWeight: 'bold', letterSpacing: 0.7, }} >Connexion</Text>
+                    <Text style={{ color: 'white', fontSize: normalize(15), fontWeight: 'bold', letterSpacing: 0.7, }} >Connexion</Text>
 
                 </TouchableOpacity>
 
@@ -135,16 +139,18 @@ const styles = StyleSheet.create({
   
 
 
-                <View style={{ flexDirection: "row", backgroundColor: '#F5F5F8', marginTop: 20 }}>
-                    <Text>      </Text>
-                    <Text style={{ justifyContent: 'center', alignSelf: 'center', textAlign: 'center', color: "#2E3E5C", fontSize: 15,  fontWeight: 'bold', marginTop: 8, letterSpacing: 1 }}>Vous n'avez pas de compte?</Text>
-                    <Text>      </Text>
+                <View style={{ flexDirection: "row", backgroundColor: '#F5F5F8', marginTop: normalize(56), justifyContent: 'center' }}>
+                    
+                    <Text style={{ justifyContent: 'center', alignSelf: 'center', textAlign: 'center', color: "#2E3E5C", fontSize: normalize(15),  fontWeight: 'bold', marginTop: normalize(8), letterSpacing: 1 }}>Vous n'avez pas de compte?</Text>
+                   
                     <TouchableOpacity onPress={() =>
                         navigation.navigate('InscriptionNum')
-                    } ><Text style={{ justifyContent: 'center', alignSelf: 'center', textAlign: 'center', color: "#CB5C17", fontSize: 15, fontWeight: 'bold', marginTop: 8, letterSpacing: 1, }} >S'inscrire</Text></TouchableOpacity>
+                    } >
+
+                        <Text style={{ justifyContent: 'center', alignSelf: 'center', textAlign: 'center', color: "#CB5C17", fontSize: normalize(15), fontWeight: 'bold', marginTop: normalize(8), letterSpacing: 1, marginLeft: normalize(15) }} >S'inscrire</Text>
+                    </TouchableOpacity>
                 </View>
-                <View style={{ flexDirection: "column", backgroundColor: '#F5F5F8', marginTop: 56.4 }}>
-                </View>
+
 
 
 

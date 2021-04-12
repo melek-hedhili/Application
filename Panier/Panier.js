@@ -2,95 +2,100 @@ import React, { Component} from 'react';
 import { StyleSheet, Text, View, Image, TouchableOpacity, ScrollView, } from 'react-native';
 import Paiment from '../Panier/Paiment.js'
 import Feather from 'react-native-vector-icons/Feather';
+import normalize from 'react-native-normalize';
 
 export default class Panier extends Component {
     render() {
         
 return (  
     <View style={styles.container}>
-        <TouchableOpacity onPress={() => this.props.navigation.goBack()}><Image style={{ resizeMode: 'contain' }} source={require("../assets/Back.png")} /></TouchableOpacity>
+        <View style={{ flexDirection: 'row', }}>
+            <TouchableOpacity onPress={() => this.props.navigation.goBack()}><Image style={{ resizeMode: 'contain' }} source={require("../assets/Back.png")} /></TouchableOpacity>
+
+            <View style={{ flexDirection: 'row' }}>
+                <Text style={{ fontSize: normalize(18), fontWeight: 'bold', justifyContent:'space-between' }}>Panier</Text>
+            </View >
+        </View>
+        
     <ScrollView>
         <View>
-                <Text style={{ fontSize: 18, alignSelf: 'center', marginTop: -5 ,fontWeight: 'bold',}}>Panier</Text>
+                
         </View>
         <View style={styles.rectangle}>
             <View style={{flexDirection:'row',alignSelf:'center',}}>
-                    <Image style={{ width: 200, height: 64, alignSelf: 'center', marginLeft: -60, }} source={require("../assets/Tacos-M.png")}></Image>
-                    <Text style={{ alignSelf: 'center', fontSize:17 }}> Escalope grillé</Text>
+                    <Image style={{ width: normalize(200), height: normalize(64), alignSelf: 'center', marginLeft: normalize(-60), }} source={require("../assets/Tacos-M.png")}></Image>
+                    <Text style={{ alignSelf: 'center', fontSize: normalize(17) }}> Escalope grillé</Text>
                     <TouchableOpacity>
-                        <Feather name="x" color={'#D05A0B'} size={25} style={{ alignSelf: 'flex-start', marginTop: 20, marginLeft: 40, }} />
+                        <Feather name="x" color={'#D05A0B'} size={25} style={{ alignSelf: 'flex-start', marginTop: normalize(20), marginLeft: normalize( 40), }} />
                 
             </TouchableOpacity>
             </View>
-            <View style={{flexDirection:'row',alignSelf:'center',marginLeft:100,marginTop:20}}>
+                <View style={{ flexDirection: 'row', alignSelf: 'center', marginLeft: normalize(100), marginTop: normalize(20)}}>
                     <TouchableOpacity>
-                        <Feather name="minus" color={'#D05A0B'} size={20} style={styles.btnMoin} />
+                        <Feather name="minus" color={'#D05A0B'} size={normalize(20)} style={styles.btnMoin} />
                     </TouchableOpacity>
-                    <Text style={{ fontSize: 15, marginLeft:15 }}>2</Text>
+                    <Text style={{ fontSize: normalize(15), marginLeft: normalize(15) }}>2</Text>
                     <TouchableOpacity>
-                        <Feather name="plus" color={'#D05A0B'} size={20} style={styles.btnPlus} />
+                        <Feather name="plus" color={'#D05A0B'} size={normalize(20)} style={styles.btnPlus} />
                 </TouchableOpacity>
             </View>
             <View style={styles.prix} >
-            <Text>14</Text>
-            <Text>DT</Text>
+                    <Text style={{ fontSize: normalize(15),}}>14</Text>
+                    <Text style={{ fontSize: normalize(15), }}>DT</Text>
             </View>
         </View>
         <View style={styles.rectangle}>
             <View style={{flexDirection:'row',alignSelf:'center',}}>
-            <Image style={{width:200,height:64,alignSelf:'center',marginLeft:-60,}} source ={require("../assets/Tacos-M.png")}></Image>
-                    <Text style={{ alignSelf: 'center', fontSize: 17 }}> Escalope grillé</Text>
+                    <Image style={{ width: normalize(200), height: normalize(64), alignSelf: 'center', marginLeft: normalize(-60),}} source ={require("../assets/Tacos-M.png")}></Image>
+                    <Text style={{ alignSelf: 'center', fontSize: normalize( 17 )}}> Escalope grillé</Text>
             <TouchableOpacity>
-                        <Feather name="x" color={'#D05A0B'} size={25} style={{ alignSelf: 'flex-start', marginTop: 20, marginLeft: 40, }} />
+                        <Feather name="x" color={'#D05A0B'} size={25} style={{ alignSelf: 'flex-start', marginTop: normalize(20), marginLeft: normalize( 40), }} />
             </TouchableOpacity>
             </View>
-            <View style={{flexDirection:'row',alignSelf:'center',marginLeft:100,marginTop:20}}>
+                <View style={{ flexDirection: 'row', alignSelf: 'center', marginLeft: normalize(100), marginTop: normalize(20)}}>
 
                 <TouchableOpacity>
-                        <Feather name="minus" color={'#D05A0B'} size={20} style={styles.btnMoin} />
+                        <Feather name="minus" color={'#D05A0B'} size={normalize(20)} style={styles.btnMoin} />
                     </TouchableOpacity> 
-                    <Text style={{ fontSize: 15, marginLeft: 15}}>2</Text>
+                    <Text style={{ fontSize: normalize(15), marginLeft: normalize(15)}}>2</Text>
                 <TouchableOpacity>
-                        <Feather name="plus" color={'#D05A0B'} size={20} style={styles.btnPlus} />
+                        <Feather name="plus" color={'#D05A0B'} size={normalize(20)} style={styles.btnPlus} />
                 </TouchableOpacity>
             </View>
             <View style={styles.prix} >
-            <Text>14</Text>
-            <Text>DT</Text>
+                    <Text style={{ fontSize: normalize(15),}}>14</Text>
+                    <Text style={{ fontSize: normalize(15), }}>DT</Text>
             </View>
             </View>
             <TouchableOpacity style={styles.btnAjouteAutre}>
-                <Text style={{ color: 'white', alignSelf: 'center', fontSize:17 }}> Ajouter autre  </Text>
+                <Text style={{ color: 'white', alignSelf: 'center', fontSize: normalize(17) }}> Ajouter autre  </Text>
             </TouchableOpacity>
-            <View style={{ flexDirection: 'row', marginTop: 45 }}>
-                <Text style={{ color: '#667C8A', fontSize: 14, marginLeft:10 }}>Total</Text>
-            <View style={{flexDirection:'row'}}>
-            <Text style={{marginLeft:300}}>14</Text>
-            <Text>DT</Text>
-            </View>
+            <View style={{ flexDirection: 'row', marginTop: normalize(45), justifyContent: 'space-between' }}>
+                <Text style={{ color: '#667C8A', fontSize: normalize(14), marginLeft: normalize(10) }}>Total</Text>
+
+                    <Text style={{}}>14 DT</Text>
+
+
         </View>
 
-        <View style={{flexDirection:'row',marginTop:17}}>
-                <Text style={{ color: '#667C8A', fontSize: 14, marginLeft:10 }}>Frais de livraison </Text>
-            <View style={{flexDirection:'row'}}>
-            <Text style={{marginLeft:223}}>14</Text>
-            <Text>DT</Text>
+            <View style={{ flexDirection: 'row', marginTop: normalize(17) ,justifyContent: 'space-between' }}>
+                <Text style={{ color: '#667C8A', fontSize: normalize(14), marginLeft: normalize(10) }}>Frais de livraison </Text>
+                <Text style={{}}>14 DT</Text>
             </View>
-        </View>
         
-            <View style={{ flexDirection: 'row', marginTop: 17, marginLeft: 10 }}>
-            <Text style={{color:'#667C8A',fontSize:14}}>Tax</Text>
-            <View style={{flexDirection:'row'}}>
-            <Text style={{marginLeft:310}}>33</Text>
-            <Text>DT</Text>
-            </View>
+            <View style={{ flexDirection: 'row', marginTop: normalize(17), justifyContent: 'space-between'}}>
+                <Text style={{ color: '#667C8A', fontSize: normalize(14), marginLeft: normalize(10)}}>Tax</Text>
+
+                    <Text style={{ }}>33 DT</Text>
+
+
         </View>
-        <View style={{flexDirection:'row',marginTop:27, marginLeft:10 }}>
-            <Text style={{color:'black',fontSize:18,}}>Total</Text>
-            <View style={{flexDirection:'row'}}>
-            <Text style={{marginLeft:292}}>15</Text>
-            <Text>DT</Text>
-            </View>
+            <View style={{ flexDirection: 'row', marginTop: normalize(27), marginLeft: normalize(10), justifyContent: 'space-between' }}>
+                <Text style={{ color: 'black', fontSize: normalize(18),}}>Total</Text>
+
+                <Text style={{ }}>15 DT</Text>
+
+
         </View>
             <View style={styles.btnProceder}>
                 <TouchableOpacity onPress={() => this.props.navigation.navigate('Paiment')}>
@@ -119,29 +124,29 @@ const styles = StyleSheet.create({
     rectangle:{
         backgroundColor:'white',
         borderRadius:10,
-        width:345,
-        height:127,
+        width: normalize(345),
+        height: normalize(127),
         alignSelf:'center',
-        marginTop:20,
+        marginTop: normalize(20),
         
         
     },
     btnPlus:{
 
         color:'#D05A0B',
-        marginLeft:15,
+        marginLeft: normalize(15),
     },
     btnMoin:{
 
         color:'#D05A0B',
-        marginLeft:-15,
+        marginLeft: normalize(-15),
     },
     prix:{
         flexDirection:'row',
 
-        fontSize: 20,
-        marginTop: -20,
-        marginLeft:300
+        
+        marginTop: normalize( -20),
+        marginLeft: normalize(300)
         
         
     },
@@ -149,10 +154,10 @@ const styles = StyleSheet.create({
     btnAjouteAutre:{
         backgroundColor:'black',
         borderRadius:5,
-        width:345,
-        height:60,
+        width: normalize(345),
+        height: normalize(60),
 
-        marginTop: 20,
+        marginTop: normalize(20),
         justifyContent: 'center',
         alignItems: 'center',
         alignSelf: 'center',
@@ -160,10 +165,10 @@ const styles = StyleSheet.create({
     btnProceder:{
         backgroundColor:'#D05A0B',
         borderRadius:10,
-        width:341,
-        height:61,
+        width: normalize(341),
+        height: normalize(61),
 
-        marginTop: 20,
+        marginTop: normalize( 20),
         justifyContent: 'center',
         alignItems: 'center',
         alignSelf: 'center',

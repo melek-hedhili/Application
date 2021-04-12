@@ -1,6 +1,7 @@
 import React from 'react';
 import { StyleSheet, Text, View, Image, TouchableOpacity, ScrollView, } from 'react-native';
 import RadioButtonRN from 'radio-buttons-react-native';
+import normalize from 'react-native-normalize';
 
 
 
@@ -17,6 +18,10 @@ export default class Paiment extends React.Component {
             {
                 label: 'red'
             },
+            {
+                label2: 'blue'
+            },
+
 
 
         ];
@@ -46,22 +51,22 @@ return (
                     Sousse , Hamam sousse
                     Rue Farhat Hached
              </Text>
-                <Image style={{ width: 300, height: 1, alignSelf: 'center', marginTop:20 }} source={require("../assets/line.png")}>
+                <Image style={{ width: normalize(300), height: normalize(1), alignSelf: 'center', marginTop: normalize(20) }} source={require("../assets/line.png")}>
 
              </Image>
              <Text style={styles.nbrTel}>
                 +216 54 780 314 
              </Text>
         </View>
-        <Text style={{fontSize:18,marginLeft:20,marginTop:9,}}>
+            <Text style={{ fontSize: normalize(18), marginLeft: normalize(20), marginTop: normalize(9),}}>
         Ou par localisation:
         </Text>
 
         <View style={styles.rectangle1}>
             
-            <Image style={{width:290,height:160,alignSelf:'center',marginTop:20}} source ={require("../assets/map.png")}></Image>
+                <Image style={{ width: normalize(290), height: normalize(160), alignSelf: 'center', marginTop: normalize(20)}} source ={require("../assets/map.png")}></Image>
             </View>
-        <Text style={{fontSize:18,marginLeft:20,marginTop:10,}}> Outils de paiements :</Text>
+            <Text style={{ fontSize: normalize(18), marginLeft: normalize(20), marginTop: normalize(10),}}> Outils de paiements :</Text>
         
             <View style={styles.rectangle2}>
                 <View style={{ flexDirection: 'row', alignItems: 'center' }}>
@@ -69,45 +74,36 @@ return (
                     <RadioButtonRN
 
 
-                        style={{marginLeft:30}}
+                        style={{ marginLeft: normalize(30)}}
                         data={this.colors}
                         initial={1}
                         box={false}
                         selectedBtn={(e) => this.setState({ res: e })}
-                        circleSize={11}
+                        circleSize={normalize(11)}
                     />
-                    <Text style={{ fontSize: 18, marginLeft: 60, justifyContent: 'center' ,marginTop:10 }}>Livraison à domicile</Text>
+                    <Text style={{ fontSize: normalize(18), marginLeft: normalize(60), justifyContent: 'center', marginTop: normalize(10) }}>Livraison à domicile</Text>
 
                 </View>
 
 
-                <Image style={{ width: 300, height: 1, alignSelf: 'center', marginTop: 25 }} source={require("../assets/line.png")}></Image>
+                <Image style={{ width: normalize(300), height: normalize(1), alignSelf: 'center', marginTop: normalize(25) }} source={require("../assets/line.png")}></Image>
 
                 <View style={{ flexDirection: 'row', alignItems: 'center', }}>
-                    <Text style={{ marginLeft:35 }}> </Text>
-                    <RadioButtonRN
+                    <Text style={{ marginLeft: normalize(35) }}> </Text>
 
 
-                        style={{ marginLeft: 30 }}
-                        data={this.colors}
-                        initial={1}
-                        box={false}
-                        selectedBtn={(e) => this.setState({ res: e })}
-                        circleSize={11}
-                    />
-
-                    <Text style={{ fontSize: 18, marginLeft: 60, justifyContent: 'center' ,marginTop:10 }}>Surplace</Text>
+                    <Text style={{ fontSize: normalize(18), marginLeft: normalize(60), justifyContent: 'center' ,marginTop:10 }}>Surplace</Text>
                 </View>
                 
                 
                 
             </View>
-            <View style={{flexDirection:'row',marginLeft:20,marginTop:2}}>
+            <View style={{ flexDirection: 'row', marginLeft: normalize(20), marginTop: normalize(2)}}>
                 <Text style={{fontSize:17,}}>Totale</Text>
-                <Text style={{fontSize:22,marginLeft:190}}>23,000</Text>
+                <Text style={{ fontSize: normalize( 22), marginLeft: normalize(190)}}>23,000</Text>
                 </View>
             <TouchableOpacity style={styles.btnSuivant} onPress={() => this.props.navigation.navigate('Checkout')}>
-                <Text style={{alignSelf:'center',marginTop:15,color:'white'}}>Suivant</Text>
+                <Text style={{ alignSelf: 'center', marginTop: normalize(15),color:'white'}}>Suivant</Text>
                 </TouchableOpacity>
         </ScrollView>
 
@@ -126,8 +122,8 @@ const styles = StyleSheet.create({
     title: {
         alignSelf: 'center',
         fontWeight: 'bold',
-        fontSize: 18,
-        marginLeft: 90
+        fontSize: normalize(18),
+        marginLeft: normalize(90)
 
 
 
@@ -135,33 +131,33 @@ const styles = StyleSheet.create({
     rectangle:{
         backgroundColor:'white',
         borderRadius:10,
-        width:334,
-        height:126,
+        width: normalize(334),
+        height: normalize(126),
         alignSelf:'center',
-        marginTop:10,
+        marginTop: normalize(10),
     },
     titeAdresse:{
-        fontSize:18,
-        marginLeft: 20,
-        marginTop:70
+        fontSize: normalize(18),
+        marginLeft: normalize(20),
+        marginTop: normalize(70)
         
     },
     adresse:{
         color:'#667C8A',
-        fontSize:18,
+        fontSize: normalize(18),
         alignSelf:'center',
 
     },nbrTel:{
         color:'#667C8A',
-        fontSize: 18,
-        marginLeft:20,
-        marginTop:20
+        fontSize: normalize(18),
+        marginLeft: normalize(20),
+        marginTop: normalize(20)
     },
     rectangle1:{
         backgroundColor:'white',
         borderRadius:10,
-        width:334,
-        height:201,
+        width: normalize(334),
+        height: normalize(201),
         alignSelf:'center',
 
     
@@ -169,8 +165,8 @@ const styles = StyleSheet.create({
     rectangle2:{
         backgroundColor:'white',
         borderRadius:10,
-        width:334,
-        height:174,
+        width: normalize(334),
+        height: normalize(174),
         alignSelf:'center',
 
     
@@ -178,9 +174,9 @@ const styles = StyleSheet.create({
     btnSuivant:{
         backgroundColor:'#D05A0B',
         borderRadius:10,
-        width:345,
-        height:50,
+        width: normalize(345),
+        height: normalize(50),
         alignSelf:'center',
-        marginTop:20,
+        marginTop: normalize(20),
     }
 });

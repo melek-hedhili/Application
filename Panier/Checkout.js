@@ -1,5 +1,6 @@
 import React, { Component} from 'react';
-import { StyleSheet, Text, View, Image, TouchableOpacity,ScrollView} from 'react-native';
+import { StyleSheet, Text, View, Image, TouchableOpacity, ScrollView } from 'react-native';
+import normalize from 'react-native-normalize';
 
 
 
@@ -20,29 +21,29 @@ return (
         
     <ScrollView>
 
-        <Text style={{fontSize:34,marginLeft:20,marginTop:85,}}>
+            <Text style={{ fontSize: normalize(34), marginLeft: normalize(20), marginTop: normalize(85),}}>
        Paiement
         </Text>
-        <Text style={{fontSize:18,marginTop:22,marginLeft:20}}>
+            <Text style={{ fontSize: normalize(18), marginTop: normalize(22), marginLeft: normalize(20)}}>
             Payez avec:
         </Text>
         <View style={styles.rectangle1}>
-                <View style={{flexDirection:'row',marginLeft:80}}>
+                <View style={{ flexDirection: 'row', marginLeft: normalize(80)}}>
                
-                    <Image style={{width:40,height:30,alignSelf:'center',marginTop:40}} source={require("../assets/carte-e-Dinar-jeune.png")}></Image>
-                    <Text style={{fontSize:17,alignSelf:'center',marginTop:40,marginLeft:30}}>Cart e-Dinar</Text>
+                    <Image style={{ width: normalize(40), height: normalize(30), alignSelf: 'center', marginTop: normalize(40)}} source={require("../assets/carte-e-Dinar-jeune.png")}></Image>
+                    <Text style={{ fontSize: normalize(17), alignSelf: 'center', marginTop: normalize(40), marginLeft: normalize(30)}}>Cart e-Dinar</Text>
                 </View>
-            <Image  style={{width:300,height:1,alignSelf:'center',marginTop:40}} source ={require("../assets/line.png")}></Image>    
-            <View style={{flexDirection:'row',marginLeft:80,marginTop:-20}}>
+                <Image style={{ width: normalize(300), height: 1, alignSelf: 'center', marginTop: normalize(40)}} source ={require("../assets/line.png")}></Image>    
+                <View style={{ flexDirection: 'row', marginLeft: normalize(80), marginTop: normalize(-20)}}>
 
-            <Image style={{width:40,height:30,alignSelf:'center',marginTop:40}} source={require("../assets/bank.png")}></Image>
+                    <Image style={{ width: normalize(40), height: normalize(30), alignSelf: 'center', marginTop: normalize(40)}} source={require("../assets/bank.png")}></Image>
 
-                    <Text style={{fontSize:17,alignSelf:'center',marginTop:40,marginLeft:30}}>Compte bancaire</Text>
+                    <Text style={{ fontSize: normalize(17), alignSelf: 'center', marginTop: normalize(40), marginLeft: normalize(30)}}>Compte bancaire</Text>
                 </View>
          </View>
         
          <TouchableOpacity activeOpacity={0.8} style={styles.btnSuivant} >
-                    <Text style={{ color: 'white', fontSize: 15, fontWeight: 'bold', letterSpacing: 0.7, }} >Suivant</Text>
+                <Text style={{ color: 'white', fontSize: normalize(15), fontWeight: 'bold', letterSpacing: 0.7, }} >Suivant</Text>
 
                 </TouchableOpacity>
     </ScrollView>
@@ -59,8 +60,8 @@ const styles = StyleSheet.create({
     title:{
         alignSelf: 'center',
         fontWeight:'bold',
-        fontSize: 18,
-        marginLeft: 90
+        fontSize: normalize(18),
+        marginLeft: normalize(90)
 
 
 
@@ -68,43 +69,43 @@ const styles = StyleSheet.create({
     rectangle:{
         backgroundColor:'white',
         borderRadius:10,
-        width:345,
-        height:100,
+        width: normalize(345),
+        height: normalize(100),
         alignSelf:'center',
-        marginTop:10,
+        marginTop: normalize(10),
     },
     titeAdresse:{
-        fontSize:18,
-        marginLeft:20,
+        fontSize: normalize(18),
+        marginLeft: normalize(20),
         
     },
     adresse:{
         color:'#667C8A',
-        fontSize:18,
+        fontSize: normalize(18),
         alignSelf:'center',
 
     },nbrTel:{
         color:'#667C8A',
-        fontSize:18,
+        fontSize: normalize(18),
         alignSelf:'center',
-        marginTop:10
+        marginTop: normalize(10)
     },
     rectangle1:{
         backgroundColor: 'white',
         borderRadius: 20,
-        width: 341,
-        height: 202,
+        width: normalize(341),
+        height: normalize(202),
         alignSelf: 'center',
         alignSelf: 'center',
-        marginTop: 32,
+        marginTop: normalize( 32),
     
     },
     rectangle2: {
-        marginTop:32,
+        marginTop: normalize(32),
         backgroundColor:'white',
         borderRadius:20,
-        width:315,
-        height:202,
+        width: normalize(315),
+        height: normalize(202),
         alignSelf: 'center',
         alignSelf: 'center'
 
@@ -112,12 +113,12 @@ const styles = StyleSheet.create({
     },
     btnSuivant:{
         backgroundColor: "#CB5C17",
-        height: 61,
-        width:341,
+        height: normalize(61),
+        width: normalize(341),
         borderRadius: 10,
         alignSelf:'center',
         justifyContent: 'center',
         alignItems: 'center',
-        marginTop: 120
+        marginTop: normalize(120)
     }
 });

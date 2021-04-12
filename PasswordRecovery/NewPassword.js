@@ -4,6 +4,7 @@ import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
 import { StyleSheet, Text, View, Image, TouchableOpacity, TextInput } from 'react-native';
 import SimpleLineIcons from 'react-native-vector-icons/SimpleLineIcons';
+import normalize from 'react-native-normalize';
 
 export default class NewPassword extends Component {
     constructor(props) {
@@ -43,8 +44,8 @@ export default class NewPassword extends Component {
                     onBlur={() => this.onBlur()}
                     onFocus={() => this.onFocus()}
                     style={{
-                        height: 56,
-                        width: 327,
+                        height: normalize(56),
+                        width: normalize(327),
                         borderRadius: 30,
                         flexDirection: 'column',
                         backgroundColor: '#FFFFFF',
@@ -53,8 +54,8 @@ export default class NewPassword extends Component {
                         textAlign:'center',
                         justifyContent: 'center',
                         //resizeMode: 'contain',
-                        marginTop: 58,
-                        paddingHorizontal: 20,
+                        marginTop: normalize(58),
+                        paddingHorizontal: normalize(20),
                         borderWidth: 1,
                         borderColor: '#D0DBEA',
 
@@ -66,22 +67,22 @@ export default class NewPassword extends Component {
                     }}
                     secureTextEntry={true}
                     placeholder="Mot de passe" />
-                <SimpleLineIcons name="lock" color={'#2E3E5C'} size={26} style={{ alignSelf: 'flex-start', marginTop: -42, marginLeft: 48, }} />
-                <Text style={{ color: "#3E5481", fontSize: 17, fontFamily: 'arial', fontWeight: 'bold', marginTop: 30, marginLeft: 20 }}>Votre mot de passe doit avoir :</Text>
+                <SimpleLineIcons name="lock" color={'#2E3E5C'} size={normalize(26)} style={{ alignSelf: 'flex-start', marginTop: normalize(-42), marginLeft: normalize( 48), }} />
+                <Text style={{ color: "#3E5481", fontSize: normalize(17), fontFamily: 'arial', fontWeight: 'bold', marginTop: 30, marginLeft: normalize(20) }}>Votre mot de passe doit avoir :</Text>
 
 
-                <View style={{ flexDirection: "row", backgroundColor: '#F5F5F8', marginTop: 16, marginLeft: 20 }}>
+                <View style={{ flexDirection: "row", backgroundColor: '#F5F5F8', marginTop: 16, marginLeft: normalize( 20) }}>
                     <Image style={styles.tinyLogo}
                         source={require('../assets/verif.png')} />
-                    <Text style={{ color: "#9FA5C0", fontSize: 15, fontFamily: 'arial', fontWeight: 'bold' }}>Au moins 6 characteres</Text>
+                    <Text style={{ color: "#9FA5C0", fontSize: normalize(15), fontFamily: 'arial', fontWeight: 'bold' }}>Au moins 6 characteres</Text>
                 </View>
-                <View style={{ flexDirection: "row", backgroundColor: '#F5F5F8', marginTop: 10, marginLeft: 20 }}>
+                <View style={{ flexDirection: "row", backgroundColor: '#F5F5F8', marginTop: 10, marginLeft: normalize(20) }}>
                     <Image style={styles.tinyLogo}
                         source={require('../assets/verif.png')} />
-                    <Text style={{ color: "#9FA5C0", fontSize: 15, fontFamily: 'arial', fontWeight: 'bold' }}>Contient au moins un chiffre</Text>
+                    <Text style={{ color: "#9FA5C0", fontSize: normalize( 15), fontFamily: 'arial', fontWeight: 'bold' }}>Contient au moins un chiffre</Text>
                 </View>
                 <TouchableOpacity activeOpacity={0.8} style={styles.btnContainer}>
-                    <Text style={{ color: 'white', fontSize: 15, fontWeight: 'bold', letterSpacing: 0.7, fontFamily: 'arial' }} >Terminer</Text>
+                    <Text style={{ color: 'white', fontSize: normalize(15), fontWeight: 'bold', letterSpacing: 0.7, fontFamily: 'arial' }} >Terminer</Text>
 
                 </TouchableOpacity>
 
@@ -106,33 +107,33 @@ const styles = StyleSheet.create({
     },
     btnContainer: {
         backgroundColor: "#CB5C17",
-        height: 56,
-        width: 327,
+        height: normalize(56),
+        width: normalize(327),
         //resizeMode: 'contain',
         borderRadius: 30,
         justifyContent: 'center',
         alignItems: 'center',
         alignSelf: 'center',
 
-        marginTop: 54
+        marginTop: normalize(54)
 
 
     },
     text: {
         textAlign: 'center',
         color: "#3E5481",
-        fontSize: 22,
+        fontSize: normalize(22),
         fontFamily: 'arial',
         fontWeight: 'bold',
-        width: "100%",
+
         //resizeMode: 'contain',
-        marginTop: 60
+        marginTop: normalize(60)
 
     },
     inputContainerPassword: {
 
-        height: 50,
-        width: '90%',
+        height: normalize(56),
+        width: normalize(327),
         borderRadius: 30,
         flexDirection: 'column',
         backgroundColor: '#FFFFFF',
@@ -140,15 +141,15 @@ const styles = StyleSheet.create({
         alignSelf: 'center',
         justifyContent: 'center',
         //resizeMode: 'contain',
-        marginTop: 28,
-        paddingHorizontal: 20,
+        marginTop: normalize(28),
+        paddingHorizontal: normalize(20),
         
 
     },
     tinyLogo: {
         resizeMode: 'contain',
-        width: 24,
-        height: 24
+        width: normalize(24),
+            height: normalize(24)
     },
 
 
