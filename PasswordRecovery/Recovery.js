@@ -15,7 +15,7 @@ const Recovery = ({ navigation }) => {
                 placeholderTextColor={'#9FA5C0'}
                 
             />
-            <Feather name="mail" color={'#2E3E5C'} size={26} style={{ alignSelf: 'flex-start', marginTop: normalize(-40), marginLeft: normalize(48), }} />
+            <Feather name="mail" color={'#2E3E5C'} size={normalize(26)} style={{ alignSelf: 'flex-start', marginTop: normalize(-40), marginLeft: normalize(48), }} />
             <TouchableOpacity activeOpacity={0.8} style={styles.btnContainer} onPress={() =>
                 navigation.navigate('PasswordVerificationCode')}>
                 <Text style={{ color: 'white', fontSize:  normalize(15), fontWeight: 'bold', letterSpacing: 0.7, fontFamily: 'arial' }} >Envoyer</Text>

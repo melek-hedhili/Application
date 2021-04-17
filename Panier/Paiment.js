@@ -16,10 +16,10 @@ export default class Paiment extends React.Component {
 
         this.colors = [
             {
-                label: 'red'
+                label: 'livraison'
             },
             {
-                label2: 'blue'
+                label2: 'surplace'
             },
 
 
@@ -30,88 +30,98 @@ export default class Paiment extends React.Component {
 
     render() {
 
-return ( 
-    <View style={styles.container}> 
-        <View style={styles.container}>
-            <View style={{ flexDirection: 'row', }}>
-
-                <TouchableOpacity onPress={() => this.props.navigation.goBack()}><Image style={{ resizeMode: 'contain' }} source={require("../assets/Back.png")} /></TouchableOpacity>
-
-                <Text style={styles.title}>Paiement</Text>
+        return (
+            <View style={styles.container}>
 
 
-            </View>
-        </View>
-        
-    <ScrollView>
-        
-        <Text style={styles.titeAdresse} >Adresse</Text>
-        <View style={styles.rectangle}>
-            <Text style={styles.adresse}>
-                    Sousse , Hamam sousse
+
+                <ScrollView>
+
+                    <View style={{ flexDirection: 'row', }}>
+
+                        <TouchableOpacity onPress={() => this.props.navigation.goBack()}><Image style={{ resizeMode: 'contain' }} source={require("../assets/Back.png")} /></TouchableOpacity>
+
+
+                    </View>
+
+                    <Text style={styles.title}>Paiement</Text>
+
+                    <Text style={styles.titeAdresse} >Adresse:</Text>
+                    <View style={styles.rectangle}>
+                        <View>
+                            <Text style={styles.adresse}>
+                                Sousse , Hamam sousse{'\n'}
                     Rue Farhat Hached
              </Text>
-                <Image style={{ width: normalize(300), height: normalize(1), alignSelf: 'center', marginTop: normalize(20) }} source={require("../assets/line.png")}>
+                        </View>
+                        <View>
+                            <Image style={{ width: normalize(250), height: normalize(4), alignSelf: 'center', marginTop: normalize(20) }} source={require("../assets/line.png")}>
 
-             </Image>
-             <Text style={styles.nbrTel}>
-                +216 54 780 314 
+                            </Image>
+                        </View>
+                        <View>
+                            <Text style={styles.nbrTel}>
+                                +216 54 780 314
              </Text>
-        </View>
-            <Text style={{ fontSize: normalize(18), marginLeft: normalize(20), marginTop: normalize(9),}}>
-        Ou par localisation:
+                        </View>
+                    </View>
+                    <Text style={{ fontSize: normalize(18), marginLeft: normalize(20), marginTop: normalize(20), }}>
+                        Ou par localisation:
         </Text>
 
-        <View style={styles.rectangle1}>
-            
-                <Image style={{ width: normalize(290), height: normalize(160), alignSelf: 'center', marginTop: normalize(20)}} source ={require("../assets/map.png")}></Image>
+                    <View style={styles.rectangle1}>
+
+                        <Image style={{ width: normalize(290), height: normalize(160), alignSelf: 'center', marginTop: normalize(20) }} source={require("../assets/map.png")}></Image>
+                    </View>
+                    <Text style={{ fontSize: normalize(18), marginLeft: normalize(20), marginTop: normalize(10), }}> Outils de paiements :</Text>
+
+                    <View style={styles.rectangle2}>
+
+
+                        <View style={{ flexDirection: 'row', alignItems: 'center' }}>
+
+                            <RadioButtonRN
+
+                                activeColor={'#FA4A0C'}
+                                deactiveColor={'#FA4A0C'}
+                                style={{ marginLeft: normalize(30), marginTop: normalize(-30), }}
+                                data={this.colors}
+                                initial={1}
+                                box={false}
+                                selectedBtn={(e) => this.setState({ res: e })}
+                                circleSize={normalize(11)}
+                            />
+                            <Text style={{ fontSize: normalize(18), marginLeft: normalize(20), justifyContent: 'center', marginTop: normalize(-50) }}>Livraison à domicile</Text>
+                            <Image style={{ width: normalize(250), height: normalize(4), marginTop: normalize(50), marginLeft: normalize(-160) }} source={require("../assets/line.png")}></Image>
+
+                        </View>
+
+
+
+
+                        <View style={{ flexDirection: 'row', alignItems: 'center', }}>
+                            <Text style={{ marginLeft: normalize(35) }}> </Text>
+                            <Text style={{ fontSize: normalize(18), marginLeft: normalize(20), justifyContent: 'center', marginTop: normalize(-35) }}>Surplace</Text>
+                        </View>
+
+
+
+                    </View>
+                    <View style={{ flexDirection: 'row', marginLeft: normalize(20), marginTop: normalize(10) }}>
+                        <Text style={{ fontSize: 17, }}>Totale</Text>
+                        <Text style={{ fontSize: normalize(22), marginLeft: normalize(220) }}>23,000</Text>
+                    </View>
+                    <TouchableOpacity style={styles.btnSuivant} onPress={() => this.props.navigation.navigate('Checkout')}>
+                        <Text style={{ alignSelf: 'center', marginTop: normalize(20), color: 'white', fontSize: normalize(15), fontWeight: 'bold' }}>Suivant</Text>
+                    </TouchableOpacity>
+                    <Text> </Text>
+                </ScrollView>
+
+
             </View>
-            <Text style={{ fontSize: normalize(18), marginLeft: normalize(20), marginTop: normalize(10),}}> Outils de paiements :</Text>
-        
-            <View style={styles.rectangle2}>
-                <View style={{ flexDirection: 'row', alignItems: 'center' }}>
-                    
-                    <RadioButtonRN
 
-
-                        style={{ marginLeft: normalize(30)}}
-                        data={this.colors}
-                        initial={1}
-                        box={false}
-                        selectedBtn={(e) => this.setState({ res: e })}
-                        circleSize={normalize(11)}
-                    />
-                    <Text style={{ fontSize: normalize(18), marginLeft: normalize(60), justifyContent: 'center', marginTop: normalize(10) }}>Livraison à domicile</Text>
-
-                </View>
-
-
-                <Image style={{ width: normalize(300), height: normalize(1), alignSelf: 'center', marginTop: normalize(25) }} source={require("../assets/line.png")}></Image>
-
-                <View style={{ flexDirection: 'row', alignItems: 'center', }}>
-                    <Text style={{ marginLeft: normalize(35) }}> </Text>
-
-
-                    <Text style={{ fontSize: normalize(18), marginLeft: normalize(60), justifyContent: 'center' ,marginTop:10 }}>Surplace</Text>
-                </View>
-                
-                
-                
-            </View>
-            <View style={{ flexDirection: 'row', marginLeft: normalize(20), marginTop: normalize(2)}}>
-                <Text style={{fontSize:17,}}>Totale</Text>
-                <Text style={{ fontSize: normalize( 22), marginLeft: normalize(190)}}>23,000</Text>
-                </View>
-            <TouchableOpacity style={styles.btnSuivant} onPress={() => this.props.navigation.navigate('Checkout')}>
-                <Text style={{ alignSelf: 'center', marginTop: normalize(15),color:'white'}}>Suivant</Text>
-                </TouchableOpacity>
-        </ScrollView>
-
-
-    </View>
-
- );
-}
+        );
+    }
 }
 const styles = StyleSheet.create({
     container: {
@@ -123,60 +133,66 @@ const styles = StyleSheet.create({
         alignSelf: 'center',
         fontWeight: 'bold',
         fontSize: normalize(18),
-        marginLeft: normalize(90)
+        alignSelf: 'center',
+        marginTop: normalize(-50)
 
 
 
     },
-    rectangle:{
-        backgroundColor:'white',
-        borderRadius:10,
+    rectangle: {
+        backgroundColor: 'white',
+        borderRadius: 20,
         width: normalize(334),
         height: normalize(126),
-        alignSelf:'center',
+        alignSelf: 'center',
         marginTop: normalize(10),
     },
-    titeAdresse:{
-        fontSize: normalize(18),
-        marginLeft: normalize(20),
-        marginTop: normalize(70)
-        
-    },
-    adresse:{
-        color:'#667C8A',
-        fontSize: normalize(18),
-        alignSelf:'center',
-
-    },nbrTel:{
-        color:'#667C8A',
+    titeAdresse: {
         fontSize: normalize(18),
         marginLeft: normalize(20),
         marginTop: normalize(20)
+
     },
-    rectangle1:{
-        backgroundColor:'white',
-        borderRadius:10,
+    adresse: {
+        color: '#667C8A',
+        fontSize: normalize(18),
+        alignSelf: 'center',
+        marginTop: normalize(10)
+
+
+
+    }, nbrTel: {
+        color: '#667C8A',
+        fontSize: normalize(18),
+        alignSelf: 'center',
+        marginTop: normalize(15),
+    },
+    rectangle1: {
+        backgroundColor: 'white',
+        borderRadius: 20,
         width: normalize(334),
         height: normalize(201),
-        alignSelf:'center',
+        alignSelf: 'center',
+        marginTop: normalize(20)
 
-    
+
     },
-    rectangle2:{
-        backgroundColor:'white',
-        borderRadius:10,
+    rectangle2: {
+        backgroundColor: 'white',
+        borderRadius: 20,
         width: normalize(334),
-        height: normalize(174),
-        alignSelf:'center',
+        height: normalize(200),
+        alignSelf: 'center',
+        marginTop: normalize(20)
 
-    
+
     },
-    btnSuivant:{
-        backgroundColor:'#D05A0B',
-        borderRadius:10,
-        width: normalize(345),
-        height: normalize(50),
-        alignSelf:'center',
+    btnSuivant: {
+        backgroundColor: '#D05A0B',
+        borderRadius: 10,
+        width: normalize(341),
+        height: normalize(61),
+        alignSelf: 'center',
         marginTop: normalize(20),
     }
 });

@@ -18,6 +18,8 @@ import MyTabs from '../Navbar/Navbar.js'
 import Commande from '../Order/Commande.js'
 import Panier from '../Panier/Panier.js'
 import Checkout from '../Panier/Checkout.js'
+import Carte from '../Panier/Carte'
+import Rate from '../Rate/Rate.js';
 
 const Stack = createStackNavigator();
 
@@ -94,6 +96,16 @@ class Navigation extends React.Component {
                     <Stack.Screen
                         name="Checkout"
                         component={Checkout}
+                        options={{ headerShown: false }}
+                    />
+                    <Stack.Screen
+                        name="Carte"
+                        component={Carte}
+                        options={{ headerShown: false }}
+                    />
+                    <Stack.Screen
+                        name="Rate"
+                        component={Rate}
                         options={{ headerShown: false }}
                     />
 

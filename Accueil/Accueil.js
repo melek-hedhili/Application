@@ -1,6 +1,7 @@
 import React, { Component, state } from 'react';
 import { StyleSheet, Text, View, Image, TouchableOpacity, ScrollView, Dimensions } from 'react-native';
 import Slider from './Slider.js'
+import { Linking } from 'react-native'
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 import normalize from 'react-native-normalize';
 
@@ -16,7 +17,7 @@ export default class Accueil extends Component {
                         <Image style={{ resizeMode: 'contain', justifyContent: 'center', width: normalize(98), height: normalize(98), alignSelf: 'center', marginLeft: normalize(60), marginTop: normalize(-20) }} source={require('../assets/logo.png')} />                  
                 </View>
                     <Text style={{ fontSize: normalize(16), color: '#D05A0B', fontWeight: 'bold', marginLeft: normalize(25), marginTop: normalize(-40) }}>The best taste</Text>     
-                
+
                     <TouchableOpacity onPress={() => this.props.navigation.navigate('Commande')} activeOpacity={0.8} style={styles.btnContainer} >
                         <Text style={{ color: 'white', fontSize: normalize(15), fontWeight: 'bold', letterSpacing: 0.7 }} >Personnaliser votre tacos</Text>
 
@@ -53,14 +54,14 @@ export default class Accueil extends Component {
                             alignSelf: "center"
                         }}
                     />
-                    <Text style={{ fontSize: normalize(18), color: '#000000', fontWeight: 'bold', marginLeft: normalize(10), marginTop: normalize(15) }}>Notre position</Text>
-                    <View style={styles.specialSection}>
+                    <Text style={{ fontSize: normalize(18), color: '#000000', fontWeight: 'bold', marginLeft: normalize(10), marginTop: normalize(15), }}>Notre position</Text>
+                    <TouchableOpacity style={styles.specialSection}>
 
                         <Image style={{ resizeMode: 'contain', justifyContent: 'center', width: normalize(330), height: normalize(310), alignSelf: 'center', borderRadius: 10 }} source={require('../assets/local.png')} />
 
                  
 
-                    </View>
+                    </TouchableOpacity>
                     <View
                         style={{
                             marginTop: normalize(20),
@@ -70,23 +71,30 @@ export default class Accueil extends Component {
                             alignSelf: "center"
                         }}
                     />
-                    <View>
-                        <Text style={{ fontSize: normalize(13), color: '#000000', fontWeight: 'bold', alignSelf: 'center' }} option>Contactez-nous</Text>
-                        <View style={{ flexDirection: 'row', alignItems: 'center', justifyContent: 'center', marginTop: normalize(10) }}>
-                            <MaterialCommunityIcons name="phone" size={normalize(18)} color={ "green"} />
-                            <Text style={{ fontSize: normalize(8), color: '#000000', fontWeight: 'bold' }} option>+21631185183</Text>
-                        </View>
-                        <View style={{ flexDirection: 'row', alignItems: 'center', justifyContent: 'center', marginTop: normalize(10) }}>
-                            <MaterialCommunityIcons name="facebook" size={18} color={"blue"} />
-                            <Text style={{ fontSize: normalize(8), color: '#000000', fontWeight: 'bold' }} option>Tacos 619</Text>
-                        </View>
-                        <View style={{ flexDirection: 'row', alignItems: 'center', justifyContent: 'center', marginTop: normalize(10 )}}>
-                            <MaterialCommunityIcons name="instagram" size={normalize(18)} color={"orange"} />
-                            <Text style={{ fontSize: normalize(8), color: '#000000', fontWeight: 'bold' }} option>Tacos 619</Text>
-                        </View>
-
-
+                    <Text style={{ fontSize: normalize(18), color: '#000000', fontWeight: 'bold', alignSelf: 'center' }} option>Contactez-nous</Text>
+                    <View style={{ justifyContent: 'center' }}>
+                        <TouchableOpacity style={{ flexDirection: 'row', justifyContent: 'center', marginLeft: normalize(-5) }} onPress={() => Linking.openURL('https://www.facebook.com/Tacos.tn/')}>
+                            <Image style={{ resizeMode: 'contain', width: normalize(54), height: normalize(55), alignSelf: 'center' }} source={require('../assets/fb.png')} />
+                            <Text style={{ fontSize: normalize(14), color: '#000000', fontWeight: 'bold', marginTop: normalize(15) }} option>Tacos 619</Text>
+                            
+                            
+                        </TouchableOpacity>
+                        
+                        <TouchableOpacity style={{ flexDirection: 'row', justifyContent: 'center', marginTop: normalize(15) }} onPress={() => Linking.openURL('https://www.instagram.com/tacos_619/?hl=fr')}>
+                            <Image style={{ resizeMode: 'contain', width: normalize(44), height: normalize(44), alignSelf: 'center' }} source={require('../assets/inst.png')} />
+                            <Text style={{ fontSize: normalize(14), color: '#000000', fontWeight: 'bold', marginTop: normalize(15), marginLeft: normalize(5) }} option>Tacos 619</Text>
+                        </TouchableOpacity>
+                        <TouchableOpacity style={{ flexDirection: 'row', justifyContent: 'center', marginTop: normalize(15) }} onPress={() => Linking.openURL('tel:31 185 183')}>
+                            <MaterialCommunityIcons name="phone" size={normalize(32)} color={"green"} style={{ marginLeft: normalize(35) }} />
+                            <Text style={{ fontSize: normalize(14), color: '#000000', fontWeight: 'bold', marginTop: normalize(10), marginLeft: normalize(10) }} option>+216 36 185 183</Text>
+                        </TouchableOpacity>
                     </View>
+
+                        
+
+
+
+                 
 
                 </ScrollView>
             </View>
@@ -129,7 +137,8 @@ const styles = StyleSheet.create({
         height: normalize(296),
         borderRadius: 15,
         alignSelf: 'center',
-        marginTop: normalize(13)
+        marginTop: normalize(13),
+        elevation: 5, shadowRadius: 5, shadowOpacity: 0.1, shadowOffset: { height: 0, width: 0 }, shadowColor: '#000', 
     }
 
 });

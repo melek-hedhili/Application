@@ -20,6 +20,7 @@
     "expo": "^40.0.1",
     "expo-constants": "~9.3.3",
     "expo-file-system": "~9.3.0",
+    "pod-install": "^0.1.20",
     "radio-buttons-react-native": "^1.0.4",
     "react": "17.0.1",
     "react-native": "0.64.0",

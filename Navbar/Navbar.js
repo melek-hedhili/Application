@@ -16,6 +16,7 @@ const Tab = createMaterialBottomTabNavigator();
 
 function MyTabs() {
     return (
+       
         <Tab.Navigator
             barStyle={{ backgroundColor: '#FFFFFF', }}
             style={{}}
@@ -36,6 +37,7 @@ function MyTabs() {
                     ),
                 }}
             />
+            
             <Tab.Screen
                 name="Accueil"
                 component={Accueil}
@@ -60,6 +62,7 @@ function MyTabs() {
                 }}
             />
         </Tab.Navigator>
+        
     );
 }
 

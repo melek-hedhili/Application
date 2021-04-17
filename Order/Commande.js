@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { StyleSheet, Text, View, Image, TouchableOpacity, ScrollView, Alert, Dimensions } from 'react-native';
+import { AsyncStorage } from 'react-native';
 import CheckBox from '@react-native-community/checkbox';
 var { height, width } = Dimensions.get("window")
 import normalize from 'react-native-normalize';
@@ -74,7 +75,7 @@ export default class Commande extends Component {
     }
     oncheckedExtra2(id) {
         const dataExtra2 = this.state.extra2
-        const indexExtra2 = dataExtra2.findIndex(x_extra2=> x_extra2.id === id);
+        const indexExtra2 = dataExtra2.findIndex(x_extra2 => x_extra2.id === id);
         dataExtra2[indexExtra2].checked = !dataExtra2[indexExtra2].checked
         this.setState(dataExtra2)
     }
@@ -103,11 +104,11 @@ export default class Commande extends Component {
         this.setState(dataSupp)
     }
 
-    
+
     renderTacos() {
         return this.state.data.map((item, key) => {
             return (
-             
+
                 <TouchableOpacity style={{ alignItems: 'center' }} key={key} onPress={() => { this.onchecked(item.id) }}>
                     <Image style={styles.rednerImg} source={{ uri: item.image }} ></Image>
                     <Text style={styles.rednertext}>{item.key}</Text>
@@ -117,8 +118,8 @@ export default class Commande extends Component {
                         tintColors={{ true: '#D05A0B', false: 'black' }}
 
                     />
-                    </TouchableOpacity>
-                  
+                </TouchableOpacity>
+
             )
         })
     }
@@ -175,7 +176,7 @@ export default class Commande extends Component {
         return this.state.extra.map((item, key) => {
             return (
                 <TouchableOpacity style={{ alignItems: 'center' }} key={key} onPress={() => { this.oncheckedExtra(item.id) }}>
-                    <Image style={styles.rednerImg}source={{ uri: item.image }} ></Image>
+                    <Image style={styles.rednerImg} source={{ uri: item.image }} ></Image>
                     <Text style={styles.rednertext}>{item.key}</Text>
                     <CheckBox value={item.checked}
                         style={{ transform: [{ scaleX: 0.8 }, { scaleY: 0.8 }], }}
@@ -239,7 +240,7 @@ export default class Commande extends Component {
         return this.state.boisson2.map((item, key) => {
             return (
                 <TouchableOpacity style={{ alignItems: 'center' }} key={key} onPress={() => { this.oncheckedBoisson2(item.id) }}>
-                    <Image style={styles.rednerImg}source={{ uri: item.image }} ></Image>
+                    <Image style={styles.rednerImg} source={{ uri: item.image }} ></Image>
                     <Text style={styles.rednertext}>{item.key}</Text>
                     <CheckBox value={item.checked}
                         style={{ transform: [{ scaleX: 0.8 }, { scaleY: 0.8 }], }}
@@ -254,7 +255,7 @@ export default class Commande extends Component {
     renderSupp() {
         return this.state.supp.map((item, key) => {
             return (
-                <TouchableOpacity style={{ alignItems: 'center', margin:37 }} key={key} onPress={() => { this.oncheckedSupp(item.id) }}>
+                <TouchableOpacity style={{ alignItems: 'center', margin: 37 }} key={key} onPress={() => { this.oncheckedSupp(item.id) }}>
                     <Image style={styles.rednerImg} source={{ uri: item.image }} ></Image>
                     <Text style={styles.rednertext}>{item.key}</Text>
                     <CheckBox value={item.checked}
@@ -370,23 +371,29 @@ export default class Commande extends Component {
             <View style={styles.container}>
 
 
-                <TouchableOpacity onPress={() => this.props.navigation.goBack()}><Image style={{ resizeMode: 'contain' }} source={require("../assets/Back.png")} /></TouchableOpacity>
-
                 <ScrollView>
-                    <Text style={styles.text}>french Tacos </Text>
-                    <Text style={{ color: '#435D6B', fontSize: normalize(18), alignSelf: 'center', }}>Choisissez votre choix !</Text>
-                    <Image style={{ width: normalize(450), height: normalize(450), alignSelf: 'center', marginTop: normalize(-130), }} source={require("../assets/Tacos-M.png")}></Image>
-
-                    <View style={{ flexDirection: 'row', marginLeft: normalize(100), marginTop: normalize(-130) }}>
-                        <TouchableOpacity style={styles.button_S}><Text style={{ color: '#000000', alignSelf: 'center', marginTop: normalize(9), fontSize: normalize(15) }}>XL</Text></TouchableOpacity>
-                        <TouchableOpacity style={styles.button_L}><Text style={{ color: '#000000', alignSelf: 'center', marginTop: normalize(9), fontSize: normalize(15)  }}>L</Text></TouchableOpacity>
+                    <View style={styles.rectangle2}>
+                        <TouchableOpacity onPress={() => this.props.navigation.goBack()}><Image style={{ resizeMode: 'contain' }} source={require("../assets/Back.png")} /></TouchableOpacity>
                     </View>
-                    <TouchableOpacity style={styles.button_M}><Text style={{ color: '#FFFFFF', alignSelf: 'center', marginTop: normalize(9), fontSize: normalize(15)  }}>M</Text></TouchableOpacity>
+                    <View style={styles.rectangle}>
+                        <Text style={styles.text}>french Tacos </Text>
+                        <Text style={{ color: '#435D6B', fontSize: normalize(18), alignSelf: 'center', }}>Choisissez votre choix !</Text>
+                    </View>
+                    <View style={styles.cercle}>
+                        <Image style={{ width: normalize(430), height: normalize(430), alignSelf: 'center', marginTop: normalize(-20), }} source={require("../assets/Tacos-M.png")}></Image>
 
-                    <View style={{ flexDirection: 'row', alignSelf: 'center', marginTop: normalize(50), }}>
-                        <TouchableOpacity style={styles.button_moins}><Text style={{ color: '#FFFFFF', alignSelf: 'center',fontSize: normalize(13) }}>-</Text></TouchableOpacity>
-                        <Text style={{ fontSize: normalize(24), color: '#000000', alignSelf: 'center',  marginLeft: normalize(40),fontSize: normalize(15) }}>2</Text>
-                        <TouchableOpacity style={styles.button_plus}><Text style={{ color: '#FFFFFF', alignSelf: 'center', fontSize: normalize(15)}}>+</Text></TouchableOpacity>
+                        <View style={{ flexDirection: 'row', marginLeft: normalize(80), marginTop: normalize(-50) }}>
+                            <TouchableOpacity style={styles.button_XL}><Text style={{ color: '#000000', alignSelf: 'center', marginTop: normalize(12), fontSize: normalize(20) }}>XL</Text></TouchableOpacity>
+                            <TouchableOpacity style={styles.button_L}><Text style={{ color: '#000000', alignSelf: 'center', marginTop: normalize(12), fontSize: normalize(20) }}>L</Text></TouchableOpacity>
+                        </View>
+                    </View>
+
+                    <TouchableOpacity style={styles.button_M}><Text style={{ color: '#FFFFFF', alignSelf: 'center', marginTop: normalize(12), fontSize: normalize(20) }}>M</Text></TouchableOpacity>
+
+                    <View style={{ flexDirection: 'row', alignSelf: 'center', marginTop: normalize(40), }}>
+                        <TouchableOpacity style={styles.button_moins}><Text style={{ color: '#FFFFFF', alignSelf: 'center', fontSize: normalize(20), marginTop: normalize(7) }}>-</Text></TouchableOpacity>
+                        <Text style={{ fontSize: normalize(24), color: '#000000', alignSelf: 'center', marginLeft: normalize(40), fontSize: normalize(15) }}>2</Text>
+                        <TouchableOpacity style={styles.button_plus}><Text style={{ color: '#FFFFFF', alignSelf: 'center', fontSize: normalize(20), marginTop: normalize(7) }}>+</Text></TouchableOpacity>
                     </View>
 
 
@@ -395,7 +402,7 @@ export default class Commande extends Component {
                         <View style={{ marginTop: normalize(25), marginLeft: normalize(-20) }}>
                             {this.renderTacos()}
                         </View>
-                        <View style={{ marginTop: normalize(25), marginLeft: normalize(20 )}}>
+                        <View style={{ marginTop: normalize(25), marginLeft: normalize(20) }}>
                             {this.renderTacos2()}
                         </View>
 
@@ -404,11 +411,11 @@ export default class Commande extends Component {
 
                     <Text style={styles.text_titre}>Sauces</Text>
 
-                    <View style={{ flexDirection: 'row', alignSelf: 'center', justifyContent: 'center',}}>
-                        <View style={{ marginTop: normalize(25), marginLeft: normalize( -15) }}>
+                    <View style={{ flexDirection: 'row', alignSelf: 'center', justifyContent: 'center', }}>
+                        <View style={{ marginTop: normalize(25), marginLeft: normalize(-15) }}>
                             {this.renderSauce()}
                         </View>
-                        <View style={{ marginTop: normalize(25), marginLeft: normalize(50 )}}>
+                        <View style={{ marginTop: normalize(25), marginLeft: normalize(50) }}>
                             {this.renderSauce2()}
                         </View>
 
@@ -436,8 +443,8 @@ export default class Commande extends Component {
 
                     <Text style={styles.text_titre}>LES BOISSONS</Text>
 
-                    <View style={{ flexDirection: 'row', alignSelf: 'center',  }}>
-                        <View style={{ marginTop: normalize(25), marginLeft: normalize(30 )}}>
+                    <View style={{ flexDirection: 'row', alignSelf: 'center', }}>
+                        <View style={{ marginTop: normalize(25), marginLeft: normalize(30) }}>
                             {this.renderBoisson()}
                         </View>
                         <View style={{ marginTop: normalize(25), marginLeft: normalize(80) }}>
@@ -453,10 +460,10 @@ export default class Commande extends Component {
 
                     <Text style={styles.text_titre}>SUPLEMENTS</Text>
                     <View style={{ alignSelf: 'center' }}>
-                        <View style={{   flexDirection: 'row', }}>
-                     
+                        <View style={{ flexDirection: 'row', }}>
+
                             {this.renderSupp()}
-                     
+
                         </View>
 
 
@@ -464,9 +471,9 @@ export default class Commande extends Component {
 
 
 
-                    <View style={{ marginTop: normalize( 80), }}>
+                    <View>
                         <TouchableOpacity style={styles.btnAjout} onPress={() => { this.getSelectedItem() }}>
-                            <Text style={{ fontSize: normalize(17), color: '#FFFFFF', alignSelf: 'center', marginTop: normalize(12), }} >Ajouter</Text>
+                            <Text style={{ fontSize: normalize(17), color: '#FFFFFF' }} >Ajouter</Text>
                         </TouchableOpacity>
 
 
@@ -479,13 +486,13 @@ export default class Commande extends Component {
                         <Text style={{ color: "#000000", fontSize: normalize(24), alignSelf: 'flex-start', marginLeft: normalize(10), }}>7DT</Text>
                     </View>
                     <TouchableOpacity style={styles.button} onPress={() =>
-                        this.props.navigation.navigate('Panier')}>
-                        <Text style={{ color: "#FFFFFF", fontSize: normalize(17), alignSelf: 'center', marginTop: normalize(10), marginLeft: normalize(10) }}>Aller au panier</Text>
-                        <Image style={{ alignSelf: 'flex-start', marginLeft: normalize(15), marginTop: normalize(-22), }} source={require("../assets/Group.png")} ></Image>
+                        this.props.navigation.navigate('Panier')} >
+                        <Text style={{ color: "#FFFFFF", fontSize: normalize(17), alignSelf: 'center', marginTop: normalize(13), marginLeft: normalize(10) }}>Aller au panier</Text>
+                        <Image style={{ alignSelf: 'flex-start', marginLeft: normalize(15), marginTop: normalize(-19), }} source={require("../assets/Group.png")} ></Image>
                     </TouchableOpacity>
 
                 </View>
-                <Text></Text>
+
             </View>
 
         );
@@ -500,8 +507,8 @@ const styles = StyleSheet.create({
     button: {
         backgroundColor: '#D05A0B',
         borderRadius: 10,
-        width: normalize(200),
-        height: normalize(50),
+        width: normalize(195),
+        height: normalize(45),
         alignSelf: 'flex-end',
         marginLeft: normalize(140),
         marginTop: normalize(10)
@@ -522,17 +529,18 @@ const styles = StyleSheet.create({
     button_M: {
         backgroundColor: '#D05A0B',
         borderRadius: 10,
-        width: normalize(40),
-        height: normalize(40),
+        width: normalize(50),
+        height: normalize(50),
         alignSelf: 'center',
         marginLeft: 0,
+        marginTop: normalize(-10)
 
 
-    }, button_S: {
-        backgroundColor: '#FFFFFF',
+    }, button_XL: {
+        backgroundColor: '#FFFDFD',
         borderRadius: 10,
-        width: normalize(40),
-        height: normalize( 40),
+        width: normalize(50),
+        height: normalize(50),
         alignSelf: 'center',
 
 
@@ -541,12 +549,12 @@ const styles = StyleSheet.create({
     },
 
     button_L: {
-        backgroundColor: '#FFFFFF',
+        backgroundColor: '#FFFDFD',
         borderRadius: 10,
-        width: normalize(40),
-        height: normalize(40),
+        width: normalize(50),
+        height: normalize(50),
         alignSelf: 'center',
-        marginLeft: normalize(100),
+        marginLeft: normalize(140),
 
 
 
@@ -554,9 +562,9 @@ const styles = StyleSheet.create({
     },
     button_moins: {
         backgroundColor: '#D05A0B',
-        borderRadius: 13,
-        width: normalize(25),
-        height: normalize(25),
+        borderRadius: 40,
+        width: normalize(40),
+        height: normalize(40),
         alignSelf: 'center',
 
 
@@ -566,9 +574,9 @@ const styles = StyleSheet.create({
     },
     button_plus: {
         backgroundColor: '#D05A0B',
-        borderRadius: 13,
-        width: normalize(25),
-            height: normalize(25),
+        borderRadius: 40,
+        width: normalize(40),
+        height: normalize(40),
         alignSelf: 'center',
         marginLeft: normalize(40),
 
@@ -588,21 +596,45 @@ const styles = StyleSheet.create({
     btnAjout: {
         backgroundColor: '#000000',
         borderRadius: 10,
-        width: normalize( 354),
-        height:normalize( 60),
+        width: normalize(354),
+        height: normalize(60),
         alignSelf: 'center',
+        alignItems: 'center',
+        justifyContent:'center'
 
     },
     rednerImg: {
         width: normalize(50),
         height: normalize(50),
-        alignSelf: 'center', 
+        alignSelf: 'center',
     },
     rednertext: {
         fontSize: normalize(18),
         fontStyle: 'normal',
         alignItems: 'center'
     },
+    cercle: {
+        backgroundColor: 'white',
+        borderRadius: 200,
+        width: normalize(400),
+        height: normalize(400),
+        alignSelf: 'center',
+        marginTop: normalize(-120),
+    },
+    rectangle: {
+        backgroundColor: 'white',
+        borderRadius: 10,
+        width: normalize(380),
+        height: normalize(174),
+        alignSelf: 'center',
+    },
+    rectangle2: {
+        backgroundColor: 'white',
+        borderRadius: 10,
+        width: normalize(380),
+        height: normalize(100),
+        alignSelf: 'center',
+    }
 
 
 
