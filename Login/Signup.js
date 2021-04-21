@@ -1,14 +1,44 @@
-import React from 'react';
+import React, { useState } from 'react';
 import 'react-native-gesture-handler';
 import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
 import { StyleSheet, Text, View, Image, TouchableOpacity, TextInput } from 'react-native';
 import normalize from 'react-native-normalize';
+import AsyncStorage from '@react-native-community/async-storage';
+
+
 const Signup = ({ navigation }) => {
+    const [email, setEmail] = useState('');
+    const [password, setPassword] = useState('');
+    const [nom, setNom] = useState('');
+    const [prenom, setPrenom] = useState('');
 
 
 
-
+    const SendUserInfo = async() => {
+        fetch("http://10.0.2.2:4000/signup", {
+            method: "POST",
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body:JSON.stringify({
+                "nom": nom,
+                "prenom": prenom,
+                "email": email,
+                "password": password
+            })
+        })
+            .then(res => res.json())
+            .then(async(data) => {
+                try {
+                    await AsyncStorage.setItem('token', data.token)
+                    navigation.navigate('Login')
+                } catch (e) {
+                    console.log(e)
+                }
+            })
+        console.log("user added")
+}
 
         return (
             <View style={styles.container}>
@@ -19,22 +49,29 @@ const Signup = ({ navigation }) => {
                     style={styles.input}
                     placeholder="Nom "
                     placeholderTextColor={'#9FA5C0'}
-
+                    value={nom}
+                    onChangeText={(text)=>setNom(text)}
                 />
                 <TextInput
                     style={styles.inputContainer}
                     placeholder="Prenom"
-                    placeholderTextColor={'#9FA5C0'}/>
+                    placeholderTextColor={'#9FA5C0'}
+                    value={prenom}
+                    onChangeText={(text) => setPrenom(text)}/>
                 <TextInput
                     style={styles.inputContainer}
                     placeholder="Email "
-                    placeholderTextColor={'#9FA5C0'}/>
+                    placeholderTextColor={'#9FA5C0'}
+                    value={email}
+                    onChangeText={(text) => setEmail(text)}/>
 
                 <TextInput
                     style={styles.inputContainerPassword}
                     secureTextEntry={true}
                     placeholder="Mot de passe"
-                    placeholderTextColor={'#9FA5C0'}/>
+                    placeholderTextColor={'#9FA5C0'}
+                    value={password}
+                    onChangeText={(text) => setPassword(text)} />
                 <Text style={{ color: "#3E5481", fontSize: normalize(17), fontFamily: 'arial', fontWeight: 'bold', marginTop: normalize(78), marginLeft: normalize(20 )}}>Votre mot de passe doit avoir :</Text>
                 
 
@@ -48,7 +85,7 @@ const Signup = ({ navigation }) => {
                     source={require('../assets/verif.png')} />
                     <Text style={{ color: "#9FA5C0", fontSize: normalize(15), fontFamily: 'arial', fontWeight: 'bold' }}>Contient au moins un chiffre</Text>
                 </View>
-                <TouchableOpacity activeOpacity={0.8} style={styles.btnContainer}>
+                <TouchableOpacity activeOpacity={0.8} style={styles.btnContainer} onPress={() => { SendUserInfo() }}>
                     <Text style={{ color: 'white', fontSize: normalize(15), fontWeight: 'bold', letterSpacing: 0.7, fontFamily: 'arial' }} >S'inscrire</Text>
 
                 </TouchableOpacity>

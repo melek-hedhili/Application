@@ -1,19 +1,25 @@
-import React from 'react';
+import React, {useEffect} from 'react';
 import 'react-native-gesture-handler';
 import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
 import { StyleSheet, Text, View, Image, TouchableOpacity } from 'react-native';
 import normalize from 'react-native-normalize';
+import AsyncStorage from '@react-native-community/async-storage';
 
-export default class Splash extends React.Component {
-    constructor(props) {
-        super(props);
-        setTimeout(() => {
-            this.props.navigation.navigate('OnBoarding');
-        }, 2000);
+const Splash = ({navigation})=> {
 
-    }
-    render() {
+
+        const detectLogin = async () => {
+            const token = await AsyncStorage.getItem('token')
+            if (token) {
+                navigation.replace("MyTabs")
+            } else {
+                navigation.replace("Login")
+            }
+        }
+        useEffect(() => {
+            detectLogin()
+        }, [])
 
         return (
             <View>
@@ -23,7 +29,7 @@ export default class Splash extends React.Component {
         );
     }
 
-}
+export default Splash
 
 
 const styles = StyleSheet.create({

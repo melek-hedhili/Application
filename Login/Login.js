@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { Component ,useState} from 'react';
 import { StyleSheet, Text, View, Image, TouchableOpacity, SafeAreaView, TextInput, Alert} from 'react-native';
 import Icon from 'react-native-vector-icons/FontAwesome';
 import 'react-native-gesture-handler';
@@ -10,6 +10,8 @@ import SimpleLineIcons from 'react-native-vector-icons/SimpleLineIcons';
 import Feather from 'react-native-vector-icons/Feather';
 import 'react-native-gesture-handler';
 import normalize from 'react-native-normalize';
+import AsyncStorage from '@react-native-community/async-storage';
+
 const styles = StyleSheet.create({
     container: {
         flex: 1,
@@ -94,7 +96,34 @@ const styles = StyleSheet.create({
 
 
 
-     const Login = ({ navigation }) => {
+const Login = ({ navigation }) => {
+    const [email, setEmail] = useState('');
+    const [password, setPassword] = useState('');
+
+    const SendUserInfo = async () => {
+        fetch("http://10.0.2.2:4000/signin", {
+            method: "POST",
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({
+
+                "email": email,
+                "password": password
+            })
+        })
+            .then(res => res.json())
+            .then(async (data) => {
+                try {
+                    await AsyncStorage.setItem('token', data.token)
+                    navigation.replace("MyTabs")
+                } catch (e) {
+                    console.log(e)
+                   
+                }
+            })
+        console.log("Logged in !")
+    }
         return (
 
 
@@ -108,6 +137,8 @@ const styles = StyleSheet.create({
                    style={styles.inputContainer}
                     placeholder="Email ou numero du telephone"
                     placeholderTextColor={'#9FA5C0'}
+                    value={email}
+                    onChangeText={(text) => setEmail(text)}
                    
                 />
                 <Feather name="mail" color={'#2E3E5C'} size={normalize(26)} style={{ alignSelf: 'flex-start', marginTop: normalize(- 36), marginLeft: normalize(47), }} />
@@ -120,6 +151,8 @@ const styles = StyleSheet.create({
                     secureTextEntry={true}
                     placeholder="Mot de passe"
                     placeholderTextColor={'#9FA5C0'}
+                    value={password}
+                    onChangeText={(text) => setPassword(text)}
 
                 />
                 <SimpleLineIcons name="lock" color={'#2E3E5C'} size={normalize(26)} style={{ alignSelf: 'flex-start', marginTop: normalize(-38), marginLeft: normalize( 47), }} />
@@ -129,8 +162,7 @@ const styles = StyleSheet.create({
                         style={styles.mdp}
                     >Mot de passe oublie?</Text>
                 </TouchableOpacity>
-                <TouchableOpacity onPress={() =>
-                    navigation.navigate('MyTabs')} activeOpacity={0.8} style={styles.btnContainer}>
+                <TouchableOpacity onPress={() => SendUserInfo()} activeOpacity={0.8} style={styles.btnContainer}>
                     <Text style={{ color: 'white', fontSize: normalize(15), fontWeight: 'bold', letterSpacing: 0.7, }} >Connexion</Text>
 
                 </TouchableOpacity>

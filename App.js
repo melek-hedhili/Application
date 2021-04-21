@@ -19,6 +19,7 @@ import Navigation2 from './Navigation/Navigation2.js';
 import Te from './te.js'
 import OnBoarding from './Login/Onboarding';
 import Login from './Login/Login';
+import Signup from './Login/Signup';
 
 
 class App extends React.Component {
