@@ -2,10 +2,14 @@
   "ExpandedNodes": [
     "",
     "\\Accueil",
+    "\\JSON",
     "\\Login",
+    "\\Navbar",
     "\\Navigation",
-    "\\Order"
+    "\\Order",
+    "\\Panier",
+    "\\PasswordRecovery"
   ],
-  "SelectedNode": "\\Accueil\\Slider.js",
+  "SelectedNode": "\\App.js",
   "PreviewInSolutionExplorer": false
 }

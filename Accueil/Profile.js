@@ -12,6 +12,7 @@ const Profile = ({ navigation }) => {
     const [email, setEmail] = useState("loading")
     const [nom, setNom] = useState("loading")
     const [prenom, setPreom] = useState("loading")
+    const [telephone, setTelephone] = useState("")
         const Boiler = async () => {
             const token = await AsyncStorage.getItem("token")
             fetch('http://10.0.2.2:4000/', {
@@ -24,21 +25,25 @@ const Profile = ({ navigation }) => {
                     setEmail(data.email)
                     setNom(data.nom)
                     setPreom(data.prenom)
+                    setTelephone(data.telephone)
                 }
                 )
         }
         useEffect(() => {
             Boiler()
+
         }, [])
         const logout = async() => {
             await AsyncStorage.removeItem("token").then(() => {
 
                 navigation.replace('Login')
             })
-        } 
-        
-        return (
+    }
+    var new_tele = telephone.replace(/"/g, '');
+    console.log(new_tele, ' new tele')
 
+        return (
+            
             
             <View style={styles.container}>
                 <Text style={styles.profile}>Profile</Text>
@@ -56,7 +61,7 @@ const Profile = ({ navigation }) => {
                 </TouchableOpacity>
                 <Text style={styles.profileA}>{nom} {prenom}</Text>
                 <Text style={{ alignSelf: 'center', fontSize: normalize(14), fontWeight: 'bold', marginTop: normalize(20), marginLeft: normalize(110), color: '#667C8A' }}>{email}</Text>
-                <Text style={{ alignSelf: 'center', fontSize: normalize(14), fontWeight: 'bold', marginTop: normalize(20), marginLeft: normalize(35), color:'#667C8A' }}>+216 55 500 797</Text>
+                <Text style={{ alignSelf: 'center', fontSize: normalize(14), fontWeight: 'bold', marginTop: normalize(20), marginLeft: normalize(35), color: '#667C8A' }}>{new_tele}</Text>
 
             </View>
 

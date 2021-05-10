@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState ,useEffect} from 'react';
 import 'react-native-gesture-handler';
 import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
@@ -7,15 +7,41 @@ import normalize from 'react-native-normalize';
 import AsyncStorage from '@react-native-community/async-storage';
 
 
+
+
 const Signup = ({ navigation }) => {
+
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const [nom, setNom] = useState('');
     const [prenom, setPrenom] = useState('');
+    const [telephone, setTelephone] = useState("")
+
+    const UserTelephone = async () => {
+
+        try {
+            AsyncStorage.getItem('STORAGE_PHONE').then((data) => {
+                if (data !== null) {
+                    console.log(data)
+                    setTelephone(data)
+                }
+
+            })
+
+        } catch (error) {
+            console.log("no data found")
+        }
+
+    }
+    useEffect(() => {
+        UserTelephone()
+    }, [])
 
 
 
-    const SendUserInfo = async() => {
+    const SendUserInfo = async () => {
+
+
         fetch("http://10.0.2.2:4000/signup", {
             method: "POST",
             headers: {
@@ -25,13 +51,15 @@ const Signup = ({ navigation }) => {
                 "nom": nom,
                 "prenom": prenom,
                 "email": email,
-                "password": password
+                "password": password,
+                "telephone": telephone
+              
             })
         })
             .then(res => res.json())
             .then(async(data) => {
                 try {
-                    await AsyncStorage.setItem('token', data.token)
+                    
                     navigation.navigate('Login')
                 } catch (e) {
                     console.log(e)
@@ -40,9 +68,10 @@ const Signup = ({ navigation }) => {
         console.log("user added")
 }
 
-        return (
+    return (
+        
             <View style={styles.container}>
-
+            
                 <Text style={styles.text}>Bienvenu!</Text>
 
                 <TextInput
@@ -84,11 +113,12 @@ const Signup = ({ navigation }) => {
                 <Image style={styles.tinyLogo}
                     source={require('../assets/verif.png')} />
                     <Text style={{ color: "#9FA5C0", fontSize: normalize(15), fontFamily: 'arial', fontWeight: 'bold' }}>Contient au moins un chiffre</Text>
-                </View>
-                <TouchableOpacity activeOpacity={0.8} style={styles.btnContainer} onPress={() => { SendUserInfo() }}>
+            </View>
+            <TouchableOpacity activeOpacity={0.8} style={styles.btnContainer} onPress={() => { SendUserInfo() }}>
                     <Text style={{ color: 'white', fontSize: normalize(15), fontWeight: 'bold', letterSpacing: 0.7, fontFamily: 'arial' }} >S'inscrire</Text>
 
-                </TouchableOpacity>
+            </TouchableOpacity>
+
 
 
 

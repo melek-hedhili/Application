@@ -20,6 +20,7 @@ import Te from './te.js'
 import OnBoarding from './Login/Onboarding';
 import Login from './Login/Login';
 import Signup from './Login/Signup';
+import InscriptionNum from './Login/InscriptionNum';
 
 
 class App extends React.Component {

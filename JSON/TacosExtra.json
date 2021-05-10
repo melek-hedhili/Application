@@ -14,6 +14,20 @@
     "checked": false,
     "image": "https://i.imgur.com/4wa6oHH.png"
 
+  },
+  {
+    "id": 2,
+    "key": " Jambon",
+    "checked": false,
+    "image": "https://i.imgur.com/1M3uXiK.png "
+
+  },
+  {
+    "id": 3,
+    "key": " Cheddar",
+    "checked": false,
+    "image": "https://i.imgur.com/hdZfAmG.png"
+
   }
 
 

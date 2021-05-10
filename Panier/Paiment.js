@@ -1,5 +1,5 @@
 import React from 'react';
-import { StyleSheet, Text, View, Image, TouchableOpacity, ScrollView, } from 'react-native';
+import { StyleSheet, Text, View, Image, TouchableOpacity, ScrollView, TextInput } from 'react-native';
 import RadioButtonRN from 'radio-buttons-react-native';
 import normalize from 'react-native-normalize';
 
@@ -47,27 +47,23 @@ export default class Paiment extends React.Component {
                     <Text style={styles.title}>Paiement</Text>
 
                     <Text style={styles.titeAdresse} >Adresse:</Text>
-                    <View style={styles.rectangle}>
-                        <View>
-                            <Text style={styles.adresse}>
-                                Sousse , Hamam sousse{'\n'}
-                    Rue Farhat Hached
-             </Text>
-                        </View>
-                        <View>
-                            <Image style={{ width: normalize(250), height: normalize(4), alignSelf: 'center', marginTop: normalize(20) }} source={require("../assets/line.png")}>
+                    <View style={styles.textAreaContainer}>
 
-                            </Image>
-                        </View>
-                        <View>
-                            <Text style={styles.nbrTel}>
-                                +216 54 780 314
-             </Text>
-                        </View>
+
+                        <TextInput
+                            style={styles.textArea}
+                            underlineColorAndroid="transparent"
+                            placeholder="Veuillez saisir vos informations
+ici"
+                            placeholderTextColor="grey"
+                            numberOfLines={2}
+                            multiline={true}
+                        />
+
                     </View>
                     <Text style={{ fontSize: normalize(18), marginLeft: normalize(20), marginTop: normalize(20), }}>
                         Ou par localisation:
-        </Text>
+                        </Text>
 
                     <View style={styles.rectangle1}>
 
@@ -194,5 +190,26 @@ const styles = StyleSheet.create({
         height: normalize(61),
         alignSelf: 'center',
         marginTop: normalize(20),
+    },
+    textAreaContainer: {
+        marginTop: normalize(15),
+        backgroundColor:'white',
+        width: normalize(334),
+        height: normalize(100),
+        padding: 5,
+        borderRadius: 30,
+        alignSelf: 'center',
+        alignItems: 'center'
+    },
+    textArea: {
+        color: 'black',
+        alignItems: 'center',
+        justifyContent: 'flex-start',
+        alignSelf: "center",
+        fontSize: normalize(18),
+        textAlign: 'center', 
+        
+
+        
     }
 });

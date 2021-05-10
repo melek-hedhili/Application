@@ -1,256 +1,136 @@
 import React from 'react';
-import { StyleSheet, View, Text, TouchableOpacity } from 'react-native';
+import { StyleSheet, Text, View, Image, TouchableOpacity, ScrollView, Alert, Dimensions, FlatList } from 'react-native';
 import Icon from 'react-native-vector-icons/FontAwesome';
-import RadioButtonRN from 'radio-buttons-react-native';
+import normalize from 'react-native-normalize';
+import CheckBox from '@react-native-community/checkbox';
 
+const TacosData = require("./JSON/TacosViande.json")
+const TacosSupplement = require("./JSON/TacosSupplement.json")
 class Te extends React.Component {
 
 	constructor(props) {
 		super(props);
 
 		this.state = {
-			res: {},
-			example: 1
+			data: TacosData,
+			supp: TacosSupplement,
 		};
-
-		this.colors = [
-			{
-				label: 'red'
-			},
-			{
-				label: 'green'
-			},
-			{
-				label: 'blue'
-			}
-		];
-
-		this._renderRadioBtn = this._renderRadioBtn.bind(this);
+	};
+	onchecked(id) {
+		const data = this.state.data
+		const index = data.findIndex(x => x.id === id);
+		data[index].checked = !data[index].checked
+		this.setState(data)
 	}
-
-	_renderRadioBtn() {
-		let { example } = this.state;
-		if (example === 1) {
-			return (
-				<RadioButtonRN
-					data={this.colors}
-					selectedBtn={(e) => this.setState({ res: e })}
-					circleSize={16}
-				/>
-			)
-		}
-		else if (example === 2) {
-			return (
-				<RadioButtonRN
-					data={this.colors}
-					initial={1}
-					box={false}
-					selectedBtn={(e) => this.setState({ res: e })}
-					circleSize={16}
-				/>
-			)
-		}
-		else if (example === 3) {
-			return (
-				<RadioButtonRN
-					data={this.colors}
-					initial={2}
-					selectedBtn={(e) => this.setState({ res: e })}
-					circleSize={16}
-					icon={
-						<Icon
-							name="check-circle"
-							size={25}
-							color="#2c9dd1"
-						/>
-					}
-				/>
-			)
-		}
-		else if (example === 4) {
-			return (
-				<RadioButtonRN
-					data={this.colors}
-					animationTypes={['pulse']}
-					initial={1}
-					selectedBtn={(e) => this.setState({ res: e })}
-					circleSize={16}
-				/>
-			)
-		}
-		else if (example === 5) {
-			return (
-				<RadioButtonRN
-					data={this.colors}
-					animationTypes={['zoomIn']}
-					initial={2}
-					box={false}
-					selectedBtn={(e) => this.setState({ res: e })}
-					circleSize={16}
-					icon={
-						<Icon
-							name="rocket"
-							size={25}
-							color="#a82c3a"
-						/>
-					}
-				/>
-			)
-		}
-		else if (example === 6) {
-			return (
-				<RadioButtonRN
-					data={this.colors}
-					animationTypes={['shake']}
-					initial={3}
-					selectedBtn={(e) => this.setState({ res: e })}
-					circleSize={16}
-					icon={
-						<Icon
-							name="check-circle"
-							size={25}
-							color="#2c9dd1"
-						/>
-					}
-				/>
-			)
-		}
-		else if (example === 7) {
-			return (
-				<RadioButtonRN
-					data={this.colors}
-					animationTypes={['rotate']}
-					initial={2}
-					selectedBtn={(e) => this.setState({ res: e })}
-					circleSize={16}
-					icon={
-						<Icon
-							name="rocket"
-							size={25}
-							color="#2c9dd1"
-						/>
-					}
-				/>
-			)
-		}
+	oncheckedSupp(id) {
+		const dataSupp = this.state.supp
+		const indexSupp = dataSupp.findIndex(x_supp => x_supp.id === id);
+		dataSupp[indexSupp].checked = !dataSupp[indexSupp].checked
+		this.setState(dataSupp)
 	}
+	renderTacos(item,key) {
 
-	render() {
-		let { example } = this.state;
 		return (
-			<View>
-
-				<View style={{ margin: 10, flexDirection: 'row' }}>
-					<TouchableOpacity
-						activeOpacity={1}
-						style={[styles.types, { backgroundColor: example === 1 ? '#ccc' : '#fff' }]}
-						onPress={() => this.setState({ example: 1 })}
-					>
-						<Text>
-							with Box
-						</Text>
-					</TouchableOpacity>
-
-					<TouchableOpacity
-						activeOpacity={1}
-						style={[styles.types, { backgroundColor: example === 2 ? '#ccc' : '#fff' }]}
-						onPress={() => this.setState({ example: 2 })}
-					>
-						<Text>
-							without Box
-						</Text>
-					</TouchableOpacity>
-
-					<TouchableOpacity
-						activeOpacity={1}
-						style={[styles.types, { backgroundColor: example === 3 ? '#ccc' : '#fff' }]}
-						onPress={() => this.setState({ example: 3 })}
-					>
-						<Text>
-							with Icon
-						</Text>
-					</TouchableOpacity>
-
-				</View>
-
-				<Text style={{ marginHorizontal: 10 }}>Animation: </Text>
-				<View style={{ margin: 10, flexDirection: 'row' }}>
-					<TouchableOpacity
-						activeOpacity={1}
-						style={[styles.types, { backgroundColor: example === 4 ? '#ccc' : '#fff' }]}
-						onPress={() => this.setState({ example: 4 })}
-					>
-						<Text>
-							pulse
-						</Text>
-					</TouchableOpacity>
-
-					<TouchableOpacity
-						activeOpacity={1}
-						style={[styles.types, { backgroundColor: example === 5 ? '#ccc' : '#fff' }]}
-						onPress={() => this.setState({ example: 5 })}
-					>
-						<Text>
-							zoomIn
-						</Text>
-					</TouchableOpacity>
-
-					<TouchableOpacity
-						activeOpacity={1}
-						style={[styles.types, { backgroundColor: example === 6 ? '#ccc' : '#fff' }]}
-						onPress={() => this.setState({ example: 6 })}
-					>
-						<Text>
-							shake
-						</Text>
-					</TouchableOpacity>
-
-					<TouchableOpacity
-						activeOpacity={1}
-						style={[styles.types, { backgroundColor: example === 7 ? '#ccc' : '#fff' }]}
-						onPress={() => this.setState({ example: 7 })}
-					>
-						<Text>
-							rotate
-						</Text>
-					</TouchableOpacity>
-				</View>
 
 
-				<View style={{ top: 50, padding: 20 }}>
-					<Text style={{ fontSize: 13 }}>
-						Selected your color:
-					</Text>
+				
+				
+				
+				
+				<TouchableOpacity style={{ alignItems: 'center', justifyContent: 'center', alignSelf: 'center' }} key={key} onPress={() => { this.onchecked(item.id) }}>
+					<Image style={styles.rednerImg} source={{ uri: item.image }} ></Image>
+					<Text style={styles.rednertext}>{item.key}</Text>
+					<CheckBox value={item.checked}
+						style={{ transform: [{ scaleX: 0.8 }, { scaleY: 0.8 }], }}
+						onValueChange={() => { this.onchecked(item.id) }}
+						tintColors={{ true: '#D05A0B', false: 'black' }}
 
-					{this._renderRadioBtn()}
+					/>
+				</TouchableOpacity>
+				
+
+
+
+
+		)
+	}
+	renderSupp(item,key) {
+
+			return (
+				<TouchableOpacity style={{ alignItems: 'center', margin: 37 }} key={key} onPress={() => { this.oncheckedSupp(item.id) }}>
+					<Image style={styles.rednerImg} source={{ uri: item.image }} ></Image>
+					<Text style={styles.rednertext}>{item.key}</Text>
+					<CheckBox value={item.checked}
+						style={{ transform: [{ scaleX: 0.8 }, { scaleY: 0.8 }], }}
+						onValueChange={() => { this.oncheckedSupp(item.id) }}
+						tintColors={{ true: '#D05A0B', false: 'black' }}
+
+					/>
+				</TouchableOpacity>
+			)
+	}
+	render() {
+		return (
+
+			<View style={styles.container}>
+				<View style={{ alignItems: 'center', justifyContent: 'center', alignSelf: 'center',}}>
+					<Text style={styles.text_titre}>La viande</Text>
+					<FlatList
+
+						data={this.state.data}
+						
+						numColumns={2}
+						renderItem={({ item }) => this.renderTacos(item)}
+						keyExtractor={(item, index) => index.toString()}
+					/>
+					<Text style={styles.text_titre}>La viande</Text>
+					<FlatList
+
+						data={this.state.supp}
+
+						numColumns={2}
+						renderItem={({ item }) => this.renderSupp(item)}
+						keyExtractor={(item, index) => index.toString()}
+					/>
+
+					<Text>hi</Text>
 
 				</View>
-				{
-					this.state.res &&
-					<View style={{ top: 100, width: '100%', alignItems: 'center' }}>
-						<Text style={{ fontSize: 13 }}>
-							Selected Color:
-							</Text>
-						<Text style={{ fontSize: 24, color: this.state.res.label }}>
-							{this.state.res.label}
-						</Text>
-					</View>
-				}
+
+				
 
 			</View>
-		);
-	}
-};
+			);
+    }
+
+
+}
 
 const styles = StyleSheet.create({
-	types: {
-		marginHorizontal: 5,
-		borderWidth: 1,
-		borderColor: '#bbb',
-		padding: 4,
-		borderRadius: 3,
-		backgroundColor: '#fff'
-	}
+	container: {
+		flex: 1,
+		backgroundColor: '#F5F5F8',
+
+	},
+	rednerImg: {
+		width: normalize(50),
+		height: normalize(50),
+		alignSelf: 'center',
+	},
+	rednertext: {
+		fontSize: normalize(18),
+		fontStyle: 'normal',
+		alignItems: 'center'
+	},
+	    text_titre: {
+        alignSelf: 'center',
+        fontSize: normalize(24),
+        fontWeight: 'bold',
+        color: '#000000',
+        marginTop: normalize(70),
+
+
+    },
 });
 
 export default Te;

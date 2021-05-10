@@ -16,9 +16,30 @@
   },
   {
     "id": 2,
-    "key": " Harissa",
+    "key": "  Harissa  ",
     "checked": false,
     "image": "https://i.imgur.com/6M3bHme.png "
+
+  },
+  {
+    "id": 3,
+    "key": "     Ketchup  ",
+    "checked": false,
+    "image": "https://i.imgur.com/HyBGf2c.png "
+
+  },
+  {
+    "id": 4,
+    "key": " Mayonaise",
+    "checked": false,
+    "image": "https://i.imgur.com/d6MzFSN.png"
+
+  },
+  {
+    "id": 5,
+    "key": "   Lail",
+    "checked": false,
+    "image": "https://i.imgur.com/MlDUNQb.png"
 
   }
 

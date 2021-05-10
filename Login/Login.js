@@ -118,6 +118,7 @@ const Login = ({ navigation }) => {
                     await AsyncStorage.setItem('token', data.token)
                     navigation.replace("MyTabs")
                 } catch (e) {
+                    alert("Verifier vos donnes")
                     console.log(e)
                    
                 }

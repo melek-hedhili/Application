@@ -1,0 +1,154 @@
+{
+
+  "viande": [
+    {
+      "id": 0,
+      "key": " Viande hachee",
+      "checked": false,
+      "image": "https://i.imgur.com/RuVD8qi.png   "
+    },
+    {
+      "id": 1,
+      "key": " Escalope pane",
+      "checked": false,
+      "image": "https://i.imgur.com/WNeYn6d.png"
+    },
+    {
+      "id": 2,
+      "key": " Escalope grille",
+      "checked": false,
+      "image": "https://i.imgur.com/iFpCySw.png"
+
+    },
+    {
+      "id": 3,
+      "key": "   Cordon  bleu",
+      "checked": false,
+      "image": "https://i.imgur.com/iRo6ivZ.png"
+
+    }
+  ],
+  "sauce": [
+    {
+      "id": 0,
+      "key": " Algerienne",
+      "checked": false,
+      "image": "https://i.imgur.com/ZRMBYLZ.png  "
+
+    },
+    {
+      "id": 1,
+      "key": " Barbacue",
+      "checked": false,
+      "image": "https://i.imgur.com/kizbniG.png"
+
+    },
+    {
+      "id": 2,
+      "key": " Ketchup",
+      "checked": false,
+      "image": "https://i.imgur.com/HyBGf2c.png "
+
+    },
+    {
+      "id": 3,
+      "key": " Mayonaise",
+      "checked": false,
+      "image": "https://i.imgur.com/d6MzFSN.png"
+
+    },
+    {
+      "id": 4,
+      "key": " Lail",
+      "checked": false,
+      "image": "https://i.imgur.com/MlDUNQb.png"
+
+    }
+  ],
+  "extra": [
+    {
+      "id": 0,
+      "key": " Mozarella",
+      "checked": false,
+      "image": "https://i.imgur.com/hnTZo9l.png"
+
+    },
+    {
+      "id": 1,
+      "key": " Gruyere",
+      "checked": false,
+      "image": "https://i.imgur.com/4wa6oHH.png"
+
+    },
+    {
+      "id": 2,
+      "key": " Jambon",
+      "checked": false,
+      "image": "https://i.imgur.com/1M3uXiK.png "
+
+    },
+    {
+      "id": 3,
+      "key": " Cheddar",
+      "checked": false,
+      "image": "https://i.imgur.com/hdZfAmG.png"
+
+    },
+    {
+      "id": 4,
+      "key": " Oeuf",
+      "checked": false,
+      "image": "https://i.imgur.com/sOG8ICt.png"
+
+    }
+
+  ],
+  "boisson": [
+    {
+      "id": 0,
+      "key": " Coca",
+      "checked": false,
+      "image": "https://i.imgur.com/K389fEv.png "
+
+    },
+    {
+      "id": 1,
+      "key": " Fanta",
+      "checked": false,
+      "image": "https://i.imgur.com/0iR0uIA.png"
+
+    },
+    {
+      "id": 2,
+      "key": "Eau",
+      "checked": false,
+      "image": "https://i.imgur.com/Bm7CSrm.png"
+
+    },
+    {
+      "id": 3,
+      "key": "Boga ",
+      "checked": false,
+      "image": "https://i.imgur.com/L4Lj4xr.png"
+
+    }
+
+  ],
+  "supplements": [
+      {
+    "id": 0,
+    "key": "Frites",
+    "checked": false               ,
+    "image": "https://i.imgur.com/dMcnbkn.png                    "
+
+  },
+  {
+    "id": 1,
+    "key": "Dessert",
+    "checked": false,
+    "image": "https://i.imgur.com/5fSVMWO.png"
+
+  }
+
+  ]
+}

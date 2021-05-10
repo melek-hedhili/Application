@@ -14,6 +14,20 @@
     "checked": false,
     "image": "https://i.imgur.com/0iR0uIA.png"
 
+  },
+  {
+    "id": 2,
+    "key": "Eau",
+    "checked": false,
+    "image": "https://i.imgur.com/Bm7CSrm.png"
+
+  },
+  {
+    "id": 3,
+    "key": "Boga ",
+    "checked": false,
+    "image": "https://i.imgur.com/L4Lj4xr.png"
+
   }
 
 

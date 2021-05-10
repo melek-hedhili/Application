@@ -1,5 +1,5 @@
-import React, { useState, useEffect, useRef, Component} from 'react';
-
+import React, { useState, useEffect, useRef, Component } from 'react';
+import InscriptionNum from '../Login/InscriptionNum.js'
 import { StyleSheet, Text, View, Image, TouchableOpacity, TextInput, Alert } from 'react-native';
 import normalize from 'react-native-normalize';
 export default class InputOTPScreen extends Component {
