@@ -3,36 +3,105 @@ import { StyleSheet, Text, View, Image, TouchableOpacity, ScrollView, TextInput 
 import RadioButtonRN from 'radio-buttons-react-native';
 import normalize from 'react-native-normalize';
 
-
+import AsyncStorage from '@react-native-community/async-storage';
 
 export default class Paiment extends React.Component {
+    
     constructor(props) {
         super(props);
 
         this.state = {
-            res: {},
-            example: 1
+            choix: "",
+            text: '',
+            commandes: [],
+            user:''
+
+
         };
 
         this.colors = [
             {
-                label: 'livraison'
+                label: 'livraison à domicile'
             },
             {
-                label2: 'surplace'
+                label: 'surplace'
             },
 
 
 
         ];
+        
+    }
+    componentDidMount =async()=> {
+        try {
+            const token = await AsyncStorage.getItem("token")
+            fetch('http://10.0.2.2:4000/', {
+                headers: new Headers({
+                    Authorization: "Bearer " + token
+                })
+            }).then(res => res.json())
+                .then(async (data) => {
+                    console.log(data)
+                    this.setState({ user:data })
+                }
+            )
+        } catch (error) { console.log(error) }
+        try {
+            AsyncStorage.getItem('STORAGE_Data').then((cart) => {
+                if (cart !== null) {
+                    const cartfood = JSON.parse(cart)
+                    console.log('cart in paiement', cartfood)
+                    this.setState({ commandes: cartfood })
+                    console.log(JSON.stringify(this.state.commandes))
+
+
+                }
+            })
+        }
+        catch (error) {
+            console.log(error)
+        }
+    }
+    sendCommand=async()=> {
+        const date = new Date()
+        const description = this.state.text
+
+        const choix = this.state.choix.label
+        const user = this.state.user
+        fetch("http://10.0.2.2:4000/envoyercommande", {
+            method: "POST",
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({
+                "date": date,
+                "user": user,
+                "data": this.state.commandes,
+                "description": description,
+                "choix": choix
+
+            })
+        })
+            .then(res => res.json())
+            .then(async (data) => {
+                try {
+                    console.log("command sent",data)
+
+                } catch (e) {
+
+                    console.log(e)
+                }
+            })
+        this.props.navigation.replace("Checkout")
 
     }
 
-    render() {
 
+    render() {
+        
         return (
             <View style={styles.container}>
-
+                
 
 
                 <ScrollView>
@@ -58,6 +127,8 @@ ici"
                             placeholderTextColor="grey"
                             numberOfLines={2}
                             multiline={true}
+                            value={this.state.text}
+                            onChangeText={(text) => this.setState({ text })}
                         />
 
                     </View>
@@ -73,41 +144,26 @@ ici"
 
                     <View style={styles.rectangle2}>
 
-
-                        <View style={{ flexDirection: 'row', alignItems: 'center' }}>
-
                             <RadioButtonRN
 
                                 activeColor={'#FA4A0C'}
-                                deactiveColor={'#FA4A0C'}
-                                style={{ marginLeft: normalize(30), marginTop: normalize(-30), }}
+                            deactiveColor={'#FA4A0C'}
+                            style={{ justifyContent: 'space-between', marginTop: normalize(15) }}
                                 data={this.colors}
                                 initial={1}
                                 box={false}
-                                selectedBtn={(e) => this.setState({ res: e })}
+                                selectedBtn={(e) => this.setState({ choix: e })}
                                 circleSize={normalize(11)}
                             />
-                            <Text style={{ fontSize: normalize(18), marginLeft: normalize(20), justifyContent: 'center', marginTop: normalize(-50) }}>Livraison à domicile</Text>
-                            <Image style={{ width: normalize(250), height: normalize(4), marginTop: normalize(50), marginLeft: normalize(-160) }} source={require("../assets/line.png")}></Image>
-
-                        </View>
-
-
-
-
-                        <View style={{ flexDirection: 'row', alignItems: 'center', }}>
-                            <Text style={{ marginLeft: normalize(35) }}> </Text>
-                            <Text style={{ fontSize: normalize(18), marginLeft: normalize(20), justifyContent: 'center', marginTop: normalize(-35) }}>Surplace</Text>
-                        </View>
-
 
 
                     </View>
+
                     <View style={{ flexDirection: 'row', marginLeft: normalize(20), marginTop: normalize(10) }}>
                         <Text style={{ fontSize: 17, }}>Totale</Text>
                         <Text style={{ fontSize: normalize(22), marginLeft: normalize(220) }}>23,000</Text>
                     </View>
-                    <TouchableOpacity style={styles.btnSuivant} onPress={() => this.props.navigation.navigate('Checkout')}>
+                    <TouchableOpacity style={styles.btnSuivant} onPress={() => this.sendCommand()}>
                         <Text style={{ alignSelf: 'center', marginTop: normalize(20), color: 'white', fontSize: normalize(15), fontWeight: 'bold' }}>Suivant</Text>
                     </TouchableOpacity>
                     <Text> </Text>
@@ -131,6 +187,7 @@ const styles = StyleSheet.create({
         fontSize: normalize(18),
         alignSelf: 'center',
         marginTop: normalize(-50)
+        
 
 
 
@@ -142,6 +199,7 @@ const styles = StyleSheet.create({
         height: normalize(126),
         alignSelf: 'center',
         marginTop: normalize(10),
+        
     },
     titeAdresse: {
         fontSize: normalize(18),
@@ -177,7 +235,7 @@ const styles = StyleSheet.create({
         backgroundColor: 'white',
         borderRadius: 20,
         width: normalize(334),
-        height: normalize(200),
+        height: normalize(100),
         alignSelf: 'center',
         marginTop: normalize(20)
 

@@ -7,38 +7,67 @@ import AsyncStorage from '@react-native-community/async-storage';
 
 const InscriptionNum = ({ navigation }) => {
 
-    const [telephone, setTelephone] = useState("")
-    const SendUserInfo = async () => {
-        try {
-            await AsyncStorage.setItem('STORAGE_PHONE', JSON.stringify(telephone));
+    const [email, setEmail] = useState("")
+    const renderRandom = () => {
+        const min = 1000;
+        const max = 9999;
+        const random = (Math.floor(Math.random() * (max - min + 1)) + min)
+        console.log(random)
+        return random
 
-            console.log(typeof (telephone))
-            console.log("number sent")
-            navigation.navigate("InputOTPScreen")
+    }
+
+    const VerificationMail = async () => {
+        const verifyCode = renderRandom()
+
+        fetch("http://10.0.2.2:4000/send", {
+            method: "POST",
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({
+
+                "email": email,
+                "verifycode": verifyCode,
+
+            })
+        })
+            .then(res => res.json())
+            .then(async (data) => {
+                console.log(data)
+
+
+            })
+        console.log("email envoyé")
+        try {
+         AsyncStorage.setItem('STORAGE_MAIL', JSON.stringify(email));
         } catch (error) {
             console.log(error)
             console.log("failed")
         }
+        console.log("email de asyncstorage envoyee")
+        navigation.navigate("InputOTPScreen", { verifyCode: verifyCode })
     }
+
 
         return (
             <View style={styles.container}>
-                <Text style={styles.text}>Validation numero de telephone</Text>
-                <Text style={{ textAlign: 'center', color: "#9FA5C0", fontSize: normalize(15), fontFamily: 'arial', fontWeight: 'bold', marginTop: normalize(20), letterSpacing: 1, lineHeight: normalize(25) }}>Veuillez renseigner le numero de telephone que
+                <Text style={styles.text}>Validation d'utilisateur</Text>
+                <Text style={{ textAlign: 'center', color: "#9FA5C0", fontSize: normalize(15), fontFamily: 'arial', fontWeight: 'bold', marginTop: normalize(20), letterSpacing: 1, lineHeight: normalize(25) }}>Veuillez renseigner le numero  que
                 vous voulez utililiser pour la creation de votre
                 compte.Vous recevrez le code temporaire
-sous forme un SMS pour valider votre numero</Text>
+dans votre boite email</Text>
 
                 <TextInput
                     style={styles.inputContainer}
-                    placeholder="Numero du telephone"
+                    placeholder="e-mail"
                     placeholderTextColor={'#9FA5C0'}
-                    value={telephone}
-                    onChangeText={(text) => setTelephone(text)}
+                    value={email}
+                    onChangeText={(text) => setEmail(text)}
 
                 />
                 <Feather name="phone" color={'#2E3E5C'} size={normalize(26)} style={{ alignSelf: 'flex-start', marginTop: normalize(-40), marginLeft: normalize(48), }} />
-                <TouchableOpacity activeOpacity={0.8} style={styles.btnContainer} onPress={() => { SendUserInfo() }}>
+                <TouchableOpacity activeOpacity={0.8} style={styles.btnContainer} onPress={() => { VerificationMail() }}>
                     <Text style={{ color: 'white', fontSize: normalize(15), fontWeight: 'bold', letterSpacing: 0.7, fontFamily: 'arial' }} >Envoyer</Text>
 
                 </TouchableOpacity>

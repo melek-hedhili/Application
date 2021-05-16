@@ -5,6 +5,7 @@ import normalize from 'react-native-normalize';
 import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
 import AsyncStorage from '@react-native-community/async-storage';
+import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 const Profile = ({ navigation }) => {
 
     
@@ -12,7 +13,7 @@ const Profile = ({ navigation }) => {
     const [email, setEmail] = useState("loading")
     const [nom, setNom] = useState("loading")
     const [prenom, setPreom] = useState("loading")
-    const [telephone, setTelephone] = useState("")
+    const [telephone, setTelephone] = useState("loading")
         const Boiler = async () => {
             const token = await AsyncStorage.getItem("token")
             fetch('http://10.0.2.2:4000/', {
@@ -39,14 +40,17 @@ const Profile = ({ navigation }) => {
                 navigation.replace('Login')
             })
     }
-    var new_tele = telephone.replace(/"/g, '');
-    console.log(new_tele, ' new tele')
+    var new_email = email.replace(/"/g, '');
+    console.log(new_email, ' new email')
 
         return (
             
             
             <View style={styles.container}>
+
+                
                 <Text style={styles.profile}>Profile</Text>
+                
                 <View style={styles.avatarPlaceholder} >
                     <Image source={ require('../assets/user.png')}
                         style={styles.avatar} />
@@ -55,14 +59,12 @@ const Profile = ({ navigation }) => {
                 </View>
                 <TouchableOpacity onPress={()=>logout() } >
                     <Text style={styles.text}>Log out</Text>
-                    
-
-
                 </TouchableOpacity>
                 <Text style={styles.profileA}>{nom} {prenom}</Text>
-                <Text style={{ alignSelf: 'center', fontSize: normalize(14), fontWeight: 'bold', marginTop: normalize(20), marginLeft: normalize(110), color: '#667C8A' }}>{email}</Text>
-                <Text style={{ alignSelf: 'center', fontSize: normalize(14), fontWeight: 'bold', marginTop: normalize(20), marginLeft: normalize(35), color: '#667C8A' }}>{new_tele}</Text>
-
+                <Text style={{ alignSelf: 'center', fontSize: normalize(14), fontWeight: 'bold', marginTop: normalize(20), marginLeft: normalize(110), color: '#667C8A' }}>{new_email}</Text>
+                <Text style={{ alignSelf: 'center', fontSize: normalize(14), fontWeight: 'bold', marginTop: normalize(20), marginLeft: normalize(35), color: '#667C8A' }}>{telephone}</Text>
+                
+                
             </View>
 
         );

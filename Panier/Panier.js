@@ -1,10 +1,11 @@
 import React, {Component} from 'react';
-import { StyleSheet, Text, View, Image, TouchableOpacity, ScrollView, } from 'react-native';
+import { StyleSheet, Text, View, Image, TouchableOpacity, ScrollView, Dimensions} from 'react-native';
 import Paiment from '../Panier/Paiment.js'
 import Feather from 'react-native-vector-icons/Feather';
 import Ionicons from 'react-native-vector-icons/Ionicons';
 import normalize from 'react-native-normalize';
 import AsyncStorage from '@react-native-community/async-storage';
+var { width } = Dimensions.get("window")
 
 
 export default  class Panier extends Component {
@@ -32,12 +33,16 @@ export default  class Panier extends Component {
             console.log(error)
         }
     }
-    removeItem() {
+    removeItem(i) {
+        const dataCar = this.state.dataCart
+        let cantd = dataCar[i].Quantity;
 
-        AsyncStorage.removeItem("STORAGE_Data").then((item) => {
+            dataCar.splice(i, 1)
+            this.setState({ dataCart: dataCar })
+            AsyncStorage.setItem("STORAGE_Data", JSON.stringify(this.state.dataCart))
+            console.log(this.state.dataCart)
+            alert("item removed !")
 
-            alert("Item removed")
-        })
     }
 
     onChangeQual(i, type) {
@@ -58,13 +63,8 @@ export default  class Panier extends Component {
             AsyncStorage.setItem("STORAGE_Data", JSON.stringify(this.state.dataCart))
             console.log(this.state.dataCart)
         }
-        else if (type == false && cantd == 1) {
-            dataCar.splice(i, 1)
-            this.setState({ dataCart: dataCar })
-            AsyncStorage.setItem("STORAGE_Data", JSON.stringify(this.state.dataCart))
-            console.log(this.state.dataCart)
-            alert("item removed !")
-        }
+
+        
 
     }
     onLoadTotal() {
@@ -115,30 +115,50 @@ export default  class Panier extends Component {
                     {
 
                         this.state.dataCart.map((item, i) => {
+
+
+
                           
 
                             return (
 
-                                <View style={styles.rectangle} key={i}>
-                                    <Image style={{ width: normalize(200), height: normalize(64), alignSelf: 'center', marginLeft: normalize(-40) }} source={require("../assets/Tacos-M.png")}></Image>
-                                    <View>
-                                        <Text style={{ alignSelf: 'center', fontSize: normalize(17), marginTop: normalize(10) }} key={i}>{item.Viande}</Text>
-                                        <View style={{ flexDirection: 'row', alignSelf: 'baseline', marginTop: normalize(50), }}>
+                                <View style={{ flex: 1, }} key={i}>
 
-                                                <TouchableOpacity onPress={() => this.onChangeQual(i,false)}>
-                                                    <Ionicons name="remove-circle" color={'#D05A0B'} size={normalize(35)} style={styles.btnMoin} />
-                                            </TouchableOpacity>
-                                            <Text style={{ fontSize: normalize(20), marginLeft: normalize(15) }}>{item.Quantity}</Text>
-                                            <TouchableOpacity onPress={() => this.onChangeQual(i, true)} >
-                                                <Ionicons name="add-circle" color={'#D05A0B'} size={normalize(30)} style={styles.btnPlus} />
-                                            </TouchableOpacity>
+                                    <View style={{ width: width - 20, margin: 10, backgroundColor: 'transparent', flexDirection: 'row', borderBottomWidth: 2, borderColor: "#cccccc", paddingBottom: 10 }}>
+                                        <Image resizeMode={"contain"} style={{ width: width / 3, height: width / 3 }} source={require("../assets/Tacos-M.png")} />
+                                        <View style={{ flex: 1, backgroundColor: 'transparent', padding: 10, justifyContent: "space-between" }}>
+                                            <View>
+                                                <View style={{ flexDirection: 'row', justifyContent: 'space-between' }}>
+                                                    <Text style={{ fontWeight: "bold", fontSize: 20 }}>Tacos { item.Viande}</Text>
+                                                    <TouchableOpacity onPress={() => this.removeItem(i)}>
+                                                        <Ionicons name="close-sharp" size={30} color={'#D05A0B'} />
+                                                    </TouchableOpacity>
+                                                </View>
+                                                
+                                                <Text>Sauce:{ item.Sauce}</Text>
+                                                <Text>Taille:{item.taille}</Text>
+                                                <Text>Extra:{item.Extra}</Text>
+                                                <Text>Boissons:{item.Boisson}</Text>
+                                                <Text>Supplements:{item.Supplements}</Text>
+                                            </View>
+                                            <View style={{ flexDirection: 'row', justifyContent: 'space-between' }}>
+                                                <Text style={{ fontWeight: 'bold',  fontSize: 20 }}>{item.Price * item.Quantity} DT</Text>
+                                                <View style={{ flexDirection: 'row', alignItems: 'center' }}>
+                                                    <TouchableOpacity onPress={() => this.onChangeQual(i, false)}>
+                                                        <Ionicons name="remove-circle" size={30} color={'#D05A0B'} />
+                                                    </TouchableOpacity>
+                                                    <Text style={{ paddingHorizontal: 8, fontWeight: 'bold' }}>{item.Quantity}</Text>
+                                                    <TouchableOpacity onPress={() => this.onChangeQual(i, true)}>
+                                                        <Ionicons name="add-circle" size={30} color={'#D05A0B'} />
+                                                    </TouchableOpacity>
+                                                </View>
+                                            </View>
                                         </View>
                                     </View>
-                                    <View>
 
-                                        <Text style={{ fontSize: normalize(15), alignSelf: 'center', marginTop: normalize(27), marginLeft: normalize(35) }}>{item.Price * item.Quantity} DT</Text>
-                                    </View>
                                 </View>
+
+
                             )
                         })
                     }
@@ -203,7 +223,32 @@ export default  class Panier extends Component {
 
 
 
+{/*<View style={styles.rectangle} key={i}>
+                                    <Image style={{ width: normalize(200), height: normalize(64), alignSelf: 'center', marginLeft: normalize(-40) }} source={require("../assets/Tacos-M.png")}></Image>
+                                    <View>
+                                        <TouchableOpacity onPress={() => this.removeItem(i)}>
+                                            <Ionicons name="close-sharp" color={'#D05A0B'} size={normalize(35)} />
+                                        </TouchableOpacity>
 
+                                        <Text style={{ alignSelf: 'center', fontSize: normalize(17), marginTop: normalize(10) }} key={i}>{item.Viande}</Text>
+                                        <TouchableOpacity onPress={() => this.onChangeQual(i, false)}>
+                                            <Ionicons name="remove-circle" color={'#D05A0B'} size={normalize(35)} style={styles.btnMoin} />
+                                        </TouchableOpacity>
+                                        <Text style={{ fontSize: normalize(20), marginLeft: normalize(15) }}>{item.Quantity}</Text>
+                                        <TouchableOpacity onPress={() => this.onChangeQual(i, true)} >
+                                            <Ionicons name="add-circle" color={'#D05A0B'} size={normalize(30)} style={styles.btnPlus} />
+                                        </TouchableOpacity>
+                                    </View>
+                                        <View style={{ flexDirection: 'row', alignSelf: 'baseline', marginTop: normalize(50), }}>
+
+
+
+                                    </View>
+                                    <View>
+
+                                        <Text style={{ fontSize: normalize(15), alignSelf: 'center', marginTop: normalize(27), marginLeft: normalize(35) }}>{item.Price * item.Quantity} DT</Text>
+                                    </View>
+                                </View>*/} 
 
 
     

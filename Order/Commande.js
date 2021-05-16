@@ -248,7 +248,7 @@ export default class Commande extends Component {
             if (checks[i] == true) {
                 Viande.push(keys[i])
 
-            }
+            } 
         }
 
 
@@ -262,7 +262,8 @@ export default class Commande extends Component {
             if (checksextra[i] == true) {
                 Extra.push(keysextra[i])
 
-            }
+            } 
+
 
         }
 
@@ -271,7 +272,9 @@ export default class Commande extends Component {
             if (checksboisson[i] == true) {
                 Boisson.push(keysboisson[i])
 
-            }
+            } 
+
+
 
         }
 
@@ -279,7 +282,8 @@ export default class Commande extends Component {
             if (checkssupp[i] == true) {
                 Supplements.push(keyssupp[i])
 
-            }           
+            }
+
         }
         console.log("Commande ajoute", " Viande :  " + Viande + "\n Sauce : " + Sauce + "\n Extra :" + Extra + "\n Boisson :" + Boisson + "\n Supplements :" + Supplements + "\n price :" + this.state.price)
         const data =

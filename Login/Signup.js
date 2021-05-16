@@ -17,13 +17,16 @@ const Signup = ({ navigation }) => {
     const [prenom, setPrenom] = useState('');
     const [telephone, setTelephone] = useState("")
 
+    
+
     const UserTelephone = async () => {
 
         try {
-            AsyncStorage.getItem('STORAGE_PHONE').then((data) => {
+            AsyncStorage.getItem('STORAGE_MAIL').then((data) => {
                 if (data !== null) {
                     console.log(data)
-                    setTelephone(data)
+                    setEmail(data)
+
                 }
 
             })
@@ -33,6 +36,8 @@ const Signup = ({ navigation }) => {
         }
 
     }
+    const new_email = email.replace(/"/g, '');
+    console.log("new_email", new_email)
     useEffect(() => {
         UserTelephone()
     }, [])
@@ -40,7 +45,7 @@ const Signup = ({ navigation }) => {
 
 
     const SendUserInfo = async () => {
-
+        
 
         fetch("http://10.0.2.2:4000/signup", {
             method: "POST",
@@ -50,7 +55,7 @@ const Signup = ({ navigation }) => {
             body:JSON.stringify({
                 "nom": nom,
                 "prenom": prenom,
-                "email": email,
+                "email": new_email,
                 "password": password,
                 "telephone": telephone
               
@@ -62,11 +67,12 @@ const Signup = ({ navigation }) => {
                     
                     navigation.navigate('Login')
                 } catch (e) {
+                    console.log('data:', data)
                     console.log(e)
                 }
             })
         console.log("user added")
-}
+    }
 
     return (
         
@@ -89,10 +95,10 @@ const Signup = ({ navigation }) => {
                     onChangeText={(text) => setPrenom(text)}/>
                 <TextInput
                     style={styles.inputContainer}
-                    placeholder="Email "
+                    placeholder="Telephone "
                     placeholderTextColor={'#9FA5C0'}
-                    value={email}
-                    onChangeText={(text) => setEmail(text)}/>
+                value={telephone}
+                onChangeText={(text) => setTelephone(text)} />
 
                 <TextInput
                     style={styles.inputContainerPassword}
