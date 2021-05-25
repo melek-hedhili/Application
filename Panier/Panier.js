@@ -25,7 +25,7 @@ export default  class Panier extends Component {
                     const cartfood = JSON.parse(cart)
                     console.log(cart)
                     this.setState({ dataCart: cartfood })
-                    console.log(JSON.stringify(this.state.dataCart))
+                    console.log("this state datacar:",this.state.dataCart)
                 }
             })
         }

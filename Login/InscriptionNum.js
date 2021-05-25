@@ -49,6 +49,26 @@ const InscriptionNum = ({ navigation }) => {
         navigation.navigate("InputOTPScreen", { verifyCode: verifyCode })
     }
 
+    const validate = () => {
+        let text = email
+
+        let reg = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w\w+)+$/;
+        if (reg.test(text) === false) {
+            setEmail(text)
+            console.log("Email is Not Correct");
+            alert("Veuillez saisir un email correct");
+
+            
+            
+            return false;
+        }
+        else {
+            setEmail(text)
+            console.log("Email is Correct", email);
+            VerificationMail();
+        }
+    }
+
 
         return (
             <View style={styles.container}>
@@ -65,9 +85,11 @@ dans votre boite email</Text>
                     value={email}
                     onChangeText={(text) => setEmail(text)}
 
+
+
                 />
                 <Feather name="phone" color={'#2E3E5C'} size={normalize(26)} style={{ alignSelf: 'flex-start', marginTop: normalize(-40), marginLeft: normalize(48), }} />
-                <TouchableOpacity activeOpacity={0.8} style={styles.btnContainer} onPress={() => { VerificationMail() }}>
+                <TouchableOpacity activeOpacity={0.8} style={styles.btnContainer} onPress={() => { validate() }}>
                     <Text style={{ color: 'white', fontSize: normalize(15), fontWeight: 'bold', letterSpacing: 0.7, fontFamily: 'arial' }} >Envoyer</Text>
 
                 </TouchableOpacity>

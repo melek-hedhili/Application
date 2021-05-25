@@ -20,6 +20,7 @@ import Panier from '../Panier/Panier.js'
 import Checkout from '../Panier/Checkout.js'
 import Carte from '../Panier/Carte'
 import Rate from '../Rate/Rate.js';
+import Maps from '../Panier/Maps'
 
 
 const Navigation = () => {
@@ -62,6 +63,7 @@ const Navigation = () => {
                                     <Stack.Screen name="Paiment" component={Paiment} options={{ headerShown: false }} />
                                     <Stack.Screen name="Checkout" component={Checkout} options={{ headerShown: false }} />
                                     <Stack.Screen name="Carte" component={Carte} options={{ headerShown: false }} />
+                                    <Stack.Screen name="Maps" component={Maps} options={{ headerShown: false }}/>
                                     
                                 </>)
                                 : (<>
@@ -74,6 +76,7 @@ const Navigation = () => {
                                     <Stack.Screen name="Paiment" component={Paiment} options={{ headerShown: false }} />
                                     <Stack.Screen name="Checkout" component={Checkout} options={{ headerShown: false }} />
                                     <Stack.Screen name="Carte" component={Carte} options={{ headerShown: false }} />
+                                    <Stack.Screen name="Maps" component={Maps} options={{ headerShown: false }} />
                                     <Stack.Screen name="InscriptionNum" component={InscriptionNum} options={{ headerShown: false }} />
                                     <Stack.Screen name="InputOTPScreen" component={InputOTPScreen} options={{ headerShown: false }} />
                                     <Stack.Screen name="Recovery" component={Recovery} options={{ headerShown: false }} />

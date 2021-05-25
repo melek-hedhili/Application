@@ -38,8 +38,8 @@ export default class Commande extends Component {
             showSoundImg: true,
             SelectedItem: [],
             price: 7,
-            colorId: 0,
-            taille: ""
+            colorId: 1,
+            taille: "M"
         };
     }
 
@@ -50,15 +50,18 @@ export default class Commande extends Component {
         if (id == 1) {
             this.setState({ taille: 'M' })
             this.setState({ selected: sizes.M })
+            //this.setState({ price: 7 })
         }
         else if (id == 2) {
             this.setState({ taille: 'XL' })
             this.setState({ selected: sizes.XL })
+            //this.setState({ price: 14 })
         }
 
         else {
             this.setState({ taille: 'L' })
             this.setState({ selected: sizes.L })
+           // this.setState({ price: 10 })
         }
         // console.log("Button id:", id ,"size :", this.state.taille)
     }
@@ -249,6 +252,7 @@ export default class Commande extends Component {
                 Viande.push(keys[i])
 
             } 
+
         }
 
 
@@ -285,7 +289,7 @@ export default class Commande extends Component {
             }
 
         }
-        console.log("Commande ajoute", " Viande :  " + Viande + "\n Sauce : " + Sauce + "\n Extra :" + Extra + "\n Boisson :" + Boisson + "\n Supplements :" + Supplements + "\n price :" + this.state.price)
+        //console.log("Commande ajoute", " Viande :  " + Viande + "\n Sauce : " + Sauce + "\n Extra :" + Extra + "\n Boisson :" + Boisson + "\n Supplements :" + Supplements + "\n price :" + this.state.price)
         const data =
 
         {
@@ -303,33 +307,43 @@ export default class Commande extends Component {
         }
 
 
+        
+        if (checks[0] == false && checks[1] == false && checks[2] == false && checks[3] == false) {
+                alert("veuillez choisir la viande")
 
-
-
-        AsyncStorage.getItem("STORAGE_Data").then((datacart) => {
-            console.log("datacart = ", datacart)
-            if (datacart !== null) {
-
-                const cart = JSON.parse(datacart)
-                cart.push(data)
-                AsyncStorage.setItem("STORAGE_Data", JSON.stringify(cart))
-                console.log("cart 2:", cart)
             } else {
 
+                AsyncStorage.getItem("STORAGE_Data").then((datacart) => {
+                    console.log("datacart = ", datacart)
+                    if (datacart !== null) {
 
-                AsyncStorage.setItem("STORAGE_Data", JSON.stringify([data]))
-                console.log("else : ", data)
+                        const cart = JSON.parse(datacart)
+                        cart.push(data)
+                        AsyncStorage.setItem("STORAGE_Data", JSON.stringify(cart))
+                        console.log("cart 2:", cart)
+                    } else {
+
+
+                        AsyncStorage.setItem("STORAGE_Data", JSON.stringify([data]))
+                        console.log("else : ", data)
+                    }
+                    console.log("DATA:", JSON.stringify(data))
+                    alert(" Viande :  " + Viande + "\n Sauce : " + Sauce + "\n Extra :" + Extra + "\n Boisson :" + Boisson + "\n Supplements :" + Supplements + "\n price :" + this.state.price)
+
+                }).catch((error) => {
+                    alert(error)
+                })
+
             }
-            console.log("DATA:", JSON.stringify(data))
-            alert(" Viande :  " + Viande + "\n Sauce : " + Sauce + "\n Extra :" + Extra + "\n Boisson :" + Boisson + "\n Supplements :" + Supplements + "\n price :" + this.state.price)
 
-        }).catch((error) => {
-            alert(error)
-        })
+        }
+
+
+
         
 
         //this.setState({price:7})
-    };
+    
 
 
 

@@ -15,18 +15,20 @@ import Commande from './Order/Commande.js'
 import Checkout from './Panier/Checkout.js'
 import Paiment from './Panier/Paiment.js'
 import Panier from './Panier/Panier.js'
+import Carte from './Panier/Carte.js'
 import Navigation2 from './Navigation/Navigation2.js';
 import Te from './te.js'
 import OnBoarding from './Login/Onboarding';
 import Login from './Login/Login';
 import Signup from './Login/Signup';
 import InscriptionNum from './Login/InscriptionNum';
+import InputOTPScreen from './PasswordRecovery/InputOTPScreen';
 
 
 class App extends React.Component {
     render() {
         return (
-            <Navigation />
+            <Navigation/>
         );
     }
 }

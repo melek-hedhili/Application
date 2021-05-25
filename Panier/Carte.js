@@ -1,39 +1,92 @@
-import React, { Component} from 'react';
-import { StyleSheet, Text, View, Image, TouchableOpacity, ScrollView, } from 'react-native';
+import React, { Component } from 'react';
+import { StyleSheet, Text, View, Image, TouchableOpacity, ScrollView, Dimensions } from 'react-native';
 import Feather from 'react-native-vector-icons/Feather';
 import normalize from 'react-native-normalize';
+import MapView, { PROVIDER_GOOGLE, Marker, Heatmap, Circle, Polyline, Polygon } from 'react-native-maps'
+import GeoFencing from 'react-native-geo-fencing';
+import { request, PERMISSIONS } from 'react-native-permissions'
+import Geolocation from 'react-native-geolocation-service';
+var { width } = Dimensions.get("window") 
 export default class Panier extends Component {
+    constructor(props) {
+        super(props);
+        this.state = {
+            CmdCart: [],
+            test:[]
+
+        };
+    }
+    componentDidMount() {
+        fetch("http://10.0.2.2:4000/getcmd", {
+            method: "GET",
+            headers: {
+                'Content-Type': 'application/json'
+            },
+        })
+            .then(res => res.json())
+            .then(async(results) => {
+                try {
+
+                    console.log("results", results)
+
+
+                    this.setState({ CmdCart: results })
+                    console.log("food order data:", JSON.stringify(this.state.CmdCart))
+
+                    
+
+                } catch (e) {
+
+                    console.log(e)
+                }
+            })
+    }
     render() {
-        
-return (  
-    <View style={styles.container}>
 
-        <ScrollView>
-            <View style={{ flexDirection: 'row', }}>
-            <TouchableOpacity onPress={() => this.props.navigation.goBack()}><Image style={{ resizeMode: 'contain' }} source={require("../assets/Back.png")} /></TouchableOpacity>
-                
-            </View>
-            <Text style={{ fontSize: normalize(18), fontWeight: 'bold', alignSelf: 'center', marginTop: normalize(-50) }}>Carte</Text>
-<View style={styles.rectangle}>
-<Image style={{ width: normalize(200), height: normalize(64), alignSelf: 'flex-start', marginLeft: normalize(-20),marginTop:normalize(20)}} source ={require("../assets/Tacos-M.png")}></Image>
-                    <Text style={{ alignSelf: 'center', fontSize: normalize( 17 ),marginTop:normalize(-40),marginLeft:normalize(50)}}> Escalope grillé</Text>
-</View>
-<View style={styles.rectangle2}>
-<Image style={{ width: normalize(200), height: normalize(64), alignSelf: 'flex-start', marginLeft: normalize(-20),marginTop:normalize(20)}} source ={require("../assets/Tacos-M.png")}></Image>
-                    <Text style={{ alignSelf: 'center', fontSize: normalize( 17 ),marginTop:normalize(-40),marginLeft:normalize(50)}}> Escalope pannée</Text>
-</View>
-<View style={styles.rectangle1}>
-    <View style={{flexDirection:'row'}}>
-<Text style={{fontSize:normalize(17),alignSelf:'flex-start',marginLeft:normalize(30),marginTop:normalize(30)}}>Totale</Text>
-<Text style={{fontSize:normalize(17),alignSelf:'flex-start',marginLeft:normalize(200),marginTop:normalize(30)}}>23,000</Text>
-</View>
-</View>
+        return (
+            <View style={styles.container}>
 
-<TouchableOpacity activeOpacity={0.8} style={styles.btnTerminer}  onPress={() => this.props.navigation.navigate('Rate')}>
-                <Text style={{ color: 'white', fontSize: normalize(15), fontWeight: 'bold', letterSpacing: 0.7, }} >Terminer</Text>
+                {
+                    this.state.CmdCart.map((item, i) => {
 
-                </TouchableOpacity>
-</ScrollView>
+                        return (
+                            <View style={{ flex: 1, }} key={i}>
+
+                                <TouchableOpacity style={{ width: width - 20, margin: 10, backgroundColor: 'transparent', flexDirection: 'row', borderBottomWidth: 2, borderColor: "#cccccc", paddingBottom: 10 }} onPress={() => { this.props.navigation.navigate("Maps")}}>
+                                    
+                                    <View style={{ flex: 1, backgroundColor: 'transparent', padding: 10, justifyContent: "space-between" }}>
+                                        <View>
+                                            <View style={{ flexDirection: 'row', justifyContent: 'space-between' }}>
+                                                <Text style={{ fontWeight: "bold", fontSize: 20 }}>ID :  {item._id}</Text>
+                                            </View>
+                                            <Text style={{ fontWeight: "bold", fontSize: 20 }}>Choix : { item.choix} </Text>
+                                            <Text style={{ fontWeight: "bold", fontSize: 20 }}>Sauce :{item.data.map((elem) => elem.Sauce)} </Text>
+                                            <Text style={{ fontWeight: "bold", fontSize: 20 }}>Viande :{item.data.map((elem) => elem.Viande)} </Text>
+                                            <Text style={{ fontWeight: "bold", fontSize: 20 }}>Extra :{item.data.map((elem) => elem.Extra)} </Text>
+                                            <Text style={{ fontWeight: "bold", fontSize: 20 }}>Longitude :{item.coordonnees.longitude} </Text>
+                                            <Text style={{ fontWeight: "bold", fontSize: 20 }}>Latitude :{item.coordonnees.latitude} </Text>
+
+
+                                            
+                                        </View>
+                                        <View style={{ flexDirection: 'row', justifyContent: 'space-between' }}>
+                                           
+                                            
+                                            <View style={{ flexDirection: 'row', alignItems: 'center' }}>
+
+                                                
+
+                                            </View>
+                                        </View>
+                                    </View>
+                                </TouchableOpacity>
+
+                            </View>
+                            
+                            );
+
+                    })
+                }
             </View>
 
 

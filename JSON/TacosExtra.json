@@ -3,28 +3,28 @@
 
   {
     "id": 0,
-    "key": " Mozarella",
+    "key": "Mozarella",
     "checked": false,
     "image": "https://i.imgur.com/hnTZo9l.png"
 
   },
   {
     "id": 1,
-    "key": " Gruyere",
+    "key": "Gruyere",
     "checked": false,
     "image": "https://i.imgur.com/4wa6oHH.png"
 
   },
   {
     "id": 2,
-    "key": " Jambon",
+    "key": "Jambon",
     "checked": false,
     "image": "https://i.imgur.com/1M3uXiK.png "
 
   },
   {
     "id": 3,
-    "key": " Cheddar",
+    "key": "Cheddar",
     "checked": false,
     "image": "https://i.imgur.com/hdZfAmG.png"
 

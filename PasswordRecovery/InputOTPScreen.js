@@ -70,7 +70,7 @@ export default class InputOTPScreen extends Component {
                             width: normalize(72),
                             borderRadius: 20,
                             borderWidth: 1,
-                            borderColor: '#D0DBEA',
+                            borderColor: this.state.borderColor,
                             textAlign: 'center'}}
                     onChangeText={(pin1) => {
                         this.setState({ pin1: pin1 })

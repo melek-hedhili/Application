@@ -34,9 +34,11 @@ const Profile = ({ navigation }) => {
             Boiler()
 
         }, [])
-        const logout = async() => {
+    const logout = async () => {
+        await AsyncStorage.removeItem("STORAGE_Data")
             await AsyncStorage.removeItem("token").then(() => {
-
+                
+                console.log("Items removed and disconnected")
                 navigation.replace('Login')
             })
     }

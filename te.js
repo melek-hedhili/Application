@@ -1,105 +1,80 @@
 import React from 'react';
-import { StyleSheet, Text, View, Image, TouchableOpacity, ScrollView, Alert, Dimensions, FlatList } from 'react-native';
+import { StyleSheet, Text, View, Image, TouchableOpacity, ScrollView, Alert, Dimensions, FlatList, ActivityIndicator } from 'react-native';
 import Icon from 'react-native-vector-icons/FontAwesome';
 import normalize from 'react-native-normalize';
 import CheckBox from '@react-native-community/checkbox';
+import MapView, { PROVIDER_GOOGLE, Marker, Heatmap, Circle, Polyline, Polygon } from 'react-native-maps'
+import Geolocation from 'react-native-geolocation-service';
+import { request, PERMISSIONS } from 'react-native-permissions'
 
-const TacosData = require("./JSON/TacosViande.json")
-const TacosSupplement = require("./JSON/TacosSupplement.json")
+
 class Te extends React.Component {
-
 	constructor(props) {
 		super(props);
 
 		this.state = {
-			data: TacosData,
-			supp: TacosSupplement,
+			userLocation: false,
+			coordinate: {
+				latitude: 35.844104,
+				longitude: 10.599076,
+
+			},
+			
 		};
-	};
-	onchecked(id) {
-		const data = this.state.data
-		const index = data.findIndex(x => x.id === id);
-		data[index].checked = !data[index].checked
-		this.setState(data)
 	}
-	oncheckedSupp(id) {
-		const dataSupp = this.state.supp
-		const indexSupp = dataSupp.findIndex(x_supp => x_supp.id === id);
-		dataSupp[indexSupp].checked = !dataSupp[indexSupp].checked
-		this.setState(dataSupp)
+
+	componentDidMount = async () => {
+		var response = await request(PERMISSIONS.ANDROID.ACCESS_FINE_LOCATION)
+		if (response = 'granted') {
+			await Geolocation.getCurrentPosition(
+				({ coords }) => {
+					this.setState({userLocation: coords })
+					
+				},
+				(error) => {
+					// See error code charts below.
+					console.log(error.code, error.message);
+				},
+				{ enableHighAccuracy: true, timeout: 15000, maximumAge: 10000 }
+			);
+		}
 	}
-	renderTacos(item,key) {
-
-		return (
-
-
-				
-				
-				
-				
-				<TouchableOpacity style={{ alignItems: 'center', justifyContent: 'center', alignSelf: 'center' }} key={key} onPress={() => { this.onchecked(item.id) }}>
-					<Image style={styles.rednerImg} source={{ uri: item.image }} ></Image>
-					<Text style={styles.rednertext}>{item.key}</Text>
-					<CheckBox value={item.checked}
-						style={{ transform: [{ scaleX: 0.8 }, { scaleY: 0.8 }], }}
-						onValueChange={() => { this.onchecked(item.id) }}
-						tintColors={{ true: '#D05A0B', false: 'black' }}
-
-					/>
-				</TouchableOpacity>
-				
 
 
 
+	
 
-		)
-	}
-	renderSupp(item,key) {
+    
 
-			return (
-				<TouchableOpacity style={{ alignItems: 'center', margin: 37 }} key={key} onPress={() => { this.oncheckedSupp(item.id) }}>
-					<Image style={styles.rednerImg} source={{ uri: item.image }} ></Image>
-					<Text style={styles.rednertext}>{item.key}</Text>
-					<CheckBox value={item.checked}
-						style={{ transform: [{ scaleX: 0.8 }, { scaleY: 0.8 }], }}
-						onValueChange={() => { this.oncheckedSupp(item.id) }}
-						tintColors={{ true: '#D05A0B', false: 'black' }}
-
-					/>
-				</TouchableOpacity>
-			)
-	}
 	render() {
+		let { latitude, longitude } = this.state.coordinate
+
+		console.log(this.state.userLocation)
 		return (
+			<View style={{ flex: 1, }} >
 
-			<View style={styles.container}>
-				<View style={{ alignItems: 'center', justifyContent: 'center', alignSelf: 'center',}}>
-					<Text style={styles.text_titre}>La viande</Text>
-					<FlatList
-
-						data={this.state.data}
+				<MapView
+					provider={PROVIDER_GOOGLE}
+					style={{ flex: 1}}
+					showsUserLocation={true}
+					initialRegion={{
+						latitude,
+						longitude,
+						latitudeDelta: 0.0922,
+						longitudeDelta: 0.0421,
+					}}
+					showsUserLocation={true}
+					showsMyLocationButton={true}
+					onRegionChangeComplete={(region) => this.setState({ coordinate: region })}
+					onPress={(e) =>
+						this.setState({ cordinate: e.nativeEvent.cordinate }), alert("hi")
 						
-						numColumns={2}
-						renderItem={({ item }) => this.renderTacos(item)}
-						keyExtractor={(item, index) => index.toString()}
-					/>
-					<Text style={styles.text_titre}>La viande</Text>
-					<FlatList
-
-						data={this.state.supp}
-
-						numColumns={2}
-						renderItem={({ item }) => this.renderSupp(item)}
-						keyExtractor={(item, index) => index.toString()}
-					/>
-
-					<Text>hi</Text>
-
-				</View>
-
-				
-
+					}
+					
+				>
+				</MapView>
 			</View>
+			
 			);
     }
 

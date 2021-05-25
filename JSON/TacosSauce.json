@@ -2,42 +2,41 @@
 
   {
     "id": 0,
-    "key": " Algerienne",
+    "key": "Algerienne",
     "checked": false,
     "image": "https://i.imgur.com/ZRMBYLZ.png  "
 
   },
   {
     "id": 1,
-    "key": " Barbacue",
+    "key": "Barbacue",
     "checked": false,
     "image": "https://i.imgur.com/kizbniG.png"
 
   },
   {
     "id": 2,
-    "key": "  Harissa  ",
-    "checked": false,
+    "key": "Harissa",
     "image": "https://i.imgur.com/6M3bHme.png "
 
   },
   {
     "id": 3,
-    "key": "     Ketchup  ",
+    "key": "Ketchup",
     "checked": false,
     "image": "https://i.imgur.com/HyBGf2c.png "
 
   },
   {
     "id": 4,
-    "key": " Mayonaise",
+    "key": "Mayonaise",
     "checked": false,
     "image": "https://i.imgur.com/d6MzFSN.png"
 
   },
   {
     "id": 5,
-    "key": "   Lail",
+    "key": "Lail",
     "checked": false,
     "image": "https://i.imgur.com/MlDUNQb.png"
 

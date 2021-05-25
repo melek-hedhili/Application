@@ -2,18 +2,52 @@ import React from 'react';
 import { StyleSheet, Text, View, Image, TouchableOpacity, ScrollView, TextInput } from 'react-native';
 import RadioButtonRN from 'radio-buttons-react-native';
 import normalize from 'react-native-normalize';
-
+import MapView, { PROVIDER_GOOGLE, Marker, Heatmap, Circle, Polyline, Polygon } from 'react-native-maps'
 import AsyncStorage from '@react-native-community/async-storage';
+import GeoFencing from 'react-native-geo-fencing';
+import { request, PERMISSIONS } from 'react-native-permissions'
+import Geolocation from 'react-native-geolocation-service';
 
 export default class Paiment extends React.Component {
+
+
     
     constructor(props) {
         super(props);
 
         this.state = {
+            userLocation: false,
+            marker:null,
+            polygon: [
+                { latitude: 35.870247597680056, longitude: 10.605444844603324 },
+                { latitude: 35.85508368966026, longitude: 10.58433049523809 },
+                { latitude: 35.84339576298802, longitude: 10.58381551110723 },
+                { latitude: 35.82767000153273, longitude: 10.5985783895252  },
+                { latitude: 35.814307613912845, longitude: 10.631709035277153 },
+                { latitude: 35.83226280275943, longitude: 10.640807088255668 },
+                { latitude: 35.870247597680056, longitude: 10.605444844603324},
+
+            ],
+            polygon2: [
+                { lat: 35.870247597680056, lng: 10.605444844603324 },
+                { lat: 35.85508368966026, lng: 10.58433049523809 },
+                { lat: 35.84339576298802, lng: 10.58381551110723 },
+                { lat: 35.82767000153273, lng: 10.5985783895252 },
+                { lat: 35.814307613912845, lng: 10.631709035277153 },
+                { lat: 35.83226280275943, lng: 10.640807088255668 },
+                { lat: 35.870247597680056, lng: 10.605444844603324 },
+
+            ],
+
+            
+            coordinate: {
+                latitude: 35.844104,
+                longitude: 10.599076,
+
+            },
             choix: "",
             text: '',
-            commandes: [],
+            commandes:'',
             user:''
 
 
@@ -32,7 +66,24 @@ export default class Paiment extends React.Component {
         ];
         
     }
-    componentDidMount =async()=> {
+    componentDidMount = async () => {
+
+        
+
+        var response = await request(PERMISSIONS.ANDROID.ACCESS_FINE_LOCATION)
+        if (response = 'granted') {
+            await Geolocation.getCurrentPosition(
+                ({ coords }) => {
+                    this.setState({ userLocation: coords })
+
+                },
+                (error) => {
+                    // See error code charts below.
+                    console.log(error.code, error.message);
+                },
+                { enableHighAccuracy: true, timeout: 15000, maximumAge: 10000 }
+            );
+        }
         try {
             const token = await AsyncStorage.getItem("token")
             fetch('http://10.0.2.2:4000/', {
@@ -60,45 +111,16 @@ export default class Paiment extends React.Component {
         }
         catch (error) {
             console.log(error)
+
         }
     }
-    sendCommand=async()=> {
-        const date = new Date()
-        const description = this.state.text
 
-        const choix = this.state.choix.label
-        const user = this.state.user
-        fetch("http://10.0.2.2:4000/envoyercommande", {
-            method: "POST",
-            headers: {
-                'Content-Type': 'application/json'
-            },
-            body: JSON.stringify({
-                "date": date,
-                "user": user,
-                "data": this.state.commandes,
-                "description": description,
-                "choix": choix
+    
 
-            })
-        })
-            .then(res => res.json())
-            .then(async (data) => {
-                try {
-                    console.log("command sent",data)
-
-                } catch (e) {
-
-                    console.log(e)
-                }
-            })
-        this.props.navigation.replace("Checkout")
-
-    }
 
 
     render() {
-        
+        let { latitude, longitude } = this.state.coordinate
         return (
             <View style={styles.container}>
                 
@@ -136,10 +158,44 @@ ici"
                         Ou par localisation:
                         </Text>
 
-                    <View style={styles.rectangle1}>
+                    <View >
 
-                        <Image style={{ width: normalize(290), height: normalize(160), alignSelf: 'center', marginTop: normalize(20) }} source={require("../assets/map.png")}></Image>
+                        <MapView
+                            provider={PROVIDER_GOOGLE}
+                            style={styles.rectangle1}
+                            showsUserLocation={true}
+                            initialRegion={{
+                                latitude,
+                                longitude,
+                                latitudeDelta: 0.0550,
+                                longitudeDelta: 0.0421,
+                            }}
+                            showsUserLocation={true}
+
+                            onRegionChangeComplete={(region) => this.setState({ coordinate: region })}
+                            onPress={(e) => this.setState({ marker: e.nativeEvent.coordinate })}>
+
+
+ 
+
+                        
+                            {
+                                this.state.marker  && 
+                                <MapView.Marker
+                                    coordinate={this.state.marker}                    
+                                />                             
+                            }
+
+                            <Polygon
+                                coordinates={this.state.polygon}
+                                fillColor={'rgba(100,100,200,0.3)'}
+                                
+                            />
+                            
+                        </MapView>
+                        
                     </View>
+                   
                     <Text style={{ fontSize: normalize(18), marginLeft: normalize(20), marginTop: normalize(10), }}> Outils de paiements :</Text>
 
                     <View style={styles.rectangle2}>
@@ -163,7 +219,7 @@ ici"
                         <Text style={{ fontSize: 17, }}>Totale</Text>
                         <Text style={{ fontSize: normalize(22), marginLeft: normalize(220) }}>23,000</Text>
                     </View>
-                    <TouchableOpacity style={styles.btnSuivant} onPress={() => this.sendCommand()}>
+                    <TouchableOpacity style={styles.btnSuivant} onPress={() => this.verif()} >
                         <Text style={{ alignSelf: 'center', marginTop: normalize(20), color: 'white', fontSize: normalize(15), fontWeight: 'bold' }}>Suivant</Text>
                     </TouchableOpacity>
                     <Text> </Text>
@@ -174,6 +230,75 @@ ici"
 
         );
     }
+    sendCommand = async () => {
+
+        const date = new Date()
+        const description = this.state.text
+
+        const choix = this.state.choix.label
+        const user = this.state.user
+        const coordonnees = this.state.marker
+        fetch("http://10.0.2.2:4000/envoyercommande", {
+            method: "POST",
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({
+                "date": date,
+                "user": user,
+                "data": this.state.commandes,
+                "description": description,
+                "choix": choix,
+                "coordonnees": coordonnees
+
+            })
+        })
+            .then(res => res.json())
+            .then(async (data) => {
+                try {
+                    console.log("command sent", data)
+
+                } catch (e) {
+
+                    console.log(e)
+                }
+            })
+        this.props.navigation.replace("Checkout")
+        const CMD = {
+            "date": date,
+            "user": user,
+            "data": this.state.commandes,
+            "description": description,
+            "choix": choix,
+            "coordonnees": coordonnees
+        }
+        console.log("CMD : ", CMD)
+
+
+
+    }
+    verif() {
+        if (this.state.marker == null) {
+            alert("Veuillez donner votre position")
+        } else {
+
+            let point = {
+                lat: this.state.marker.latitude,
+                lng: this.state.marker.longitude,
+
+            };
+            
+
+            GeoFencing.containsLocation(point, this.state.polygon2)
+                .then(async () => await this.sendCommand())
+                .catch(() => alert('vous n etes pas dans la zone de livraison'))
+
+        }
+
+
+        }
+
+
 }
 const styles = StyleSheet.create({
     container: {
@@ -225,7 +350,7 @@ const styles = StyleSheet.create({
         backgroundColor: 'white',
         borderRadius: 20,
         width: normalize(334),
-        height: normalize(201),
+        height: normalize(400),
         alignSelf: 'center',
         marginTop: normalize(20)
 

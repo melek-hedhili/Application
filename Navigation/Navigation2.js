@@ -11,6 +11,8 @@ import Commande from '../Order/Commande.js'
 import Panier from '../Panier/Panier.js'
 import Paiment from '../Panier/Paiment.js'
 import Checkout from '../Panier/Checkout.js'
+import Carte from '../Panier/Carte'
+import Maps from '../Panier/Maps'
 const Stack = createStackNavigator();
 
 class Navigation2 extends React.Component {
@@ -19,30 +21,12 @@ class Navigation2 extends React.Component {
             <NavigationContainer>
                 <Stack.Navigator>
                     <Stack.Screen
-                        name="MyTabs"
-                        component={MyTabs}
+                        name="Carte"
+                        component={Carte}
                         options={{ headerShown: false }}
                     />
-                    <Stack.Screen
-                        name="Commande"
-                        component={Commande}
-                        options={{ headerShown: false }}
-                    />
-                    <Stack.Screen
-                        name="Panier"
-                        component={Panier}
-                        options={{ headerShown: false }}
-                    />
-                    <Stack.Screen
-                        name="Paiment"
-                        component={Paiment}
-                        options={{ headerShown: false }}
-                    />
-                    <Stack.Screen
-                        name="Checkout"
-                        component={Checkout}
-                        options={{ headerShown: false }}
-                    />
+                    <Stack.Screen name="Maps" component={Maps} options={{ headerShown: false }}/>
+
                 </Stack.Navigator>
             </NavigationContainer>
 
