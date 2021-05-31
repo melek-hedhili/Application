@@ -11,6 +11,7 @@ import Geolocation from 'react-native-geolocation-service';
 export default class Maps extends Component {
     constructor(props) {
         super(props);
+        var coordonees = this.props.route.params.coordonees;
         this.state = {
             CmdCart: [],
             test: [],
@@ -19,10 +20,27 @@ export default class Maps extends Component {
                 longitude: 10.599076,
 
             },
+            polygon: [
+                { latitude: 35.870247597680056, longitude: 10.605444844603324 },
+                { latitude: 35.85508368966026, longitude: 10.58433049523809 },
+                { latitude: 35.84339576298802, longitude: 10.58381551110723 },
+                { latitude: 35.82767000153273, longitude: 10.5985783895252 },
+                { latitude: 35.814307613912845, longitude: 10.631709035277153 },
+                { latitude: 35.83226280275943, longitude: 10.640807088255668 },
+                { latitude: 35.870247597680056, longitude: 10.605444844603324 },
+
+            ],
 
         };
     }
     componentDidMount() {
+        this._unsubscribe = this.props.navigation.addListener('focus', () => {
+            const coordonees = this.props.route.params.coordonees;
+            console.log("mes coords", coordonees.longitude)
+            
+        });
+
+
         fetch("http://10.0.2.2:4000/getcmd", {
             method: "GET",
             headers: {
@@ -39,7 +57,7 @@ export default class Maps extends Component {
                     this.setState({ CmdCart: results })
                     console.log("food order data:", JSON.stringify(this.state.CmdCart))
 
-
+                    
 
                 } catch (e) {
 
@@ -49,64 +67,69 @@ export default class Maps extends Component {
     }
     render() {
         let { latitude, longitude } = this.state.coordinate
+
+        const coordonees = this.props.route.params.coordonees;
+
+
+
         return (
-            <View style={styles.container}>
 
-                {
-                    this.state.CmdCart.map((item, i) => {
+            <View style={{ flex: 1, }} >
 
+                <MapView
+                    provider={PROVIDER_GOOGLE}
+                    style={{
+                        flex: 1,
+                    }}
+                    showsUserLocation={true}
+                    initialRegion={{
+                        latitude,
+                        longitude,
+                        latitudeDelta: 0.0550,
+                        longitudeDelta: 0.0421,
+                    }}
+                    showsUserLocation={true}
 
-                        return (
-                            <View style={{ flex: 1, }} key={i}>
-
-                                <MapView
-                                    provider={PROVIDER_GOOGLE}
-                                    style={{
-                                        flex: 1,
-                                    }}
-                                    showsUserLocation={true}
-                                    initialRegion={{
-                                        latitude,
-                                        longitude,
-                                        latitudeDelta: 0.0550,
-                                        longitudeDelta: 0.0421,
-                                    }}
-                                    showsUserLocation={true}
-
-                                    onRegionChangeComplete={(region) => this.setState({ coordinate: region })}
-                                    onPress={(e) => this.setState({ marker: e.nativeEvent.coordinate })}>
+                    onRegionChangeComplete={(region) => this.setState({ coordinate: region })}
+                    onPress={(e) => this.setState({ marker: e.nativeEvent.coordinate })}>
 
 
 
 
 
-                                    <MapView.Marker
-                                        coordinate={{
-                                            latitude: item.coordonnees.latitude,
-                                            longitude: item.coordonnees.longitude
-                                        }}
-                                    /> 
+                    <MapView.Marker
+                        coordinate={{
+                            latitude: coordonees.latitude,
+                            longitude: coordonees.longitude
+                        }}
+      
+                    />
 
 
-                                    
+
+                    <Polygon
+                        coordinates={this.state.polygon}
+                       
+
+                    />
+
+                </MapView>
 
 
-                                </MapView>
-
-                            </View>
-
-                        );
-
-                    })
-                }
             </View>
 
-
-
-
         );
+
+
+
     }
 }
+
+
+
+
+
+
 const styles = StyleSheet.create({
     container: {
         flex: 1,

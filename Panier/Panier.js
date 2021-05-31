@@ -1,9 +1,11 @@
 import React, {Component} from 'react';
 import { StyleSheet, Text, View, Image, TouchableOpacity, ScrollView, Dimensions} from 'react-native';
 import Paiment from '../Panier/Paiment.js'
-import Feather from 'react-native-vector-icons/Feather';
+import SimpleLineIcons from 'react-native-vector-icons/SimpleLineIcons';
+import FontAwesome from 'react-native-vector-icons/FontAwesome';
 import Ionicons from 'react-native-vector-icons/Ionicons';
 import normalize from 'react-native-normalize';
+
 import AsyncStorage from '@react-native-community/async-storage';
 var { width } = Dimensions.get("window")
 
@@ -14,8 +16,9 @@ export default  class Panier extends Component {
         super(props);
         this.state = {
             dataCart: [],
-            frais: 3,
-            tax:1,
+            frais: 0,
+            tax: 0,
+ 
         };
     }
     componentDidMount(){
@@ -25,14 +28,17 @@ export default  class Panier extends Component {
                     const cartfood = JSON.parse(cart)
                     console.log(cart)
                     this.setState({ dataCart: cartfood })
-                    console.log("this state datacar:",this.state.dataCart)
+                    console.log("this state datacart lenght:", this.state.dataCart.length)
                 }
             })
         }
         catch (error) {
             console.log(error)
         }
+
+
     }
+
     removeItem(i) {
         const dataCar = this.state.dataCart
         let cantd = dataCar[i].Quantity;
@@ -89,7 +95,84 @@ export default  class Panier extends Component {
         return prix
 
     }
-    
+
+    isEmpty() {
+
+        return (
+
+            <View style={{ flex: 1, marginTop: normalize(50) }}>
+                <SimpleLineIcons name="basket" size={100} color={'#000000'} style={{ alignSelf: 'center', }} />
+                <Text style={{ fontSize: 17, alignSelf: 'center', marginTop: normalize(24), fontWeight: 'bold' }}>Panier est vide</Text>
+            </View>
+
+            )
+    }
+    notEmpty() {
+
+
+
+        
+
+
+        return this.state.dataCart.map((item, i) => {
+                return (
+                    
+                    <View style={{ flex: 1, }} key={i}>
+
+                        <View style={{ width: width - 20, margin: 10, backgroundColor: 'transparent', flexDirection: 'row', borderBottomWidth: 2, borderColor: "#cccccc", paddingBottom: 10 }}>
+                            <Image resizeMode={"contain"} style={{ width: width / 3, height: width / 3 }} source={require("../assets/Tacos-M.png")} />
+                            <View style={{ flex: 1, backgroundColor: 'transparent', padding: 10, justifyContent: "space-between" }}>
+                                <View>
+                                    <View style={{ flexDirection: 'row', justifyContent: 'space-between' }}>
+                                        <Text style={{ fontWeight: "bold", fontSize: 20 }}>Tacos {item.Viande}</Text>
+                                        <TouchableOpacity onPress={() => this.removeItem(i)}>
+                                            <Ionicons name="close-sharp" size={30} color={'#D05A0B'} />
+                                        </TouchableOpacity>
+                                    </View>
+
+                                    <Text>Sauce:{item.Sauce}</Text>
+                                    <Text>Taille:{item.taille}</Text>
+                                    <Text>Extra:{item.Extra}</Text>
+                                    <Text>Boissons:{item.Boisson}</Text>
+                                    <Text>Supplements:{item.Supplements}</Text>
+                                </View>
+                                <View style={{ flexDirection: 'row', justifyContent: 'space-between' }}>
+                                    <Text style={{ fontWeight: 'bold', fontSize: 20 }}>{item.Price * item.Quantity} DT</Text>
+                                    <View style={{ flexDirection: 'row', alignItems: 'center' }}>
+                                        <TouchableOpacity onPress={() => this.onChangeQual(i, false)}>
+                                            <Ionicons name="remove-circle" size={30} color={'#D05A0B'} />
+                                        </TouchableOpacity>
+                                        <Text style={{ paddingHorizontal: 8, fontWeight: 'bold' }}>{item.Quantity}</Text>
+                                        <TouchableOpacity onPress={() => this.onChangeQual(i, true)}>
+                                            <Ionicons name="add-circle" size={30} color={'#D05A0B'} />
+                                        </TouchableOpacity>
+                                    </View>
+                                </View>
+                            </View>
+                        </View>
+
+                    </View>
+
+                    
+                )
+ 
+        })
+
+        
+    }
+    Verify() {
+
+        if (this.state.dataCart.length > 0) {
+            
+            return this.notEmpty()
+        } else {
+            
+            return this.isEmpty()
+        }
+  
+
+    }
+
 
 
     render() {
@@ -113,65 +196,13 @@ export default  class Panier extends Component {
 
 
                     {
-
-                        this.state.dataCart.map((item, i) => {
-
-
-
-                          
-
-                            return (
-
-                                <View style={{ flex: 1, }} key={i}>
-
-                                    <View style={{ width: width - 20, margin: 10, backgroundColor: 'transparent', flexDirection: 'row', borderBottomWidth: 2, borderColor: "#cccccc", paddingBottom: 10 }}>
-                                        <Image resizeMode={"contain"} style={{ width: width / 3, height: width / 3 }} source={require("../assets/Tacos-M.png")} />
-                                        <View style={{ flex: 1, backgroundColor: 'transparent', padding: 10, justifyContent: "space-between" }}>
-                                            <View>
-                                                <View style={{ flexDirection: 'row', justifyContent: 'space-between' }}>
-                                                    <Text style={{ fontWeight: "bold", fontSize: 20 }}>Tacos { item.Viande}</Text>
-                                                    <TouchableOpacity onPress={() => this.removeItem(i)}>
-                                                        <Ionicons name="close-sharp" size={30} color={'#D05A0B'} />
-                                                    </TouchableOpacity>
-                                                </View>
-                                                
-                                                <Text>Sauce:{ item.Sauce}</Text>
-                                                <Text>Taille:{item.taille}</Text>
-                                                <Text>Extra:{item.Extra}</Text>
-                                                <Text>Boissons:{item.Boisson}</Text>
-                                                <Text>Supplements:{item.Supplements}</Text>
-                                            </View>
-                                            <View style={{ flexDirection: 'row', justifyContent: 'space-between' }}>
-                                                <Text style={{ fontWeight: 'bold',  fontSize: 20 }}>{item.Price * item.Quantity} DT</Text>
-                                                <View style={{ flexDirection: 'row', alignItems: 'center' }}>
-                                                    <TouchableOpacity onPress={() => this.onChangeQual(i, false)}>
-                                                        <Ionicons name="remove-circle" size={30} color={'#D05A0B'} />
-                                                    </TouchableOpacity>
-                                                    <Text style={{ paddingHorizontal: 8, fontWeight: 'bold' }}>{item.Quantity}</Text>
-                                                    <TouchableOpacity onPress={() => this.onChangeQual(i, true)}>
-                                                        <Ionicons name="add-circle" size={30} color={'#D05A0B'} />
-                                                    </TouchableOpacity>
-                                                </View>
-                                            </View>
-                                        </View>
-                                    </View>
-
-                                </View>
-
-
-                            )
-                        })
+                        this.Verify()
+                        
                     }
 
 
 
-
-
-
-
-
-
-                    <TouchableOpacity style={styles.btnAjouteAutre} onPress={() => this.removeItem()}>
+                    <TouchableOpacity style={styles.btnAjouteAutre} onPress={() => this.props.navigation.navigate("Commande")}>
                         <Text style={{ color: 'white', alignSelf: 'center', fontSize: normalize(17), }}> Ajouter autre  </Text>
                     </TouchableOpacity>
                     <View style={{ flexDirection: 'row', marginTop: normalize(45), justifyContent: 'space-between' }}>
@@ -184,25 +215,29 @@ export default  class Panier extends Component {
 
                     <View style={{ flexDirection: 'row', marginTop: normalize(17), justifyContent: 'space-between' }}>
                         <Text style={{ color: '#667C8A', fontSize: normalize(14), marginLeft: normalize(10) }}>Frais de livraison </Text>
-                        <Text style={{}}>{this.state.frais} DT</Text>
+                        <Text style={{}}>{this.state.dataCart.length > 0 ? "1" : "0"
+
+                        } DT</Text>
                     </View>
 
                     <View style={{ flexDirection: 'row', marginTop: normalize(17), justifyContent: 'space-between' }}>
                         <Text style={{ color: '#667C8A', fontSize: normalize(14), marginLeft: normalize(10) }}>Tax</Text>
 
-                        <Text style={{}}>{this.state.tax} DT</Text>
+                        <Text style={{}}>{this.state.dataCart.length>0 ? "3" : "0"
+                           
+                        } DT</Text>
 
 
                     </View>
                     <View style={{ flexDirection: 'row', marginTop: normalize(27), marginLeft: normalize(10), justifyContent: 'space-between' }}>
                         <Text style={{ color: 'black', fontSize: normalize(18), }}>Total</Text>
 
-                        <Text style={{}}>{this.onLoadTotal()} DT</Text>
+                        <Text style={{}}>{this.state.dataCart.length == 0 ? "0" : this.onLoadTotal()} DT</Text>
 
 
                     </View>
                     <View style={styles.btnProceder}>
-                        <TouchableOpacity onPress={() => this.props.navigation.navigate('Paiment')}>
+                        <TouchableOpacity onPress={() => this.nav()}>
                             <Text style={{ alignSelf: 'center', color: 'white' }}>Procéder avec le payement</Text>
                         </TouchableOpacity>
                     </View>
@@ -217,6 +252,15 @@ export default  class Panier extends Component {
             </View>
 
         );
+    }
+
+    nav() {
+        if (this.state.dataCart == 0) {
+            alert("Votre panier est vide")
+        } else {
+            this.props.navigation.navigate('Paiment')
+        }
+
     }
 
 }

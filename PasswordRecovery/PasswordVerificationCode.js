@@ -3,14 +3,30 @@ import normalize from 'react-native-normalize';
 import { StyleSheet, Text, View, Image, TouchableOpacity, TextInput, Alert } from 'react-native';
 
 export default class PasswordVerificationCode extends Component {
+    componentDidMount() {
+        this._unsubscribe = this.props.navigation.addListener('focus', () => {
+            var code = this.props.route.params.verifyCode;
+            if (this.state.verifyCode != code) {
+                this.setState({ verifyCode: code });
+            }
+        });
+        console.log("verifycode:", this.state.verifyCode)
+    }
+
+    componentWillUnmount() {
+        this._unsubscribe();
+    }
     constructor(props) {
         super(props)
+        var code = this.props.route.params.verifyCode;
         this.state = {
 
             pin1: "",
             pin2: "",
             pin3: "",
             pin4: "",
+            codeActivationFromClient: '',
+            verifyCode: code
         }
     }
     onFocus() {
@@ -112,8 +128,7 @@ export default class PasswordVerificationCode extends Component {
 
 
                 </View>
-                <TouchableOpacity activeOpacity={0.8} style={styles.btnContainer} onPress={() =>
-                    this.props.navigation.navigate('NewPassword')}>
+                <TouchableOpacity activeOpacity={0.8} style={styles.btnContainer} onPress={() => this.verifying()}>
                     <Text style={{ color: 'white', fontSize:  normalize(15), fontWeight: 'bold', letterSpacing: 0.7, fontFamily: 'arial' }} >Suivant</Text>
 
                 </TouchableOpacity>
@@ -124,6 +139,24 @@ export default class PasswordVerificationCode extends Component {
             </View>
         );
 
+    }
+    verifying = (codeActivationFromClient) => {
+
+        this.setState({ codeActivationFromClient: this.state.pin1 + this.state.pin2 + this.state.pin3 + this.state.pin4 }, this.verify)
+
+
+    }
+    verify = () => {
+
+        console.log("codeActivationFromClient : ", this.state.codeActivationFromClient)
+        if (this.state.verifyCode == this.state.codeActivationFromClient) {
+            console.log("code correct !")
+            this.props.navigation.navigate("NewPassword")
+        }
+        else {
+            console.log("Verify code is not correct!");
+            alert("Verify code is not correct!")
+        }
     }
 
 }

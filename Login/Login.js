@@ -115,6 +115,8 @@ const Login = ({ navigation }) => {
             .then(res => res.json())
             .then(async (data) => {
                 try {
+                    console.log("Logged in !")
+                   console.log(data)
                     await AsyncStorage.setItem('token', data.token)
                     navigation.replace("MyTabs")
                 } catch (e) {
@@ -123,7 +125,7 @@ const Login = ({ navigation }) => {
                    
                 }
             })
-        console.log("Logged in !")
+        
     }
         return (
 

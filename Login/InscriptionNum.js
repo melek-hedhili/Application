@@ -35,18 +35,23 @@ const InscriptionNum = ({ navigation }) => {
             .then(res => res.json())
             .then(async (data) => {
                 console.log(data)
-
+                if (data.error) {
+                    alert("email existe")
+                } else if (data.notexist) {
+                    console.log("email doesnt existe")
+                    try {
+                        AsyncStorage.setItem('STORAGE_MAIL', JSON.stringify(email));
+                    } catch (error) {
+                        console.log(error)
+                        console.log("failed")
+                    }
+                    console.log("email de asyncstorage envoyee")
+                    navigation.navigate("InputOTPScreen", { verifyCode: verifyCode })
+                }
 
             })
-        console.log("email envoyé")
-        try {
-         AsyncStorage.setItem('STORAGE_MAIL', JSON.stringify(email));
-        } catch (error) {
-            console.log(error)
-            console.log("failed")
-        }
-        console.log("email de asyncstorage envoyee")
-        navigation.navigate("InputOTPScreen", { verifyCode: verifyCode })
+        
+
     }
 
     const validate = () => {

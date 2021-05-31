@@ -40,67 +40,67 @@ const Navigation = () => {
         detectLogin()
     }, [])
 
-        return (
-            <NavigationContainer>
-                <Stack.Navigator>
-                    {
-                        isLoggedin == null ?
-                            (<Stack.Screen name="Splash" component={Splash} options={{ headerShown: false }} />)
-                            : isLoggedin == true ?
-                                (<>
-                                    <Stack.Screen name="Splash" component={Splash} options={{ headerShown: false }} />
-                                    <Stack.Screen name="MyTabs" component={MyTabs} options={{ headerShown: false }} />
-                                    <Stack.Screen name="OnBoarding" component={OnBoarding} options={{ headerShown: false }} />
-                                    <Stack.Screen name="Login" component={Login} options={{ headerShown: false }} />
-                                    <Stack.Screen name="InscriptionNum" component={InscriptionNum} options={{ headerShown: false }} />
-                                    <Stack.Screen name="InputOTPScreen" component={InputOTPScreen} options={{ headerShown: false }} />
-                                    <Stack.Screen name="Recovery" component={Recovery} options={{ headerShown: false }} />
-                                    <Stack.Screen name="Signup" component={Signup} options={{ headerShown: false }} />
-                                    <Stack.Screen name="PasswordVerificationCode" component={PasswordVerificationCode} options={{ headerShown: false }} />
-                                    <Stack.Screen name="NewPassword" component={NewPassword} options={{ headerShown: false }} />
-                                    <Stack.Screen name="Commande" component={Commande} options={{ headerShown: false }} />
-                                    <Stack.Screen name="Panier" component={Panier} options={{ headerShown: false }} />
-                                    <Stack.Screen name="Paiment" component={Paiment} options={{ headerShown: false }} />
-                                    <Stack.Screen name="Checkout" component={Checkout} options={{ headerShown: false }} />
-                                    <Stack.Screen name="Carte" component={Carte} options={{ headerShown: false }} />
-                                    <Stack.Screen name="Maps" component={Maps} options={{ headerShown: false }}/>
-                                    
-                                </>)
-                                : (<>
-                                    <Stack.Screen name="Splash" component={Splash} options={{ headerShown: false }} />
-                                    <Stack.Screen name="OnBoarding" component={OnBoarding} options={{ headerShown: false }} />
-                                    <Stack.Screen name="Login" component={Login} options={{ headerShown: false }} />
-                                    <Stack.Screen name="MyTabs" component={MyTabs} options={{ headerShown: false }} />
-                                    <Stack.Screen name="Commande" component={Commande} options={{ headerShown: false }} />
-                                    <Stack.Screen name="Panier" component={Panier} options={{ headerShown: false }} />
-                                    <Stack.Screen name="Paiment" component={Paiment} options={{ headerShown: false }} />
-                                    <Stack.Screen name="Checkout" component={Checkout} options={{ headerShown: false }} />
-                                    <Stack.Screen name="Carte" component={Carte} options={{ headerShown: false }} />
-                                    <Stack.Screen name="Maps" component={Maps} options={{ headerShown: false }} />
-                                    <Stack.Screen name="InscriptionNum" component={InscriptionNum} options={{ headerShown: false }} />
-                                    <Stack.Screen name="InputOTPScreen" component={InputOTPScreen} options={{ headerShown: false }} />
-                                    <Stack.Screen name="Recovery" component={Recovery} options={{ headerShown: false }} />
-                                    <Stack.Screen name="Signup" component={Signup} options={{ headerShown: false }} />
-                                    <Stack.Screen name="PasswordVerificationCode" component={PasswordVerificationCode} options={{ headerShown: false }} />
-                                    <Stack.Screen name="NewPassword" component={NewPassword} options={{ headerShown: false }} />
-                                    </>
-                                    )
+    return (
+        <NavigationContainer>
+            <Stack.Navigator>
+                {
+                    isLoggedin == null ?
+                        (<Stack.Screen name="Splash" component={Splash} options={{ headerShown: false }} />)
+                        : isLoggedin == true ?
+                            (<>
+                                <Stack.Screen name="Splash" component={Splash} options={{ headerShown: false }} />
+                                <Stack.Screen name="MyTabs" component={MyTabs} options={{ headerShown: false }} />
+                                <Stack.Screen name="OnBoarding" component={OnBoarding} options={{ headerShown: false }} />
+                                <Stack.Screen name="Login" component={Login} options={{ headerShown: false }} />
+                                <Stack.Screen name="InscriptionNum" component={InscriptionNum} options={{ headerShown: false }} />
+                                <Stack.Screen name="InputOTPScreen" component={InputOTPScreen} options={{ headerShown: false }} />
+                                <Stack.Screen name="Recovery" component={Recovery} options={{ headerShown: false }} />
+                                <Stack.Screen name="Signup" component={Signup} options={{ headerShown: false }} />
+                                <Stack.Screen name="PasswordVerificationCode" component={PasswordVerificationCode} options={{ headerShown: false }} />
+                                <Stack.Screen name="NewPassword" component={NewPassword} options={{ headerShown: false }} />
+                                <Stack.Screen name="Commande" component={Commande} options={{ headerShown: false }} />
+                                <Stack.Screen name="Panier" component={Panier} options={{ headerShown: false }} />
+                                <Stack.Screen name="Paiment" component={Paiment} options={{ headerShown: false }} />
+                                <Stack.Screen name="Checkout" component={Checkout} options={{ headerShown: false }} />
+                                <Stack.Screen name="Carte" component={Carte} options={{ headerShown: false }} />
+                                <Stack.Screen name="Maps" component={Maps} options={{ headerShown: false }} />
+
+                            </>)
+                            : (<>
+                                <Stack.Screen name="Splash" component={Splash} options={{ headerShown: false }} />
+                                <Stack.Screen name="OnBoarding" component={OnBoarding} options={{ headerShown: false }} />
+                                <Stack.Screen name="Login" component={Login} options={{ headerShown: false }} />
+                                <Stack.Screen name="MyTabs" component={MyTabs} options={{ headerShown: false }} />
+                                <Stack.Screen name="Commande" component={Commande} options={{ headerShown: false }} />
+                                <Stack.Screen name="Panier" component={Panier} options={{ headerShown: false }} />
+                                <Stack.Screen name="Paiment" component={Paiment} options={{ headerShown: false }} />
+                                <Stack.Screen name="Checkout" component={Checkout} options={{ headerShown: false }} />
+                                <Stack.Screen name="Carte" component={Carte} options={{ headerShown: false }} />
+                                <Stack.Screen name="Maps" component={Maps} options={{ headerShown: false }} />
+                                <Stack.Screen name="InscriptionNum" component={InscriptionNum} options={{ headerShown: false }} />
+                                <Stack.Screen name="InputOTPScreen" component={InputOTPScreen} options={{ headerShown: false }} />
+                                <Stack.Screen name="Recovery" component={Recovery} options={{ headerShown: false }} />
+                                <Stack.Screen name="Signup" component={Signup} options={{ headerShown: false }} />
+                                <Stack.Screen name="PasswordVerificationCode" component={PasswordVerificationCode} options={{ headerShown: false }} />
+                                <Stack.Screen name="NewPassword" component={NewPassword} options={{ headerShown: false }} />
+                            </>
+                            )
 
 
 
-                    }
-                    
-
-                    
-                    
-
-                    <Stack.Screen name="Rate"component={Rate}options={{ headerShown: false }}/>
+                }
 
 
-                </Stack.Navigator>
-            </NavigationContainer>
-          
-        );
+
+
+
+                <Stack.Screen name="Rate" component={Rate} options={{ headerShown: false }} />
+
+
+            </Stack.Navigator>
+        </NavigationContainer>
+
+    );
 
 }
 

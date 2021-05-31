@@ -5,9 +5,7 @@ import { createStackNavigator } from '@react-navigation/stack';
 import { StyleSheet, Text, View, Image, TouchableOpacity, TextInput } from 'react-native';
 import normalize from 'react-native-normalize';
 import AsyncStorage from '@react-native-community/async-storage';
-
-
-
+import Feather from 'react-native-vector-icons/Feather';
 
 const Signup = ({ navigation }) => {
 
@@ -16,6 +14,7 @@ const Signup = ({ navigation }) => {
     const [nom, setNom] = useState('');
     const [prenom, setPrenom] = useState('');
     const [telephone, setTelephone] = useState("")
+    const hasNumber = /\d/; 
 
     
 
@@ -46,32 +45,40 @@ const Signup = ({ navigation }) => {
 
     const SendUserInfo = async () => {
         
+        if (password.length >= 6 && hasNumber.test(password) == true) {
 
-        fetch("http://10.0.2.2:4000/signup", {
-            method: "POST",
-            headers: {
-                'Content-Type': 'application/json'
-            },
-            body:JSON.stringify({
-                "nom": nom,
-                "prenom": prenom,
-                "email": new_email,
-                "password": password,
-                "telephone": telephone
-              
+            fetch("http://10.0.2.2:4000/signup", {
+                method: "POST",
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({
+                    "nom": nom,
+                    "prenom": prenom,
+                    "email": new_email,
+                    "password": password,
+                    "telephone": telephone
+
+                })
             })
-        })
-            .then(res => res.json())
-            .then(async(data) => {
-                try {
-                    
-                    navigation.navigate('Login')
-                } catch (e) {
-                    console.log('data:', data)
-                    console.log(e)
-                }
-            })
-        console.log("user added")
+                .then(res => res.json())
+                .then(async (data) => {
+                    try {
+
+                        navigation.navigate('Login')
+                    } catch (e) {
+                        console.log('data:', data)
+                        console.log(e)
+                    }
+                })
+            console.log("user added")
+        } else {
+            alert("Veuillez verifier les conditions pour  votre mot de passe")
+            console.log("has number ?",hasNumber.test(password))
+            console.log(password.length)
+        }
+
+
     }
 
     return (
@@ -111,17 +118,15 @@ const Signup = ({ navigation }) => {
                 
 
                 <View style={{ flexDirection: "row", backgroundColor: '#F5F5F8', marginTop: normalize(16), marginLeft: normalize(20) }}>
-                    <Image style={styles.tinyLogo}
-                        source={require('../assets/verif.png')} />
-                    <Text style={{ color: "#9FA5C0", fontSize: normalize(15), fontFamily: 'arial', fontWeight: 'bold' }}>Au moins 6 characteres</Text>
+                <Feather name="check-circle" size={normalize(26)} style={{ color: password.length >= 6 ? "#27AE60" : "#9FA5C0" }} />
+                <Text style={{ color: password.length >= 6 ? "#2E3E5C" : "#9FA5C0", fontSize: normalize(15), fontFamily: 'arial', fontWeight: 'bold' }}>Au moins 6 characteres</Text>
                 </View>
                 <View style={{ flexDirection: "row", backgroundColor: '#F5F5F8', marginTop: normalize(10), marginLeft: normalize(20)}}>
-                <Image style={styles.tinyLogo}
-                    source={require('../assets/verif.png')} />
-                    <Text style={{ color: "#9FA5C0", fontSize: normalize(15), fontFamily: 'arial', fontWeight: 'bold' }}>Contient au moins un chiffre</Text>
+                <Feather name="check-circle" size={normalize(26)} style={{ color: hasNumber.test(password) == true ? "#27AE60" : "#9FA5C0" }} />
+                <Text style={{ color: hasNumber.test(password) == true ? "#2E3E5C" : "#9FA5C0", fontSize: normalize(15), fontFamily: 'arial', fontWeight: 'bold', marginLeft: normalize(10) }}>Contient au moins un chiffre</Text>
             </View>
             <TouchableOpacity activeOpacity={0.8} style={styles.btnContainer} onPress={() => { SendUserInfo() }}>
-                    <Text style={{ color: 'white', fontSize: normalize(15), fontWeight: 'bold', letterSpacing: 0.7, fontFamily: 'arial' }} >S'inscrire</Text>
+                <Text style={{ color: 'white', fontSize: normalize(15), fontWeight: 'bold', letterSpacing: 0.7, fontFamily: 'arial', marginLeft: normalize(10)  }} >S'inscrire</Text>
 
             </TouchableOpacity>
 

@@ -1,9 +1,55 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { StyleSheet, Text, View, Image, TouchableOpacity,  TextInput, Alert } from 'react-native';
 import Feather from 'react-native-vector-icons/Feather';
 import normalize from 'react-native-normalize';
+import AsyncStorage from '@react-native-community/async-storage';
 const Recovery = ({ navigation }) => {
+    const [email, setEmail] = useState("")
+    const renderRandom = () => {
+        const min = 1000;
+        const max = 9999;
+        const random = (Math.floor(Math.random() * (max - min + 1)) + min)
+        console.log(random)
+        return random
 
+    }
+    const VerificationMail= ()=> {
+        const verifyCode = renderRandom()
+
+        fetch("http://10.0.2.2:4000/reset", {
+            method: "POST",
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({
+
+                "email": email,
+                "verifycode": verifyCode,
+
+            })
+        })
+            .then(res => res.json())
+            .then((data) => {
+                console.log("dattta: ", data)
+             
+                if (data.error) {
+                    alert("email n'existe pas")
+                } else if (data.exist){
+                        console.log("email existe")
+                        navigation.navigate("PasswordVerificationCode", { verifyCode: verifyCode })
+                    }
+
+            }).catch(err => {
+                console.log(err)
+            })
+        try {
+            AsyncStorage.setItem('RECOVERY_MAIL', JSON.stringify(email));
+        } catch (error) {
+            console.log(error)
+            console.log("failed RECOVERY_MAIL" )
+        }
+
+    }
     return (
         <View style={styles.container}>
             <Text style={styles.text}>Recuperation de mot de passe</Text>
@@ -13,11 +59,12 @@ const Recovery = ({ navigation }) => {
                 style={styles.inputContainer}
                 placeholder="Votre mail"
                 placeholderTextColor={'#9FA5C0'}
+                value={email}
+                onChangeText={(text) => setEmail(text)}
                 
             />
             <Feather name="mail" color={'#2E3E5C'} size={normalize(26)} style={{ alignSelf: 'flex-start', marginTop: normalize(-40), marginLeft: normalize(48), }} />
-            <TouchableOpacity activeOpacity={0.8} style={styles.btnContainer} onPress={() =>
-                navigation.navigate('PasswordVerificationCode')}>
+            <TouchableOpacity activeOpacity={0.8} style={styles.btnContainer} onPress={() => { VerificationMail() }}>
                 <Text style={{ color: 'white', fontSize:  normalize(15), fontWeight: 'bold', letterSpacing: 0.7, fontFamily: 'arial' }} >Envoyer</Text>
 
             </TouchableOpacity>

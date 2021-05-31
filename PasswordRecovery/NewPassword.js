@@ -4,7 +4,9 @@ import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
 import { StyleSheet, Text, View, Image, TouchableOpacity, TextInput } from 'react-native';
 import SimpleLineIcons from 'react-native-vector-icons/SimpleLineIcons';
+import Feather from 'react-native-vector-icons/Feather';
 import normalize from 'react-native-normalize';
+import AsyncStorage from '@react-native-community/async-storage';
 
 export default class NewPassword extends Component {
     constructor(props) {
@@ -12,8 +14,32 @@ export default class NewPassword extends Component {
         this.state = {
 
             pin1: "",
-
+            password: '',
+            email: "",
+            recovery_email: "",
+            hasNumber :/\d/
         }
+    }
+    componentDidMount() {
+        
+        try {
+            AsyncStorage.getItem('RECOVERY_MAIL').then((data) => {
+                if (data !== null) {
+                    console.log("RECOVERY_MAIL",data)
+                    this.setState({email:data})
+                    const new_email = this.state.email.replace(/"/g, '');
+                    this.setState({ recovery_email: new_email })
+                    console.log("recovery_email", this.state.recovery_email)
+                }
+
+            })
+
+        } catch (error) {
+            console.log("no data found")
+        }
+
+    
+
     }
 
     onFocus() {
@@ -27,12 +53,51 @@ export default class NewPassword extends Component {
             borderColor: '#FFFFFF'
         })
     }
+    PostData = async () => {
+       
 
+        if (this.state.password.length >= 6 && this.state.hasNumber.test(this.state.password) == true) {
+
+
+            fetch("http://10.0.2.2:4000/new-password", {
+                method: "post",
+                headers: {
+                    "Content-Type": "application/json"
+                },
+                body: JSON.stringify({
+                    "password": this.state.password,
+                    "email": this.state.recovery_email
+
+
+                })
+            }).then(res => res.json())
+                .then(async (data) => {
+                    console.log(data)
+                    if (data.error) {
+                        alert("error")
+                    }
+                    else {
+                        await AsyncStorage.setItem('token', data.token)
+                        alert("mot de passe changee")
+                        this.props.navigation.replace("Login")
+                    }
+                }).catch(err => {
+                    console.log(err)
+                })
+
+        } else {
+            alert("Veuillez verifier les conditions pour changer votre mot de passe")
+            console.log("has number ?", this.state.hasNumber.test(this.state.password))
+            console.log(this.state.password.length)
+        }
+        
+    }
 
 
 
     render() {
         const { pin1 } = this.state
+        const hasNumber = /\d/; 
         return (
 
             <View style={styles.container}>
@@ -51,7 +116,7 @@ export default class NewPassword extends Component {
                         backgroundColor: '#FFFFFF',
                         alignItems: 'center',
                         alignSelf: 'center',
-                        textAlign:'center',
+                        textAlign: 'center',
                         justifyContent: 'center',
                         //resizeMode: 'contain',
                         marginTop: normalize(58),
@@ -60,29 +125,26 @@ export default class NewPassword extends Component {
                         borderColor: '#D0DBEA',
 
 
-                        
+
                     }}
-                    onChangeText={(pin1) => {
-                        this.setState({ pin1: pin1 })
-                    }}
+                    value={this.state.password}
+                    onChangeText={(text) => { this.setState({ password: text }) }}
                     secureTextEntry={true}
                     placeholder="Mot de passe" />
                 <SimpleLineIcons name="lock" color={'#2E3E5C'} size={normalize(26)} style={{ alignSelf: 'flex-start', marginTop: normalize(-42), marginLeft: normalize( 48), }} />
                 <Text style={{ color: "#3E5481", fontSize: normalize(17), fontFamily: 'arial', fontWeight: 'bold', marginTop: 30, marginLeft: normalize(20) }}>Votre mot de passe doit avoir :</Text>
 
 
-                <View style={{ flexDirection: "row", backgroundColor: '#F5F5F8', marginTop: 16, marginLeft: normalize( 20) }}>
-                    <Image style={styles.tinyLogo}
-                        source={require('../assets/verif.png')} />
-                    <Text style={{ color: "#9FA5C0", fontSize: normalize(15), fontFamily: 'arial', fontWeight: 'bold' }}>Au moins 6 characteres</Text>
+                <View style={{ flexDirection: "row", backgroundColor: '#F5F5F8', marginTop: 16, marginLeft: normalize(20) }}>
+                    <Feather name="check-circle" size={normalize(26)} style={{ color: this.state.password.length >= 6 ? "#27AE60" : "#9FA5C0" }} />
+                    <Text style={{ color: this.state.password.length >= 6 ? "#2E3E5C" : "#9FA5C0", fontSize: normalize(15), fontFamily: 'arial', fontWeight: 'bold', marginLeft: normalize(10) }}>Au moins 6 characteres</Text>
                 </View>
                 <View style={{ flexDirection: "row", backgroundColor: '#F5F5F8', marginTop: 10, marginLeft: normalize(20) }}>
-                    <Image style={styles.tinyLogo}
-                        source={require('../assets/verif.png')} />
-                    <Text style={{ color: "#9FA5C0", fontSize: normalize( 15), fontFamily: 'arial', fontWeight: 'bold' }}>Contient au moins un chiffre</Text>
+                    <Feather name="check-circle" size={normalize(26)} style={{ color: hasNumber.test(this.state.password)==true ? "#27AE60": "#9FA5C0" }} />
+                    <Text style={{ color: hasNumber.test(this.state.password) == true ? "#2E3E5C" : "#9FA5C0", fontSize: normalize(15), fontFamily: 'arial', fontWeight: 'bold', marginLeft: normalize(10) }}>Contient au moins un chiffre</Text>
                 </View>
                 <TouchableOpacity activeOpacity={0.8} style={styles.btnContainer}>
-                    <Text style={{ color: 'white', fontSize: normalize(15), fontWeight: 'bold', letterSpacing: 0.7, fontFamily: 'arial' }} >Terminer</Text>
+                    <Text style={{ color: 'white', fontSize: normalize(15), fontWeight: 'bold', letterSpacing: 0.7, fontFamily: 'arial' }} onPress={() => this.PostData()}>Terminer</Text>
 
                 </TouchableOpacity>
 

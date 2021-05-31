@@ -23,12 +23,13 @@ import Login from './Login/Login';
 import Signup from './Login/Signup';
 import InscriptionNum from './Login/InscriptionNum';
 import InputOTPScreen from './PasswordRecovery/InputOTPScreen';
+import NewPassword from './PasswordRecovery/NewPassword';
 
 
 class App extends React.Component {
     render() {
         return (
-            <Navigation/>
+            <Navigation />
         );
     }
 }
