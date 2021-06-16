@@ -5,6 +5,9 @@ import normalize from 'react-native-normalize';
 import AsyncStorage from '@react-native-community/async-storage';
 const Recovery = ({ navigation }) => {
     const [email, setEmail] = useState("")
+    const [focused, setFocused] = useState(false);
+    handleFocus = () => setFocused(true)
+    handleBlur = () => setFocused(false)
     const renderRandom = () => {
         const min = 1000;
         const max = 9999;
@@ -16,7 +19,7 @@ const Recovery = ({ navigation }) => {
     const VerificationMail= ()=> {
         const verifyCode = renderRandom()
 
-        fetch("http://10.0.2.2:4000/reset", {
+        fetch("http://192.168.1.6:4000/reset", {
             method: "POST",
             headers: {
                 'Content-Type': 'application/json'
@@ -35,8 +38,9 @@ const Recovery = ({ navigation }) => {
                 if (data.error) {
                     alert("email n'existe pas")
                 } else if (data.exist){
-                        console.log("email existe")
-                        navigation.navigate("PasswordVerificationCode", { verifyCode: verifyCode })
+                    console.log("email existe")
+
+                    navigation.navigate("PasswordVerificationCode", { verifyCode: verifyCode, email: email })
                     }
 
             }).catch(err => {
@@ -56,7 +60,24 @@ const Recovery = ({ navigation }) => {
             <Text style={{ textAlign: 'center', color: "#9FA5C0", fontSize: normalize(15), fontFamily: 'arial', fontWeight: 'bold', marginTop: normalize(20), letterSpacing: 1, lineHeight: normalize(25)}}>Entrer votre email pour remettre {'\n' }le mot de passe</Text>
             
             <TextInput
-                style={styles.inputContainer}
+                onFocus={handleFocus}
+                onBlur={handleBlur}
+                style={{
+                    height: normalize(56),
+                    width: normalize(327),
+                    borderRadius: 30,
+                    flexDirection: 'column',
+                    backgroundColor: '#FFFFFF',
+                    alignItems: 'center',
+                    alignSelf: 'center',
+                    justifyContent: 'center',
+                    //resizeMode: 'contain',
+                    marginTop: normalize(54),
+                    paddingHorizontal: normalize(20),
+                    textAlign: 'center',
+                    borderColor: focused ? '#CB5C17' : "#D0DBEA",
+                    borderWidth: 1,
+                }}
                 placeholder="Votre mail"
                 placeholderTextColor={'#9FA5C0'}
                 value={email}

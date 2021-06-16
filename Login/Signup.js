@@ -6,6 +6,7 @@ import { StyleSheet, Text, View, Image, TouchableOpacity, TextInput } from 'reac
 import normalize from 'react-native-normalize';
 import AsyncStorage from '@react-native-community/async-storage';
 import Feather from 'react-native-vector-icons/Feather';
+import Toast from 'react-native-toast-message';
 
 const Signup = ({ navigation }) => {
 
@@ -16,7 +17,23 @@ const Signup = ({ navigation }) => {
     const [telephone, setTelephone] = useState("")
     const hasNumber = /\d/; 
 
-    
+    const [focusednom, setFocusednom] = useState(false);
+    const [focusedprenom, setFocusedprenom] = useState(false);
+    const [focusednum, setFocusednum] = useState(false);
+    const [focusedpass, setFocusedpass] = useState(false);
+
+
+    const handleFocusNom = () => setFocusednom(true)
+    const handleBlurNom = () => setFocusednom(false)
+
+    const handleFocusPrenom = () => setFocusedprenom(true)
+     const handleBlurPrenom = () => setFocusedprenom(false)
+
+    const handleFocusNum = () => setFocusednum(true)
+    const handleBlurNum = () => setFocusednum(false)
+
+    const handleFocusPassword = () => setFocusedpass(true)
+    const handleBlurPassword = () => setFocusedpass(false)
 
     const UserTelephone = async () => {
 
@@ -47,7 +64,7 @@ const Signup = ({ navigation }) => {
         
         if (password.length >= 6 && hasNumber.test(password) == true) {
 
-            fetch("http://10.0.2.2:4000/signup", {
+            fetch("http://192.168.1.6:4000/signup", {
                 method: "POST",
                 headers: {
                     'Content-Type': 'application/json'
@@ -85,41 +102,107 @@ const Signup = ({ navigation }) => {
         
             <View style={styles.container}>
             
-                <Text style={styles.text}>Bienvenu!</Text>
+                <Text style={styles.text}>Bienvenu</Text>
 
                 <TextInput
-                    style={styles.input}
+                style={{
+                    height: normalize(56),
+                    width: normalize(327),
+                    borderRadius: 30,
+                    flexDirection: 'column',
+                    backgroundColor: '#FFFFFF',
+                    alignItems: 'center',
+                    alignSelf: 'center',
+                    justifyContent: 'center',
+                    //resizeMode: 'contain',
+                    marginTop: normalize(44),
+                    paddingHorizontal: normalize(20),
+                    borderWidth: 1,
+                    borderColor: focusednom ? '#CB5C17' : "#D0DBEA",
+                }}
                     placeholder="Nom "
                     placeholderTextColor={'#9FA5C0'}
                     value={nom}
-                    onChangeText={(text)=>setNom(text)}
-                />
+                onChangeText={(text) => setNom(text)}
+                onFocus={handleFocusNom}
+                onBlur={handleBlurNom}
+            />
+
+
                 <TextInput
-                    style={styles.inputContainer}
+                style={{
+                    height: normalize(56),
+                    width: normalize(327),
+                    borderRadius: 30,
+                    flexDirection: 'column',
+                    backgroundColor: '#FFFFFF',
+                    alignItems: 'center',
+                    alignSelf: 'center',
+                    justifyContent: 'center',
+                    //resizeMode: 'contain',
+                    marginTop: normalize(16),
+                    paddingHorizontal: normalize(20),
+                    borderWidth: 1,
+                    borderColor: focusedprenom ? '#CB5C17' : "#D0DBEA",
+                }}
                     placeholder="Prenom"
                     placeholderTextColor={'#9FA5C0'}
                     value={prenom}
-                    onChangeText={(text) => setPrenom(text)}/>
+                onChangeText={(text) => setPrenom(text)}
+                onFocus={handleFocusPrenom}
+                onBlur={handleBlurPrenom}/>
                 <TextInput
-                    style={styles.inputContainer}
+                style={{
+                    height: normalize(56),
+                    width: normalize(327),
+                    borderRadius: 30,
+                    flexDirection: 'column',
+                    backgroundColor: '#FFFFFF',
+                    alignItems: 'center',
+                    alignSelf: 'center',
+                    justifyContent: 'center',
+                    //resizeMode: 'contain',
+                    marginTop: normalize(16),
+                    paddingHorizontal: normalize(20),
+                    borderWidth: 1,
+                    borderColor: focusednum ? '#CB5C17' : "#D0DBEA",
+                }}
                     placeholder="Telephone "
                     placeholderTextColor={'#9FA5C0'}
                 value={telephone}
-                onChangeText={(text) => setTelephone(text)} />
+                onChangeText={(text) => setTelephone(text)}
+                onFocus={handleFocusNum}
+                onBlur={handleBlurNum}/>
 
                 <TextInput
-                    style={styles.inputContainerPassword}
+                style={{
+                    height: normalize(56),
+                    width: normalize(327),
+                    borderRadius: 30,
+                    flexDirection: 'column',
+                    backgroundColor: '#FFFFFF',
+                    alignItems: 'center',
+                    alignSelf: 'center',
+                    justifyContent: 'center',
+                    //resizeMode: 'contain',
+                    marginTop: normalize(16),
+                    paddingHorizontal: normalize(20),
+                    borderWidth: 1,
+                    borderColor: focusedpass ? '#CB5C17' : "#D0DBEA",
+                }}
                     secureTextEntry={true}
                     placeholder="Mot de passe"
                     placeholderTextColor={'#9FA5C0'}
                     value={password}
-                    onChangeText={(text) => setPassword(text)} />
+                onChangeText={(text) => setPassword(text)}
+                onFocus={handleFocusPassword}
+                onBlur={handleBlurPassword}/>
                 <Text style={{ color: "#3E5481", fontSize: normalize(17), fontFamily: 'arial', fontWeight: 'bold', marginTop: normalize(78), marginLeft: normalize(20 )}}>Votre mot de passe doit avoir :</Text>
                 
 
                 <View style={{ flexDirection: "row", backgroundColor: '#F5F5F8', marginTop: normalize(16), marginLeft: normalize(20) }}>
                 <Feather name="check-circle" size={normalize(26)} style={{ color: password.length >= 6 ? "#27AE60" : "#9FA5C0" }} />
-                <Text style={{ color: password.length >= 6 ? "#2E3E5C" : "#9FA5C0", fontSize: normalize(15), fontFamily: 'arial', fontWeight: 'bold' }}>Au moins 6 characteres</Text>
+                <Text style={{ color: password.length >= 6 ? "#2E3E5C" : "#9FA5C0", fontSize: normalize(15), fontFamily: 'arial', fontWeight: 'bold', marginLeft: normalize(10) }}>Au moins 6 characteres</Text>
                 </View>
                 <View style={{ flexDirection: "row", backgroundColor: '#F5F5F8', marginTop: normalize(10), marginLeft: normalize(20)}}>
                 <Feather name="check-circle" size={normalize(26)} style={{ color: hasNumber.test(password) == true ? "#27AE60" : "#9FA5C0" }} />

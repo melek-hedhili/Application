@@ -41,7 +41,7 @@ export default class Maps extends Component {
         });
 
 
-        fetch("http://10.0.2.2:4000/getcmd", {
+        fetch("http://192.168.1.6:4000/getcmd", {
             method: "GET",
             headers: {
                 'Content-Type': 'application/json'

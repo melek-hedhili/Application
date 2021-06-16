@@ -53,7 +53,8 @@ const styles = StyleSheet.create({
         marginTop: normalize(32),
         paddingHorizontal: normalize(20),
         textAlign: 'center',
-        fontSize: normalize(14)
+        fontSize: normalize(14),
+        //focused ? "#CB5C17" : '#D0DBEA',
     },
     inputContainerPassword: {
         borderWidth: 1,
@@ -100,8 +101,21 @@ const Login = ({ navigation }) => {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
 
+    const [focused, setFocused] = useState(false);
+    const [test, setTest] = useState(false);
+
+
+    handleFocus = () => setFocused(true)
+    handleBlur = () => setFocused(false)
+
+
+
+    handleFocusPassword = () => setTest(true)
+
+    handleBlurPassword = () => setTest(false)
+
     const SendUserInfo = async () => {
-        fetch("http://10.0.2.2:4000/signin", {
+        fetch("http://192.168.1.6:4000/signin", {
             method: "POST",
             headers: {
                 'Content-Type': 'application/json'
@@ -137,12 +151,30 @@ const Login = ({ navigation }) => {
 
                 <TextInput
 
-                   style={styles.inputContainer}
-                    placeholder="Email ou numero du telephone"
+                    style={{
+                        borderWidth: 1,
+                        borderColor: focused ? '#CB5C17' : "#D0DBEA",
+                        height: normalize(56),
+                        width: normalize(327),
+                        borderRadius: 30,
+                        flexDirection: 'column',
+                        backgroundColor: '#FFFFFF',
+                        alignItems: 'center',
+                        alignSelf: 'center',
+                        justifyContent: 'center',
+                        //resizeMode: 'contain',
+                        marginTop: normalize(32),
+                        paddingHorizontal: normalize(20),
+                        textAlign: 'center',
+                        fontSize: normalize(14),
+                    }}
+                    placeholder="Email "
                     placeholderTextColor={'#9FA5C0'}
                     value={email}
                     onChangeText={(text) => setEmail(text)}
-                   
+                    onFocus={handleFocus}
+                    onBlur={handleBlur}
+                    
                 />
                 <Feather name="mail" color={'#2E3E5C'} size={normalize(26)} style={{ alignSelf: 'flex-start', marginTop: normalize(- 36), marginLeft: normalize(47), }} />
                    
@@ -150,12 +182,29 @@ const Login = ({ navigation }) => {
 
                 <TextInput
 
-                    style={styles.inputContainerPassword}
+                    style={{
+                        borderWidth: 1,
+                        borderColor: test ? '#CB5C17' : "#D0DBEA",
+                        height: normalize(56),
+                        width: normalize(327),
+                        borderRadius: 30,
+                        flexDirection: 'column',
+                        backgroundColor: '#FFFFFF',
+                        alignItems: 'center',
+                        alignSelf: 'center',
+                        justifyContent: 'center',
+                        
+                        marginTop: normalize(25),
+                        paddingHorizontal: normalize(20),
+                        textAlign: 'center',
+                        fontSize: normalize(14)}}
                     secureTextEntry={true}
                     placeholder="Mot de passe"
                     placeholderTextColor={'#9FA5C0'}
                     value={password}
                     onChangeText={(text) => setPassword(text)}
+                    onFocus={handleFocusPassword}
+                    onBlur={handleBlurPassword}
 
                 />
                 <SimpleLineIcons name="lock" color={'#2E3E5C'} size={normalize(26)} style={{ alignSelf: 'flex-start', marginTop: normalize(-38), marginLeft: normalize( 47), }} />

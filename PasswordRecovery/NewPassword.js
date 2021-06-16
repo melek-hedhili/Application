@@ -17,9 +17,12 @@ export default class NewPassword extends Component {
             password: '',
             email: "",
             recovery_email: "",
-            hasNumber :/\d/
+            hasNumber: /\d/,
+            focused: false,
         }
     }
+    handleFocus = () => this.setState({ focused: true })
+    handleBlur = () => this.setState({ focused: false })
     componentDidMount() {
         
         try {
@@ -59,7 +62,7 @@ export default class NewPassword extends Component {
         if (this.state.password.length >= 6 && this.state.hasNumber.test(this.state.password) == true) {
 
 
-            fetch("http://10.0.2.2:4000/new-password", {
+            fetch("http://192.168.1.6:4000/new-password", {
                 method: "post",
                 headers: {
                     "Content-Type": "application/json"
@@ -106,8 +109,8 @@ export default class NewPassword extends Component {
                 
                 <TextInput
                     value={pin1}
-                    onBlur={() => this.onBlur()}
-                    onFocus={() => this.onFocus()}
+                    onBlur={() => this.handleBlur()}
+                    onFocus={() => this.handleFocus()}
                     style={{
                         height: normalize(56),
                         width: normalize(327),
@@ -122,7 +125,7 @@ export default class NewPassword extends Component {
                         marginTop: normalize(58),
                         paddingHorizontal: normalize(20),
                         borderWidth: 1,
-                        borderColor: '#D0DBEA',
+                        borderColor: this.state.focused ? '#CB5C17' : "#D0DBEA",
 
 
 

@@ -45,7 +45,10 @@ const Navigation = () => {
             <Stack.Navigator>
                 {
                     isLoggedin == null ?
-                        (<Stack.Screen name="Splash" component={Splash} options={{ headerShown: false }} />)
+                        (
+                            <Stack.Screen name="Splash" component={Splash} options={{ headerShown: false }} />
+                            
+                        )
                         : isLoggedin == true ?
                             (<>
                                 <Stack.Screen name="Splash" component={Splash} options={{ headerShown: false }} />

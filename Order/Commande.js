@@ -139,7 +139,7 @@ export default class Commande extends Component {
 
         return (
 
-            <TouchableOpacity style={{ alignItems: 'center' }} key={key} onPress={() => { this.onchecked(item.id) }}>
+            <TouchableOpacity style={{ alignItems: 'center', marginLeft: normalize(20), marginRight: normalize(20 )}} key={key} onPress={() => { this.onchecked(item.id) }}>
                 <Image style={styles.rednerImg} source={{ uri: item.image }} ></Image>
                 <Text style={styles.rednertext}>{item.key}</Text>
                 <CheckBox value={item.checked}
@@ -157,7 +157,7 @@ export default class Commande extends Component {
     renderSauce(item, key) {
 
         return (
-            <TouchableOpacity style={{ alignItems: 'center' }} key={key} onPress={() => { this.oncheckedSauce(item.id) }}>
+            <TouchableOpacity style={{ alignItems: 'center', marginLeft: normalize(30), marginRight: normalize(30), alignSelf: 'center' }} key={key} onPress={() => { this.oncheckedSauce(item.id) }}>
                 <Image style={styles.rednerImg} source={{ uri: item.image }} ></Image>
                 <Text style={styles.rednertext}>{item.key}</Text>
                 <CheckBox value={item.checked}
@@ -175,7 +175,7 @@ export default class Commande extends Component {
     renderExtra(item, key) {
 
         return (
-            <TouchableOpacity style={{ alignItems: 'center' }} key={key} onPress={() => { this.oncheckedExtra(item.id) }}>
+            <TouchableOpacity style={{ alignItems: 'center', marginLeft: normalize(30), marginRight: normalize(30), }} key={key} onPress={() => { this.oncheckedExtra(item.id) }}>
                 <Image style={styles.rednerImg} source={{ uri: item.image }} ></Image>
                 <Text style={styles.rednertext}>{item.key}</Text>
                 <CheckBox value={item.checked}
@@ -192,7 +192,7 @@ export default class Commande extends Component {
     renderBoisson(item, key) {
 
         return (
-            <TouchableOpacity style={{ alignItems: 'center' }} key={key} onPress={() => { this.oncheckedBoisson(item.id) }}>
+            <TouchableOpacity style={{ alignItems: 'center', marginLeft: normalize(40), marginRight: normalize(40), marginTop: normalize(18) }} key={key} onPress={() => { this.oncheckedBoisson(item.id) }}>
                 <Image style={styles.rednerImg} source={{ uri: item.image }} ></Image>
                 <Text style={styles.rednertext}>{item.key}</Text>
                 <CheckBox value={item.checked}
@@ -361,8 +361,8 @@ export default class Commande extends Component {
             <View style={styles.container}>
 
 
-                <ScrollView>
-                    <ScrollView>
+                <ScrollView nestedScrollEnabled={false}>
+                    <ScrollView nestedScrollEnabled={false}>
                         <View style={styles.rectangle2}>
                             <TouchableOpacity onPress={() => this.props.navigation.goBack()}><Image style={{ resizeMode: 'contain' }} source={require("../assets/Back.png")} /></TouchableOpacity>
                         </View>
@@ -405,8 +405,8 @@ export default class Commande extends Component {
 
                     </ScrollView>
 
-                    
-                    <ScrollView>
+
+                    <ScrollView nestedScrollEnabled={false}>
                         <View style={{ alignItems: 'center', justifyContent: 'center', alignSelf: 'center' }}>
                             <Text style={styles.text_titre}>Sauces</Text>
                             <FlatList
@@ -424,7 +424,7 @@ export default class Commande extends Component {
 
 
 
-                    <ScrollView>
+                    <ScrollView nestedScrollEnabled={false}>
 
 
 
@@ -442,7 +442,7 @@ export default class Commande extends Component {
                     </ScrollView>
 
 
-                    <ScrollView>
+                    <ScrollView nestedScrollEnabled={false}>
                     <View style={{ alignItems: 'center', justifyContent: 'center', alignSelf: 'center' }}>
                             <Text style={styles.text_titre}>LES BOISSONS</Text>
                             <FlatList
@@ -455,7 +455,7 @@ export default class Commande extends Component {
                             />
                         </View>
                     </ScrollView>
-                    <ScrollView>
+                    <ScrollView nestedScrollEnabled={false}>
                         <View style={{ alignItems: 'center', justifyContent: 'center', alignSelf: 'center' }}>
                             <Text style={styles.text_titre}>SUPLEMENTS</Text>
                             <FlatList
@@ -468,7 +468,7 @@ export default class Commande extends Component {
                             />
                         </View>
                     </ScrollView>
-                    <ScrollView>
+                    <ScrollView nestedScrollEnabled={false}>
                         <View style={{ alignItems: 'center', justifyContent: 'center', alignSelf: 'center' }}>
                             <TouchableOpacity style={styles.btnAjout} onPress={() => { this.getSelectedItem() }}>
                                 <Text style={{ fontSize: normalize(17), color: '#FFFFFF' }} >Ajouter</Text>

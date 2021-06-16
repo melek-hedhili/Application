@@ -124,17 +124,17 @@ export default  class Panier extends Component {
                             <View style={{ flex: 1, backgroundColor: 'transparent', padding: 10, justifyContent: "space-between" }}>
                                 <View>
                                     <View style={{ flexDirection: 'row', justifyContent: 'space-between' }}>
-                                        <Text style={{ fontWeight: "bold", fontSize: 20 }}>Tacos {item.Viande}</Text>
+                                        <Text style={{ fontWeight: "bold", fontSize: 20 }}>Tacos {item.Viande } </Text>
                                         <TouchableOpacity onPress={() => this.removeItem(i)}>
                                             <Ionicons name="close-sharp" size={30} color={'#D05A0B'} />
                                         </TouchableOpacity>
                                     </View>
 
-                                    <Text>Sauce:{item.Sauce}</Text>
-                                    <Text>Taille:{item.taille}</Text>
-                                    <Text>Extra:{item.Extra}</Text>
-                                    <Text>Boissons:{item.Boisson}</Text>
-                                    <Text>Supplements:{item.Supplements}</Text>
+                                    <Text>Sauce:{item.Sauce } </Text>
+                                    <Text>Taille:{item.taille } </Text>
+                                    <Text>Extra:{item.Extra } </Text>
+                                    <Text>Boissons:{item.Boisson } </Text>
+                                    <Text>Supplements:{item.Supplements } </Text>
                                 </View>
                                 <View style={{ flexDirection: 'row', justifyContent: 'space-between' }}>
                                     <Text style={{ fontWeight: 'bold', fontSize: 20 }}>{item.Price * item.Quantity} DT</Text>

@@ -61,7 +61,7 @@ const OnBoarding = ({ navigation }) => {
                 <Text style={styles.text} >HOT AND FRENCH TACOS</Text>
                 <Text style={{ textAlign: 'center', color: "#9FA5C0", fontSize: normalize(17), fontFamily: 'arial', fontWeight: 'bold', marginTop: normalize(16), letterSpacing: 1 }} >The best taste</Text>
                 <TouchableOpacity activeOpacity={0.8} style={styles.btnContainer} onPress={() =>
-                    navigation.navigate('Login')
+                    navigation.replace('Login')
                 }>
                     <Text style={{ color: 'white', fontSize: normalize(15), fontWeight: 'bold', letterSpacing: 0.7, fontFamily: 'arial'}} >Commencer</Text>
 

@@ -26,22 +26,26 @@ export default class InputOTPScreen extends Component {
             pin3: "",
             pin4: "",
             codeActivationFromClient: '',
-            verifyCode: code
+            verifyCode: code,
+            focused: false,
+            focused2: false,
+            focused3: false,
+            focused4: false,
 
         }
     }
 
-    onFocus() {
-        this.setState({
-            borderColor: '#CB5C17'
-        })
-    }
+    handleFocus = () => this.setState({ focused:true})
+    handleBlur = () => this.setState({ focused: false })
 
-    onBlur() {
-        this.setState({
-            borderColor: '#D0DBEA'
-        })
-    }  
+    handleFocus2 = () => this.setState({ focused2: true })
+    handleBlur2 = () => this.setState({ focused2: false })
+
+    handleFocus3 = () => this.setState({ focused3: true })
+    handleBlur3 = () => this.setState({ focused3: false })
+
+    handleFocus4 = () => this.setState({ focused4: true })
+    handleBlur4 = () => this.setState({ focused4: false })
 
 
         
@@ -57,9 +61,9 @@ export default class InputOTPScreen extends Component {
                 <TextInput
                     maxLength={1}
                     keyboardType='numeric'
-                    ref={"pin1ref"}
-                    onBlur={() => this.onBlur()}
-                    onFocus={() => this.onFocus()}
+                        ref={"pin1ref"}
+                        onBlur={() => this.handleBlur()}
+                        onFocus={() => this.handleFocus()}
                         style={{
                             backgroundColor: 'white',
                             fontWeight: '600',
@@ -70,7 +74,7 @@ export default class InputOTPScreen extends Component {
                             width: normalize(72),
                             borderRadius: 20,
                             borderWidth: 1,
-                            borderColor: this.state.borderColor,
+                            borderColor: this.state.focused ? '#CB5C17' : "#D0DBEA",
                             textAlign: 'center'}}
                     onChangeText={(pin1) => {
                         this.setState({ pin1: pin1 })
@@ -83,13 +87,24 @@ export default class InputOTPScreen extends Component {
                 />
 
                     <TextInput
-                    onBlur={() => this.onBlur()}
-                    onFocus={() => this.onFocus()}
+                        onBlur={() => this.handleBlur2()}
+                        onFocus={() => this.handleFocus2()}
                     maxLength={1}
                     keyboardType='numeric'
                     ref={"pin2ref"}
 
-                        style={styles.Input}
+                        style={{
+                            backgroundColor: 'white',
+                            fontWeight: '600',
+                            alignSelf: 'center',
+                            padding: 10,
+                            fontSize: normalize(34),
+                            height: normalize(72),
+                            width: normalize(72),
+                            borderRadius: 20,
+                            borderWidth: 1,
+                            borderColor: this.state.focused2 ? '#CB5C17' : "#D0DBEA",
+                            textAlign: 'center'}}
                     onChangeText={(pin2) => {
                         this.setState({ pin2: pin2 })
                         if (pin2 != "") {
@@ -99,7 +114,9 @@ export default class InputOTPScreen extends Component {
                     value={pin2}
                 />
 
-                <TextInput
+                    <TextInput
+                        onBlur={() => this.handleBlur3()}
+                        onFocus={() => this.handleFocus3()}
                     maxLength={1}
                     keyboardType='numeric'
                     ref={"pin3ref"}
@@ -110,17 +127,41 @@ export default class InputOTPScreen extends Component {
                         }
                     }}
                     value={pin3}
-                    style={styles.Input}
+                        style={{
+                            backgroundColor: 'white',
+                            fontWeight: '600',
+                            alignSelf: 'center',
+                            padding: 10,
+                            fontSize: normalize(34),
+                            height: normalize(72),
+                            width: normalize(72),
+                            borderRadius: 20,
+                            borderWidth: 1,
+                            borderColor: this.state.focused3 ? '#CB5C17' : "#D0DBEA",
+                            textAlign: 'center'}}
 
                 />
 
-                <TextInput
+                    <TextInput
+                        onBlur={() => this.handleBlur4()}
+                        onFocus={() => this.handleFocus4()}
                     maxLength={1}
                     keyboardType='numeric'
                     ref={"pin4ref"}
                     onChangeText={(pin4) => this.setState({ pin4: pin4 })}
                     value={pin4}
-                    style={styles.Input}
+                        style={{
+                            backgroundColor: 'white',
+                            fontWeight: '600',
+                            alignSelf: 'center',
+                            padding: 10,
+                            fontSize: normalize(34),
+                            height: normalize(72),
+                            width: normalize(72),
+                            borderRadius: 20,
+                            borderWidth: 1,
+                            borderColor: this.state.focused4? '#CB5C17' : "#D0DBEA",
+                            textAlign: 'center'}}
 
 
                     />

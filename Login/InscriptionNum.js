@@ -6,7 +6,9 @@ import normalize from 'react-native-normalize';
 import AsyncStorage from '@react-native-community/async-storage';
 
 const InscriptionNum = ({ navigation }) => {
-
+    const [focused, setFocused] = useState(false);
+    handleFocus = () => setFocused(true)
+    handleBlur = () => setFocused(false)
     const [email, setEmail] = useState("")
     const renderRandom = () => {
         const min = 1000;
@@ -20,7 +22,7 @@ const InscriptionNum = ({ navigation }) => {
     const VerificationMail = async () => {
         const verifyCode = renderRandom()
 
-        fetch("http://10.0.2.2:4000/send", {
+        fetch("http://192.168.1.6:4000/send", {
             method: "POST",
             headers: {
                 'Content-Type': 'application/json'
@@ -46,6 +48,7 @@ const InscriptionNum = ({ navigation }) => {
                         console.log("failed")
                     }
                     console.log("email de asyncstorage envoyee")
+
                     navigation.navigate("InputOTPScreen", { verifyCode: verifyCode })
                 }
 
@@ -84,16 +87,31 @@ const InscriptionNum = ({ navigation }) => {
 dans votre boite email</Text>
 
                 <TextInput
-                    style={styles.inputContainer}
+                    style={{
+                        borderWidth: 1,
+                        borderColor: focused ? '#CB5C17' : "#D0DBEA",
+                        height: normalize(56),
+                        width: normalize(327),
+                        borderRadius: 30,
+                        flexDirection: 'column',
+                        backgroundColor: '#FFFFFF',
+                        alignItems: 'center',
+                        alignSelf: 'center',
+                        justifyContent: 'center',
+                        //resizeMode: 'contain',
+                        marginTop: normalize(54),
+                        paddingHorizontal: normalize(20),
+                        textAlign: 'center'}}
                     placeholder="e-mail"
                     placeholderTextColor={'#9FA5C0'}
                     value={email}
                     onChangeText={(text) => setEmail(text)}
-
+                    onFocus={handleFocus}
+                    onBlur={handleBlur}
 
 
                 />
-                <Feather name="phone" color={'#2E3E5C'} size={normalize(26)} style={{ alignSelf: 'flex-start', marginTop: normalize(-40), marginLeft: normalize(48), }} />
+                <Feather name="mail" color={'#2E3E5C'} size={normalize(26)} style={{ alignSelf: 'flex-start', marginTop: normalize(-37), marginLeft: normalize(48), }} />
                 <TouchableOpacity activeOpacity={0.8} style={styles.btnContainer} onPress={() => { validate() }}>
                     <Text style={{ color: 'white', fontSize: normalize(15), fontWeight: 'bold', letterSpacing: 0.7, fontFamily: 'arial' }} >Envoyer</Text>
 

@@ -16,7 +16,7 @@ const Profile = ({ navigation }) => {
     const [telephone, setTelephone] = useState("loading")
         const Boiler = async () => {
             const token = await AsyncStorage.getItem("token")
-            fetch('http://10.0.2.2:4000/', {
+            fetch('http://192.168.1.6:4000/', {
                 headers: new Headers({
                     Authorization: "Bearer " + token
                 })

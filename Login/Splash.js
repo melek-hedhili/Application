@@ -11,14 +11,17 @@ const Splash = ({navigation})=> {
 
         const detectLogin = async () => {
             const token = await AsyncStorage.getItem('token')
+            console.log(token)
             if (token) {
                 navigation.replace("MyTabs")
             } else {
-                navigation.replace("Login")
+                navigation.replace("OnBoarding")
             }
         }
-        useEffect(() => {
+    useEffect(() => {
+        setTimeout(() => {
             detectLogin()
+        }, 2000)
         }, [])
 
         return (
