@@ -63,7 +63,7 @@ export default class PasswordVerificationCode extends Component {
     VerificationMail = () => {
         const NewVerifyCode = this.renderRandom()
        
-        fetch("http://192.168.1.6:4000/reset", {
+        fetch("http://192.168.1.8:4000/reset", {
             method: "POST",
             headers: {
                 'Content-Type': 'application/json'

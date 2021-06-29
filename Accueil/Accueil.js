@@ -4,9 +4,19 @@ import Slider from './Slider.js'
 import { Linking } from 'react-native'
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 import normalize from 'react-native-normalize';
-
+import GeoFencing from 'react-native-geo-fencing';
+import { request, PERMISSIONS } from 'react-native-permissions'
+import Geolocation from 'react-native-geolocation-service';
+import MapView, { PROVIDER_GOOGLE, Marker, Heatmap, Circle, Polyline, Polygon } from 'react-native-maps'
 export default class Accueil extends Component {
+    constructor(props) {
+        super(props);
 
+        this.state = {
+            latitude: 35.8441004,
+            longitude: 10.5969208,
+        };
+    }
     render() {
 
         return (
@@ -55,13 +65,39 @@ export default class Accueil extends Component {
                         }}
                     />
                     <Text style={{ fontSize: normalize(18), color: '#000000', fontWeight: 'bold', marginLeft: normalize(10), marginTop: normalize(15), }}>Notre position</Text>
-                    <TouchableOpacity style={styles.specialSection}>
 
-                        <Image style={{ resizeMode: 'contain', justifyContent: 'center', width: normalize(330), height: normalize(310), alignSelf: 'center', borderRadius: 10 }} source={require('../assets/local.png')} />
+                    <View >
 
-                 
+                        <MapView
+                            provider={PROVIDER_GOOGLE}
+                            style={styles.rectangle1}
+                            showsUserLocation={true}
+                            initialRegion={{
+                                latitude:this.state.latitude,
+                                longitude:this.state.longitude,
+                                latitudeDelta: 0.009,
+                                longitudeDelta: 0.009,
+                            }}
+                           
+                            showsUserLocation={true}>
 
-                    </TouchableOpacity>
+                            <MapView.Marker
+                                coordinate={{
+                                    latitude: 35.8440076,
+                                    longitude: 10.5993317,
+                                }}
+                                title={"TACOS619"}
+                            />      
+
+
+
+
+
+
+
+                        </MapView>
+
+                    </View>
                     <View
                         style={{
                             marginTop: normalize(20),
@@ -118,6 +154,16 @@ const styles = StyleSheet.create({
         marginLeft: normalize(20),
         
         
+    },
+    rectangle1: {
+        backgroundColor: 'white',
+        borderRadius: 20,
+        width: normalize(334),
+        height: normalize(400),
+        alignSelf: 'center',
+        marginTop: normalize(20)
+
+
     },
     btnContainer: {
         backgroundColor: "#CB5C17",

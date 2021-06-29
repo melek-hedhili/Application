@@ -44,23 +44,37 @@ export default class Commande extends Component {
     }
 
     changeColor = (id) => {
-
-
+        const data = this.state.data
         this.setState({ colorId: id });
         if (id == 1) {
             this.setState({ taille: 'M' })
             this.setState({ selected: sizes.M })
+            for (let i = 0; i < data.length; i++) {
+               
+                    data[i].checked = false // reset other checkboxes to unchecked, so when taille is 'M' only clicked checkbox that can be true
+                
+            }
             //this.setState({ price: 7 })
         }
         else if (id == 2) {
             this.setState({ taille: 'XL' })
             this.setState({ selected: sizes.XL })
+            for (let i = 0; i < data.length; i++) {
+
+                data[i].checked = false // reset other checkboxes to unchecked, so when taille is 'M' only clicked checkbox that can be true
+
+            }
             //this.setState({ price: 14 })
         }
 
         else {
             this.setState({ taille: 'L' })
             this.setState({ selected: sizes.L })
+            for (let i = 0; i < data.length; i++) {
+
+                data[i].checked = false // reset other checkboxes to unchecked, so when taille is 'M' only clicked checkbox that can be true
+
+            }
            // this.setState({ price: 10 })
         }
         // console.log("Button id:", id ,"size :", this.state.taille)
@@ -69,16 +83,60 @@ export default class Commande extends Component {
 
     onchecked(id) {
         const data = this.state.data
-        const index = data.findIndex(x => x.id === id);
-        data[index].checked = !data[index].checked
-        this.setState(data)
+
+        const index = data.findIndex(x => x.id === id)
+
+        let maxCheck = undefined
+        if (this.state.taille == 'M') {
+            for (let i = 0; i < data.length; i++) {
+                if (i != index) {
+                    data[i].checked = false // reset other checkboxes to unchecked, so when taille is 'M' only clicked checkbox that can be true
+                }
+            }
+        }else if (this.state.taille == 'L') {
+            maxCheck = 2
+        }
+        else if (this.state.taille == 'XL') {
+            maxCheck = 3
+        }
+
+        let checkboxCheckedTotal = 0
+
+        for (let i = 0; i < data.length; i++) {
+            if (data[i].checked) {
+                checkboxCheckedTotal++
+            }
+        }
+
+        if (maxCheck == undefined || data[index].checked || checkboxCheckedTotal < maxCheck) {
+            data[index].checked = !data[index].checked
+          
+        }
+
+        this.setState({ data })
     }
 
     oncheckedSauce(id) {
         const dataSauce = this.state.sauce
         const indexSauce = dataSauce.findIndex(x_sauce => x_sauce.id === id);
-        dataSauce[indexSauce].checked = !dataSauce[indexSauce].checked
-        this.setState(dataSauce)
+
+        let checkboxCheckedTotal = 0
+        let maxCheck = undefined
+        maxCheck = 3
+
+        for (let i = 0; i < dataSauce.length; i++) {
+            if (dataSauce[i].checked) {
+                checkboxCheckedTotal++
+            }
+        }
+        if (maxCheck == undefined || dataSauce[indexSauce].checked || checkboxCheckedTotal < maxCheck) {
+            dataSauce[indexSauce].checked = !dataSauce[indexSauce].checked
+
+        }
+
+        
+        
+        this.setState({ dataSauce })
     }
 
 
@@ -143,7 +201,7 @@ export default class Commande extends Component {
                 <Image style={styles.rednerImg} source={{ uri: item.image }} ></Image>
                 <Text style={styles.rednertext}>{item.key}</Text>
                 <CheckBox value={item.checked}
-                    style={{ transform: [{ scaleX: 0.8 }, { scaleY: 0.8 }], }}
+                    style={{ transform: [{ scaleX: 0.8 }, { scaleY: 0.8 }]}}
                     onValueChange={() => { this.onchecked(item.id) }}
                     tintColors={{ true: '#D05A0B', false: 'black' }}
 

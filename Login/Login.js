@@ -115,7 +115,7 @@ const Login = ({ navigation }) => {
     handleBlurPassword = () => setTest(false)
 
     const SendUserInfo = async () => {
-        fetch("http://192.168.1.6:4000/signin", {
+        fetch("http://192.168.1.8:4000/signin", {
             method: "POST",
             headers: {
                 'Content-Type': 'application/json'

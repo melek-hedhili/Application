@@ -22,7 +22,7 @@ const InscriptionNum = ({ navigation }) => {
     const VerificationMail = async () => {
         const verifyCode = renderRandom()
 
-        fetch("http://192.168.1.6:4000/send", {
+        fetch("http://192.168.1.8:4000/send", {
             method: "POST",
             headers: {
                 'Content-Type': 'application/json'

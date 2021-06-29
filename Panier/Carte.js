@@ -16,7 +16,7 @@ export default class Panier extends Component {
         };
     }
     componentDidMount() {
-        fetch("http://192.168.1.6:4000/getcmd", {
+        fetch("http://192.168.1.8:4000/getcmd", {
             method: "GET",
             headers: {
                 'Content-Type': 'application/json'

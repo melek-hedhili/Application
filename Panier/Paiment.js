@@ -16,6 +16,7 @@ export default class Paiment extends React.Component {
         super(props);
 
         this.state = {
+            Total:'',
             userLocation: false,
             marker:null,
             polygon: [
@@ -68,7 +69,15 @@ export default class Paiment extends React.Component {
     }
     componentDidMount = async () => {
 
-        
+
+        AsyncStorage.getItem("Total").then((results) => {
+            if (results !== null) {
+                console.log('resukts totale', results)
+                this.setState({ Total: results })
+                console.log('Totale state = ', this.state.Total)
+            }
+        })
+
 
         var response = await request(PERMISSIONS.ANDROID.ACCESS_FINE_LOCATION)
         if (response = 'granted') {
@@ -86,7 +95,7 @@ export default class Paiment extends React.Component {
         }
         try {
             const token = await AsyncStorage.getItem("token")
-            fetch('http://192.168.1.6:4000/', {
+            fetch('http://192.168.1.8:4000/', {
                 headers: new Headers({
                     Authorization: "Bearer " + token
                 })
@@ -135,7 +144,7 @@ export default class Paiment extends React.Component {
 
                     </View>
 
-                    <Text style={styles.title}>Paiement</Text>
+                    <Text style={styles.title}>Validation</Text>
 
                     <Text style={styles.titeAdresse} >Adresse:</Text>
                     <View style={styles.textAreaContainer}>
@@ -196,7 +205,7 @@ ici"
                         
                     </View>
                    
-                    <Text style={{ fontSize: normalize(18), marginLeft: normalize(20), marginTop: normalize(10), }}> Outils de paiements :</Text>
+                    <Text style={{ fontSize: normalize(18), marginLeft: normalize(20), marginTop: normalize(10), }}> Choix de livraison :</Text>
 
                     <View style={styles.rectangle2}>
 
@@ -217,10 +226,10 @@ ici"
 
                     <View style={{ flexDirection: 'row', marginLeft: normalize(20), marginTop: normalize(10) }}>
                         <Text style={{ fontSize: 17, }}>Totale</Text>
-                        <Text style={{ fontSize: normalize(22), marginLeft: normalize(220) }}>23,000</Text>
+                        <Text style={{ fontSize: normalize(22), marginLeft: normalize(220) }}>{this.state.Total}</Text>
                     </View>
                     <TouchableOpacity style={styles.btnSuivant} onPress={() => this.verif()} >
-                        <Text style={{ alignSelf: 'center', marginTop: normalize(20), color: 'white', fontSize: normalize(15), fontWeight: 'bold' }}>Suivant</Text>
+                        <Text style={{ alignSelf: 'center', marginTop: normalize(20), color: 'white', fontSize: normalize(15), fontWeight: 'bold' }}>Valider</Text>
                     </TouchableOpacity>
                     <Text> </Text>
                 </ScrollView>
@@ -238,7 +247,7 @@ ici"
         const choix = this.state.choix.label
         const user = this.state.user
         const coordonnees = this.state.marker
-        fetch("http://192.168.1.6:4000/envoyercommande", {
+        fetch("http://192.168.1.8:4000/envoyercommande", {
             method: "POST",
             headers: {
                 'Content-Type': 'application/json'
@@ -249,7 +258,8 @@ ici"
                 "data": this.state.commandes,
                 "description": description,
                 "choix": choix,
-                "coordonnees": coordonnees
+                "coordonnees": coordonnees,
+                "prix": this.state.Total
 
             })
         })
@@ -263,7 +273,8 @@ ici"
                     console.log(e)
                 }
             })
-        this.props.navigation.replace("Checkout")
+        alert("Votre commande a ete bien passe")
+        this.props.navigation.replace("MyTabs")
         const CMD = {
             "date": date,
             "user": user,

@@ -84,6 +84,8 @@ export default  class Panier extends Component {
         }
         return total
 
+        
+
     }
     onLoadPrix() {
 
@@ -236,11 +238,13 @@ export default  class Panier extends Component {
 
 
                     </View>
+                    <TouchableOpacity onPress={() => this.nav()}>
                     <View style={styles.btnProceder}>
-                        <TouchableOpacity onPress={() => this.nav()}>
+                        
                             <Text style={{ alignSelf: 'center', color: 'white' }}>Procéder avec le payement</Text>
-                        </TouchableOpacity>
+                        
                     </View>
+                        </TouchableOpacity>
                     <View>
                         <Text></Text>
                     </View>
@@ -255,6 +259,14 @@ export default  class Panier extends Component {
     }
 
     nav() {
+        try {
+
+            AsyncStorage.setItem("Total", JSON.stringify(this.onLoadTotal()))
+            console.log("total added next")
+        } catch (error) {
+            console.log("totale not added", error)
+
+        }
         if (this.state.dataCart == 0) {
             alert("Votre panier est vide")
         } else {
