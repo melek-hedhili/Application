@@ -20,11 +20,7 @@ class Navigation2 extends React.Component {
         return (
             <NavigationContainer>
                 <Stack.Navigator>
-                    <Stack.Screen
-                        name="Carte"
-                        component={Carte}
-                        options={{ headerShown: false }}
-                    />
+                    <Stack.Screen name="Carte" component={Carte} options={{ headerShown: false }}/>
                     <Stack.Screen name="Maps" component={Maps} options={{ headerShown: false }}/>
 
                 </Stack.Navigator>

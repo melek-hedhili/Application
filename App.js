@@ -17,7 +17,7 @@ import Paiment from './Panier/Paiment.js'
 import Panier from './Panier/Panier.js'
 import Carte from './Panier/Carte.js'
 import Navigation2 from './Navigation/Navigation2.js';
-import Te from './te.js'
+import Te from './Admin/Te'
 import OnBoarding from './Login/Onboarding';
 import Login from './Login/Login';
 import Signup from './Login/Signup';
@@ -29,7 +29,7 @@ import NewPassword from './PasswordRecovery/NewPassword';
 class App extends React.Component {
     render() {
         return (
-            <Navigation />
+            <Navigation/>
         );
     }
 }

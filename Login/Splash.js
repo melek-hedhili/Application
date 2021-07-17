@@ -11,10 +11,21 @@ const Splash = ({navigation})=> {
 
         const detectLogin = async () => {
             const token = await AsyncStorage.getItem('token')
-            console.log(token)
+            const delivery_token = await AsyncStorage.getItem('delivery_token')
+            const admin_token = await AsyncStorage.getItem('admin_token')
+            console.log("splash token", token)
+            console.log("splash delivery_token", delivery_token)
+            console.log("splash admin_token", admin_token)
             if (token) {
                 navigation.replace("MyTabs")
-            } else {
+            } else if (delivery_token) {
+                navigation.replace("Carte")
+            } else if (admin_token) {
+                navigation.replace("MyDrawer")
+            }
+
+
+            else if (token == null && delivery_token == null && admin_token == null) {
                 navigation.replace("OnBoarding")
             }
         }

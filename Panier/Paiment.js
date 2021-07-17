@@ -95,7 +95,7 @@ export default class Paiment extends React.Component {
         }
         try {
             const token = await AsyncStorage.getItem("token")
-            fetch('http://192.168.1.8:4000/', {
+            fetch('http://192.168.1.4:4000/', {
                 headers: new Headers({
                     Authorization: "Bearer " + token
                 })
@@ -247,7 +247,7 @@ ici"
         const choix = this.state.choix.label
         const user = this.state.user
         const coordonnees = this.state.marker
-        fetch("http://192.168.1.8:4000/envoyercommande", {
+        fetch("http://192.168.1.4:4000/envoyercommande", {
             method: "POST",
             headers: {
                 'Content-Type': 'application/json'
@@ -273,6 +273,35 @@ ici"
                     console.log(e)
                 }
             })
+
+        fetch("http://192.168.1.4:4000/envoyerAdminCommande", {
+            method: "POST",
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({
+                "date": date,
+                "user": user,
+                "data": this.state.commandes,
+                "description": description,
+                "choix": choix,
+                "coordonnees": coordonnees,
+                "prix": this.state.Total
+
+            })
+        })
+            .then(res => res.json())
+            .then(async (data) => {
+                try {
+                    console.log("command sent to admin", data)
+
+                } catch (e) {
+
+                    console.log(e)
+                }
+            })
+
+
         alert("Votre commande a ete bien passe")
         this.props.navigation.replace("MyTabs")
         const CMD = {

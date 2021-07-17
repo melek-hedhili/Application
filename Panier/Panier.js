@@ -259,17 +259,18 @@ export default  class Panier extends Component {
     }
 
     nav() {
-        try {
 
-            AsyncStorage.setItem("Total", JSON.stringify(this.onLoadTotal()))
-            console.log("total added next")
-        } catch (error) {
-            console.log("totale not added", error)
-
-        }
         if (this.state.dataCart == 0) {
             alert("Votre panier est vide")
         } else {
+            try {
+
+                AsyncStorage.setItem("Total", JSON.stringify(this.onLoadTotal()))
+                console.log("total added next")
+            } catch (error) {
+                console.log("totale not added", error)
+
+            }
             this.props.navigation.navigate('Paiment')
         }
 

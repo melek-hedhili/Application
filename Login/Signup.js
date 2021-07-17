@@ -64,7 +64,7 @@ const Signup = ({ navigation }) => {
         
         if (password.length >= 6 && hasNumber.test(password) == true) {
 
-            fetch("http://192.168.1.8:4000/signup", {
+            fetch("http://192.168.1.4:4000/signup", {
                 method: "POST",
                 headers: {
                     'Content-Type': 'application/json'

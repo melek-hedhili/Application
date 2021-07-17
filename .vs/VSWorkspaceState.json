@@ -2,14 +2,15 @@
   "ExpandedNodes": [
     "",
     "\\Accueil",
-    "\\JSON",
+    "\\Admin",
     "\\Login",
     "\\Navbar",
     "\\Navigation",
     "\\Order",
     "\\Panier",
-    "\\PasswordRecovery"
+    "\\PasswordRecovery",
+    "\\Rate"
   ],
-  "SelectedNode": "\\App.js",
+  "SelectedNode": "\\Admin\\Commandes.js",
   "PreviewInSolutionExplorer": false
 }

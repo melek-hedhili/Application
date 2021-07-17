@@ -62,7 +62,7 @@ export default class NewPassword extends Component {
         if (this.state.password.length >= 6 && this.state.hasNumber.test(this.state.password) == true) {
 
 
-            fetch("http://192.168.1.8:4000/new-password", {
+            fetch("http://192.168.1.4:4000/new-password", {
                 method: "post",
                 headers: {
                     "Content-Type": "application/json"

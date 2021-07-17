@@ -4,7 +4,7 @@ import Ionicons from 'react-native-vector-icons/Ionicons';
 import normalize from 'react-native-normalize';
 import MapView, { PROVIDER_GOOGLE, Marker, Heatmap, Circle, Polyline, Polygon } from 'react-native-maps'
 var { width } = Dimensions.get("window") 
-export default class Panier extends Component {
+export default class Carte extends Component {
     constructor(props) {
         super(props);
         this.state = {
@@ -16,7 +16,7 @@ export default class Panier extends Component {
         };
     }
     componentDidMount() {
-        fetch("http://192.168.1.8:4000/getcmd", {
+        fetch("http://192.168.1.4:4000/getcmd", {
             method: "GET",
             headers: {
                 'Content-Type': 'application/json'
@@ -26,10 +26,8 @@ export default class Panier extends Component {
             .then(async(results) => {
                 try {
                     this.setState({ CmdCart: results })
-                    console.log("CmdCart", this.state.CmdCart)
                     this.setState({ id: this.state.CmdCart.map((x) => x._id) })
-                    console.log("id", this.state.id)
-                    console.log("map", this.state.CmdCart.map((x) => x._id))
+
                 } catch (e) {
                     console.log(e)
                 }
@@ -53,12 +51,12 @@ export default class Panier extends Component {
                                     <View style={{ flex: 1, backgroundColor: 'transparent', padding: 10, justifyContent: "space-between" }}>
                                         <View>
                                             <View style={{ flexDirection: 'row', justifyContent: 'space-between' }}>
-                                                <Text style={{ fontWeight: "bold", fontSize: 20 }}>Choix : {item._id} </Text>
+                                                <Text style={{ fontWeight: "bold", fontSize: 20 }}>ID: {item._id} </Text>
                                                 <TouchableOpacity onPress={() => this.removeItem(i)}>
                                                     <Ionicons name="close-sharp" size={30} color={'#D05A0B'} />
                                                 </TouchableOpacity>
                                             </View>
-                                            <Text style={{ fontWeight: "bold", fontSize: 20 }}>Choix : {item._id} </Text>
+                                            <Text style={{ fontWeight: "bold", fontSize: 20 }}>Choix : {item.choix} </Text>
                                             
                                             <Text style={{ fontWeight: "bold", fontSize: 20 }}>Sauce :{item.data.map((elem) => elem.Sauce)} </Text>
                                             <Text style={{ fontWeight: "bold", fontSize: 20 }}>Viande :{item.data.map((elem) => elem.Viande)} </Text>
@@ -94,7 +92,7 @@ export default class Panier extends Component {
         const dataCar = this.state.CmdCart
 
 
-        fetch("http://10.0.2.2:4000/delete", {
+        fetch("http://192.168.1.4:4000/delete", {
             method: "DELETE",
             headers: {
                 'Content-Type': 'application/json'
@@ -120,7 +118,7 @@ export default class Panier extends Component {
         alert("item removed !")
 
     }
-    }
+}
     const styles = StyleSheet.create({
         container: {
             flex: 1,

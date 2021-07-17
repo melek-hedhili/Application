@@ -12,6 +12,7 @@ import 'react-native-gesture-handler';
 import normalize from 'react-native-normalize';
 import AsyncStorage from '@react-native-community/async-storage';
 
+
 const styles = StyleSheet.create({
     container: {
         flex: 1,
@@ -115,7 +116,7 @@ const Login = ({ navigation }) => {
     handleBlurPassword = () => setTest(false)
 
     const SendUserInfo = async () => {
-        fetch("http://192.168.1.8:4000/signin", {
+        fetch("http://192.168.1.9:4000/signin", {
             method: "POST",
             headers: {
                 'Content-Type': 'application/json'
@@ -129,13 +130,42 @@ const Login = ({ navigation }) => {
             .then(res => res.json())
             .then(async (data) => {
                 try {
-                    console.log("Logged in !")
-                   console.log(data)
-                    await AsyncStorage.setItem('token', data.token)
-                    navigation.replace("MyTabs")
+                    
+                    console.log(data)
+                    if (data.token) {
+                        await AsyncStorage.setItem('token', data.token)
+                        navigation.replace("MyTabs")
+                        console.log("Logged in !")
+                    }
+                    else if (data.delivery_token) {
+                        await AsyncStorage.setItem('delivery_token', data.delivery_token)
+                        navigation.replace("Carte")
+                        console.log("Logged in !")
+                    }
+                    else if (data.admin_token) {
+                        await AsyncStorage.setItem('admin_token', data.admin_token)
+                        navigation.replace("MyDrawer")
+                        console.log("Logged in !")
+                    }
+                    
+                    else if (data.email_error) {
+                        alert("veuillez verifier votre email")
+                    }
+                    else if (data.admin_error) {
+                        alert("veuillez verifier votre  mot de passe admin")
+                    }
+                    else if (data.delivery_error) {
+                        alert("veuillez verifier votre  mot de passe livreur")
+                    }
+                    else if (data.user_error) {
+                        alert("veuillez verifier votre mot de passe")
+                    }
+
+                    
+                    
                 } catch (e) {
-                    alert("Verifier vos donnes")
                     console.log(e)
+
                    
                 }
             })
