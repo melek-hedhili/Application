@@ -17,7 +17,7 @@ export default class Livreur extends Component {
     }
 
     componentDidMount() {
-        fetch("http://192.168.1.4:4000/getLivreur", {
+        fetch("http://mysterious-badlands-16665.herokuapp.com/getLivreur", {
             method: "GET",
             headers: {
                 'Content-Type': 'application/json'
@@ -69,7 +69,7 @@ export default class Livreur extends Component {
 
     DeleteLivreur(i) {
         const dataCar = this.state.LivreurInfo
-        fetch("http://192.168.1.4:4000/deleteLivreur", {
+        fetch("http://mysterious-badlands-16665.herokuapp.com/deleteLivreur", {
             method: "DELETE",
             headers: {
                 'Content-Type': 'application/json'

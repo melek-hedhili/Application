@@ -1,6 +1,7 @@
 import React, { Component, state } from 'react';
 import { StyleSheet, Text, View, Image, TouchableOpacity, ScrollView, Dimensions } from 'react-native';
 import Slider from './Slider.js'
+import Swiper from 'react-native-swiper'
 import { Linking } from 'react-native'
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 import normalize from 'react-native-normalize';
@@ -8,17 +9,25 @@ import GeoFencing from 'react-native-geo-fencing';
 import { request, PERMISSIONS } from 'react-native-permissions'
 import Geolocation from 'react-native-geolocation-service';
 import MapView, { PROVIDER_GOOGLE, Marker, Heatmap, Circle, Polyline, Polygon } from 'react-native-maps'
+var { height, width } = Dimensions.get("window")
+const BannerTacos = require("../JSON/Banner.json")
 export default class Accueil extends Component {
     constructor(props) {
         super(props);
 
         this.state = {
-            latitude: 35.8441004,
-            longitude: 10.5969208,
+            latitude: 35.8440959,
+            longitude: 10.5989729,
+
         };
     }
-    render() {
 
+    render() {
+        const banner = [
+            "https://i.imgur.com/VFr5hxJ.jpg",
+            "https://i.imgur.com/5UvPBbF.png",
+            "https://i.imgur.com/R0aD2MH.jpg"
+        ]
         return (
             <View style={styles.container}>
                 <ScrollView>
@@ -32,7 +41,19 @@ export default class Accueil extends Component {
                         <Text style={{ color: 'white', fontSize: normalize(15), fontWeight: 'bold', letterSpacing: 0.7 }} >Personnaliser votre tacos</Text>
 
                 </TouchableOpacity>
-                <Slider />
+
+
+
+                    <Swiper style={{ height: width / 2, marginTop: normalize(10), }} showsButtons={false} autoplay={true} autoplayTimeout={2} activeDotColor    ={"#D05A0B"}>
+                        {
+                            banner.map((items) => {
+                                return (
+                                    <Image style={styles.imageBanner} resizeMode="cover" source={{ uri: items }} />
+                                )
+                            })
+                        }
+                    </Swiper>
+                    <View style={{height:20}} />
                 
                     <Text style={{ fontSize: normalize(18), color: '#000000', fontWeight: 'bold', marginLeft: normalize(10), marginTop: normalize(15) }}>SPECIALE!</Text>
 
@@ -185,6 +206,12 @@ const styles = StyleSheet.create({
         alignSelf: 'center',
         marginTop: normalize(13),
         elevation: 5, shadowRadius: 5, shadowOpacity: 0.1, shadowOffset: { height: 0, width: 0 }, shadowColor: '#000', 
-    }
+    },
+    imageBanner: {
+        height: width / 2,
+        width: width-10 ,
+        borderRadius: 10,
+        marginHorizontal:5
+    }, 
 
 });

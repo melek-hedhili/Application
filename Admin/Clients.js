@@ -16,7 +16,7 @@ export default class Client extends Component {
     }
 
     componentDidMount() {
-        fetch("http://192.168.1.4:4000/getUser", {
+        fetch("http://mysterious-badlands-16665.herokuapp.com/getUser", {
             method: "GET",
             headers: {
                 'Content-Type': 'application/json'
@@ -70,7 +70,7 @@ export default class Client extends Component {
     }
     DeleteUser (i) {
         const dataCar = this.state.ClientInfo
-        fetch("http://192.168.1.4:4000/deleteUser", {
+        fetch("http://mysterious-badlands-16665.herokuapp.com/deleteUser", {
             method: "DELETE",
             headers: {
                 'Content-Type': 'application/json'

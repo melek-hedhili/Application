@@ -19,7 +19,7 @@ const Recovery = ({ navigation }) => {
     const VerificationMail= ()=> {
         const verifyCode = renderRandom()
 
-        fetch("http://192.168.1.4:4000/reset", {
+        fetch("http://mysterious-badlands-16665.herokuapp.com/reset", {
             method: "POST",
             headers: {
                 'Content-Type': 'application/json'

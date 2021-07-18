@@ -1,7 +1,9 @@
 import React, { Component } from 'react';
 import { StyleSheet, Text, View, Image, TouchableOpacity, ScrollView, Dimensions } from 'react-native';
 import Ionicons from 'react-native-vector-icons/Ionicons';
+import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 import normalize from 'react-native-normalize';
+import AsyncStorage from '@react-native-community/async-storage';
 import MapView, { PROVIDER_GOOGLE, Marker, Heatmap, Circle, Polyline, Polygon } from 'react-native-maps'
 var { width } = Dimensions.get("window") 
 export default class Carte extends Component {
@@ -16,7 +18,7 @@ export default class Carte extends Component {
         };
     }
     componentDidMount() {
-        fetch("http://192.168.1.4:4000/getcmd", {
+        fetch("http://mysterious-badlands-16665.herokuapp.com/getcmd", {
             method: "GET",
             headers: {
                 'Content-Type': 'application/json'
@@ -32,6 +34,16 @@ export default class Carte extends Component {
                     console.log(e)
                 }
             })
+    }
+   Logout = async () => {
+
+        AsyncStorage.removeItem("delivery_token").then(() => {
+            console.log("delivery disconnected")
+
+            this.props.navigation.replace("Login")
+
+        })
+
     }
 
     render() {
@@ -75,12 +87,21 @@ export default class Carte extends Component {
                                     </View>
                                 </TouchableOpacity>
 
+
                             </View>
                             
-                            );
+                        );
 
                     })
+
                 }
+                
+
+                <TouchableOpacity onPress={() => this.Logout()}>
+                        <MaterialCommunityIcons name="logout" color={"black"} size={normalize(50)} />
+                    </TouchableOpacity>
+
+                
             </View>
 
 
@@ -92,7 +113,7 @@ export default class Carte extends Component {
         const dataCar = this.state.CmdCart
 
 
-        fetch("http://192.168.1.4:4000/delete", {
+        fetch("http://mysterious-badlands-16665.herokuapp.com/delete", {
             method: "DELETE",
             headers: {
                 'Content-Type': 'application/json'

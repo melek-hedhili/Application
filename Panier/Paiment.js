@@ -95,7 +95,7 @@ export default class Paiment extends React.Component {
         }
         try {
             const token = await AsyncStorage.getItem("token")
-            fetch('http://192.168.1.4:4000/', {
+            fetch('http://mysterious-badlands-16665.herokuapp.com/', {
                 headers: new Headers({
                     Authorization: "Bearer " + token
                 })
@@ -226,7 +226,7 @@ ici"
 
                     <View style={{ flexDirection: 'row', marginLeft: normalize(20), marginTop: normalize(10) }}>
                         <Text style={{ fontSize: 17, }}>Totale</Text>
-                        <Text style={{ fontSize: normalize(22), marginLeft: normalize(220) }}>{this.state.Total}</Text>
+                        <Text style={{ fontSize: normalize(22), marginLeft: normalize(220) }}>{this.state.Total} DT</Text>
                     </View>
                     <TouchableOpacity style={styles.btnSuivant} onPress={() => this.verif()} >
                         <Text style={{ alignSelf: 'center', marginTop: normalize(20), color: 'white', fontSize: normalize(15), fontWeight: 'bold' }}>Valider</Text>

@@ -19,7 +19,7 @@ export default class Commandes extends Component {
     }
 
     componentDidMount() {
-        fetch("http://192.168.1.4:4000/getCommande", {
+        fetch("http://mysterious-badlands-16665.herokuapp.com/getCommande", {
             method: "GET",
             headers: {
                 'Content-Type': 'application/json'
@@ -83,7 +83,7 @@ export default class Commandes extends Component {
 
     DeleteCmd(i) {
         const dataCar = this.state.CmdInfo
-        fetch("http://192.168.1.4:4000/deleteCommande", {
+        fetch("http://mysterious-badlands-16665.herokuapp.com/deleteCommande", {
             method: "DELETE",
             headers: {
                 'Content-Type': 'application/json'

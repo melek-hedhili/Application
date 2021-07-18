@@ -16,7 +16,7 @@ const Profile = ({ navigation }) => {
     const [telephone, setTelephone] = useState("loading")
         const Boiler = async () => {
             const token = await AsyncStorage.getItem("token")
-            fetch('http://192.168.1.4:4000/', {
+            fetch('http://mysterious-badlands-16665.herokuapp.com/', {
                 headers: new Headers({
                     Authorization: "Bearer " + token
                 })

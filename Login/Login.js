@@ -116,7 +116,7 @@ const Login = ({ navigation }) => {
     handleBlurPassword = () => setTest(false)
 
     const SendUserInfo = async () => {
-        fetch("http://192.168.1.9:4000/signin", {
+        fetch("https://mysterious-badlands-16665.herokuapp.com/signin", {
             method: "POST",
             headers: {
                 'Content-Type': 'application/json'

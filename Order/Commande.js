@@ -1,5 +1,6 @@
 import React, { Component, state } from 'react';
 import { StyleSheet, Text, View, Image, TouchableOpacity, ScrollView, Alert, Dimensions, FlatList } from 'react-native';
+
 import AsyncStorage from '@react-native-community/async-storage';
 import CheckBox from '@react-native-community/checkbox';
 import 'react-native-gesture-handler';
@@ -45,37 +46,74 @@ export default class Commande extends Component {
 
     changeColor = (id) => {
         const data = this.state.data
+        const dataSauce = this.state.sauce
+        const dataExtra = this.state.extra
+        const dataBoisson = this.state.boisson
+        const dataSupp = this.state.supp
+
         this.setState({ colorId: id });
         if (id == 1) {
             this.setState({ taille: 'M' })
             this.setState({ selected: sizes.M })
-            for (let i = 0; i < data.length; i++) {
-               
-                    data[i].checked = false // reset other checkboxes to unchecked, so when taille is 'M' only clicked checkbox that can be true
-                
+
+            for (let i = 0; i < data.length; i++) {              
+                    data[i].checked = false            
             }
-            //this.setState({ price: 7 })
+            for (let i = 0; i < dataSauce.length; i++) {
+                dataSauce[i].checked = false
+            }
+            for (let i = 0; i < dataExtra.length; i++) {
+                dataExtra[i].checked = false
+            }
+            for (let i = 0; i < dataBoisson.length; i++) {
+                dataBoisson[i].checked = false
+            }
+            for (let i = 0; i < dataSupp.length; i++) {
+                dataSupp[i].checked = false
+            }
+
+            this.setState({ price: 7 })
         }
         else if (id == 2) {
             this.setState({ taille: 'XL' })
             this.setState({ selected: sizes.XL })
             for (let i = 0; i < data.length; i++) {
-
-                data[i].checked = false // reset other checkboxes to unchecked, so when taille is 'M' only clicked checkbox that can be true
-
+                data[i].checked = false
             }
-            //this.setState({ price: 14 })
+            for (let i = 0; i < dataSauce.length; i++) {
+                dataSauce[i].checked = false
+            }
+            for (let i = 0; i < dataExtra.length; i++) {
+                dataExtra[i].checked = false
+            }
+            for (let i = 0; i < dataBoisson.length; i++) {
+                dataBoisson[i].checked = false
+            }
+            for (let i = 0; i < dataSupp.length; i++) {
+                dataSupp[i].checked = false
+            }
+            this.setState({ price: 14 })
         }
 
         else {
             this.setState({ taille: 'L' })
             this.setState({ selected: sizes.L })
             for (let i = 0; i < data.length; i++) {
-
-                data[i].checked = false // reset other checkboxes to unchecked, so when taille is 'M' only clicked checkbox that can be true
-
+                data[i].checked = false
             }
-           // this.setState({ price: 10 })
+            for (let i = 0; i < dataSauce.length; i++) {
+                dataSauce[i].checked = false
+            }
+            for (let i = 0; i < dataExtra.length; i++) {
+                dataExtra[i].checked = false
+            }
+            for (let i = 0; i < dataBoisson.length; i++) {
+                dataBoisson[i].checked = false
+            }
+            for (let i = 0; i < dataSupp.length; i++) {
+                dataSupp[i].checked = false
+            }
+           this.setState({ price: 10 })
         }
         // console.log("Button id:", id ,"size :", this.state.taille)
     }
@@ -200,10 +238,12 @@ export default class Commande extends Component {
             <TouchableOpacity style={{ alignItems: 'center', marginLeft: normalize(20), marginRight: normalize(20 )}} key={key} onPress={() => { this.onchecked(item.id) }}>
                 <Image style={styles.rednerImg} source={{ uri: item.image }} ></Image>
                 <Text style={styles.rednertext}>{item.key}</Text>
-                <CheckBox value={item.checked}
-                    style={{ transform: [{ scaleX: 0.8 }, { scaleY: 0.8 }]}}
+                <CheckBox
+                    value={item.checked}
+                    style={{ transform: [{ scaleX: 0.8 }, { scaleY: 0.8 }], }}
                     onValueChange={() => { this.onchecked(item.id) }}
                     tintColors={{ true: '#D05A0B', false: 'black' }}
+                    disabled={true}
 
                 />
             </TouchableOpacity>
@@ -219,6 +259,7 @@ export default class Commande extends Component {
                 <Image style={styles.rednerImg} source={{ uri: item.image }} ></Image>
                 <Text style={styles.rednertext}>{item.key}</Text>
                 <CheckBox value={item.checked}
+                    disabled={true}
                     style={{ transform: [{ scaleX: 0.8 }, { scaleY: 0.8 }], }}
                     onValueChange={() => { this.oncheckedSauce(item.id) }}
                     tintColors={{ true: '#D05A0B', false: 'black' }}
@@ -240,7 +281,7 @@ export default class Commande extends Component {
                     style={{ transform: [{ scaleX: 0.8 }, { scaleY: 0.8 }], }}
                     onValueChange={() => { this.oncheckedExtra(item.id) }}
                     tintColors={{ true: '#D05A0B', false: 'black' }}
-
+                    disabled={true}
                 />
             </TouchableOpacity>
         )
@@ -257,7 +298,7 @@ export default class Commande extends Component {
                     style={{ transform: [{ scaleX: 0.8 }, { scaleY: 0.8 }], }}
                     onValueChange={() => { this.oncheckedBoisson(item.id) }}
                     tintColors={{ true: '#D05A0B', false: 'black' }}
-
+                    disabled={true}
                 />
             </TouchableOpacity>
         )
@@ -274,7 +315,7 @@ export default class Commande extends Component {
                     style={{ transform: [{ scaleX: 0.8 }, { scaleY: 0.8 }], }}
                     onValueChange={() => { this.oncheckedSupp(item.id) }}
                     tintColors={{ true: '#D05A0B', false: 'black' }}
-
+                    disabled={true}
                 />
             </TouchableOpacity>
         )
@@ -386,7 +427,7 @@ export default class Commande extends Component {
                         console.log("else : ", data)
                     }
                     console.log("DATA:", JSON.stringify(data))
-                    alert(" Viande :  " + Viande + "\n Sauce : " + Sauce + "\n Extra :" + Extra + "\n Boisson :" + Boisson + "\n Supplements :" + Supplements + "\n price :" + this.state.price)
+                    alert(" Viande :  " + Viande + "\n Sauce : " + Sauce + "\n Extra :" + Extra + "\n Boisson :" + Boisson + "\n Supplements :" + Supplements + "\n price :" + this.state.price + "\n Taille:" + this.state.taille)
 
                 }).catch((error) => {
                     alert(error)
@@ -419,8 +460,8 @@ export default class Commande extends Component {
             <View style={styles.container}>
 
 
-                <ScrollView nestedScrollEnabled={false}>
-                    <ScrollView nestedScrollEnabled={false}>
+                <ScrollView nestedScrollEnabled={true} >
+                    <ScrollView nestedScrollEnabled={true}>
                         <View style={styles.rectangle2}>
                             <TouchableOpacity onPress={() => this.props.navigation.goBack()}><Image style={{ resizeMode: 'contain' }} source={require("../assets/Back.png")} /></TouchableOpacity>
                         </View>
@@ -464,7 +505,7 @@ export default class Commande extends Component {
                     </ScrollView>
 
 
-                    <ScrollView nestedScrollEnabled={false}>
+                    <ScrollView nestedScrollEnabled={true}>
                         <View style={{ alignItems: 'center', justifyContent: 'center', alignSelf: 'center' }}>
                             <Text style={styles.text_titre}>Sauces</Text>
                             <FlatList
@@ -482,7 +523,7 @@ export default class Commande extends Component {
 
 
 
-                    <ScrollView nestedScrollEnabled={false}>
+                    <ScrollView nestedScrollEnabled={true}>
 
 
 
@@ -500,7 +541,7 @@ export default class Commande extends Component {
                     </ScrollView>
 
 
-                    <ScrollView nestedScrollEnabled={false}>
+                    <ScrollView nestedScrollEnabled={true}>
                     <View style={{ alignItems: 'center', justifyContent: 'center', alignSelf: 'center' }}>
                             <Text style={styles.text_titre}>LES BOISSONS</Text>
                             <FlatList
@@ -513,7 +554,7 @@ export default class Commande extends Component {
                             />
                         </View>
                     </ScrollView>
-                    <ScrollView nestedScrollEnabled={false}>
+                    <ScrollView nestedScrollEnabled={true}>
                         <View style={{ alignItems: 'center', justifyContent: 'center', alignSelf: 'center' }}>
                             <Text style={styles.text_titre}>SUPLEMENTS</Text>
                             <FlatList
@@ -526,7 +567,7 @@ export default class Commande extends Component {
                             />
                         </View>
                     </ScrollView>
-                    <ScrollView nestedScrollEnabled={false}>
+                    <ScrollView nestedScrollEnabled={true}>
                         <View style={{ alignItems: 'center', justifyContent: 'center', alignSelf: 'center' }}>
                             <TouchableOpacity style={styles.btnAjout} onPress={() => { this.getSelectedItem() }}>
                                 <Text style={{ fontSize: normalize(17), color: '#FFFFFF' }} >Ajouter</Text>

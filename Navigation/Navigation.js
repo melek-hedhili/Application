@@ -93,9 +93,16 @@ const Navigation = () => {
                                 (<>
                                     <Stack.Screen name="Splash" component={Splash} options={{ headerShown: false }} />
                                     <Stack.Screen name="Carte" component={Carte} options={{ headerShown: false }} />
-                                    <Stack.Screen name="OnBoarding" component={OnBoarding} options={{ headerShown: false }} />
+                                  
                                     <Stack.Screen name="Maps" component={Maps} options={{ headerShown: false }} />
-
+                                    <Stack.Screen name="Login" component={Login} options={{ headerShown: false }} />
+                                    <Stack.Screen name="OnBoarding" component={OnBoarding} options={{ headerShown: false }} />
+                                    <Stack.Screen name="InscriptionNum" component={InscriptionNum} options={{ headerShown: false }} />
+                                    <Stack.Screen name="InputOTPScreen" component={InputOTPScreen} options={{ headerShown: false }} />
+                                    <Stack.Screen name="Recovery" component={Recovery} options={{ headerShown: false }} />
+                                    <Stack.Screen name="Signup" component={Signup} options={{ headerShown: false }} />
+                                    <Stack.Screen name="PasswordVerificationCode" component={PasswordVerificationCode} options={{ headerShown: false }} />
+                                    <Stack.Screen name="NewPassword" component={NewPassword} options={{ headerShown: false }} />
 
                                   
                                   

@@ -22,7 +22,7 @@ const InscriptionNum = ({ navigation }) => {
     const VerificationMail = async () => {
         const verifyCode = renderRandom()
 
-        fetch("http://192.168.1.4:4000/send", {
+        fetch("http://mysterious-badlands-16665.herokuapp.com/send", {
             method: "POST",
             headers: {
                 'Content-Type': 'application/json'

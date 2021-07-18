@@ -29,7 +29,7 @@ import NewPassword from './PasswordRecovery/NewPassword';
 class App extends React.Component {
     render() {
         return (
-            <Navigation/>
+            <Navigation />
         );
     }
 }
