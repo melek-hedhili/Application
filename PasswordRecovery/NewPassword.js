@@ -2,11 +2,12 @@ import React, { useState, useEffect, useRef, Component } from 'react';
 import 'react-native-gesture-handler';
 import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
-import { StyleSheet, Text, View, Image, TouchableOpacity, TextInput } from 'react-native';
+import { StyleSheet, Text, View, Image, TouchableOpacity, TextInput, Modal, ActivityIndicator, } from 'react-native';
 import SimpleLineIcons from 'react-native-vector-icons/SimpleLineIcons';
 import Feather from 'react-native-vector-icons/Feather';
 import normalize from 'react-native-normalize';
 import AsyncStorage from '@react-native-community/async-storage';
+import Toast from 'react-native-simple-toast';
 
 export default class NewPassword extends Component {
     constructor(props) {
@@ -19,6 +20,7 @@ export default class NewPassword extends Component {
             recovery_email: "",
             hasNumber: /\d/,
             focused: false,
+            loading:false
         }
     }
     handleFocus = () => this.setState({ focused: true })
@@ -80,9 +82,11 @@ export default class NewPassword extends Component {
                         alert("error")
                     }
                     else {
+                        this.setState({ loading:true })
                         await AsyncStorage.setItem('token', data.token)
-                        alert("mot de passe changee")
+                        Toast.show("mot de passe changee")
                         this.props.navigation.replace("Login")
+                        this.setState({ loading: false })
                     }
                 }).catch(err => {
                     console.log(err)
@@ -104,7 +108,18 @@ export default class NewPassword extends Component {
         return (
 
             <View style={styles.container}>
+                <Modal
 
+                    transparent={true}
+                    visible={this.state.loading}
+                >
+
+                    <View style={{ flex: 1, backgroundColor: '#000000aa', }}>
+                        <View style={{ flex: 1, position: 'absolute', left: 0, right: 0, top: 0, bottom: 0, alignItems: 'center', justifyContent: 'center' }}>
+                            <ActivityIndicator animating={this.state.loading} size="large" color="red" />
+                        </View>
+                    </View>
+                </Modal>
                 <Text style={styles.text}>Renitialiser votre mot de passe</Text>
                 
                 <TextInput

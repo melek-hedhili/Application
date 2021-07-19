@@ -88,7 +88,7 @@ const Signup = ({ navigation }) => {
                         console.log(e)
                     }
                 })
-            console.log("user added")
+            Toast.show("Votre compte a ete bien cree")
         } else {
             alert("Veuillez verifier les conditions pour  votre mot de passe")
             console.log("has number ?",hasNumber.test(password))

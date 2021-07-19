@@ -1,5 +1,5 @@
-import React, { Component ,useState} from 'react';
-import { StyleSheet, Text, View, Image, TouchableOpacity, SafeAreaView, TextInput, Alert} from 'react-native';
+import React, { Component, useState } from 'react';
+import { StyleSheet, Text, View, Image, TouchableOpacity, SafeAreaView, TextInput, Alert, ActivityIndicator, Modal } from 'react-native';
 import Icon from 'react-native-vector-icons/FontAwesome';
 import 'react-native-gesture-handler';
 import { NavigationContainer } from '@react-navigation/native';
@@ -99,6 +99,7 @@ const styles = StyleSheet.create({
 
 
 const Login = ({ navigation }) => {
+    const [loading, setLoading] = useState(false);
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
 
@@ -130,7 +131,8 @@ const Login = ({ navigation }) => {
             .then(res => res.json())
             .then(async (data) => {
                 try {
-                    
+                    setLoading(true)
+                    console.log(loading)
                     console.log(data)
                     if (data.token) {
                         await AsyncStorage.setItem('token', data.token)
@@ -161,7 +163,10 @@ const Login = ({ navigation }) => {
                         alert("veuillez verifier votre mot de passe")
                     }
 
+                        setLoading(false)
+
                     
+                    console.log(loading)
                     
                 } catch (e) {
                     console.log(e)
@@ -176,6 +181,24 @@ const Login = ({ navigation }) => {
 
 
             <View style={styles.container} >
+                
+                <Modal
+
+                    transparent={true}
+                    visible={loading}
+                >
+
+                    <View style={{ flex: 1, backgroundColor: '#000000aa', }}>
+                        <View style={{ flex: 1, position: 'absolute', left: 0, right: 0, top: 0, bottom: 0, alignItems: 'center', justifyContent: 'center' }}>
+                            <ActivityIndicator animating={loading} size="large" color="red" />
+                        </View>
+                    </View>
+                </Modal>
+
+               
+                        
+
+                
                 <Text style={styles.text}>Bienvenu</Text>
                 <Text style={{ textAlign: 'center', color: "#9FA5C0", fontSize: normalize(15), fontFamily: 'arial', fontWeight: 'bold', marginTop: normalize(20), letterSpacing: 1 }}>Veuillez entrer votre compte ici</Text>
 
@@ -250,7 +273,7 @@ const Login = ({ navigation }) => {
                 </TouchableOpacity>
 
 
-  
+               
 
 
                 <View style={{ flexDirection: "row", backgroundColor: '#F5F5F8', marginTop: normalize(56), justifyContent: 'center' }}>

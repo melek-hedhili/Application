@@ -35,7 +35,7 @@ export default class Accueil extends Component {
                     <Text style={styles.text}>Tacos'619</Text>
                         <Image style={{ resizeMode: 'contain', justifyContent: 'center', width: normalize(98), height: normalize(98), alignSelf: 'center', marginLeft: normalize(60), marginTop: normalize(-20) }} source={require('../assets/logo.png')} />                  
                 </View>
-                    <Text style={{ fontSize: normalize(16), color: '#D05A0B', fontWeight: 'bold', marginLeft: normalize(25), marginTop: normalize(-40) }}>The best taste</Text>     
+                    <Text style={{ fontSize: normalize(16), color: '#D05A0B', fontWeight: 'bold', marginLeft: normalize(25), marginTop: normalize(-30) }}>The best taste</Text>     
 
                     <TouchableOpacity onPress={() => this.props.navigation.navigate('Commande')} activeOpacity={0.8} style={styles.btnContainer} >
                         <Text style={{ color: 'white', fontSize: normalize(15), fontWeight: 'bold', letterSpacing: 0.7 }} >Personnaliser votre tacos</Text>
@@ -46,9 +46,9 @@ export default class Accueil extends Component {
 
                     <Swiper style={{ height: width / 2, marginTop: normalize(10), }} showsButtons={false} autoplay={true} autoplayTimeout={2} activeDotColor    ={"#D05A0B"}>
                         {
-                            banner.map((items) => {
+                            banner.map((items,i) => {
                                 return (
-                                    <Image style={styles.imageBanner} resizeMode="cover" source={{ uri: items }} />
+                                    <Image style={styles.imageBanner} resizeMode="cover" source={{ uri: items }} key={i} />
                                 )
                             })
                         }

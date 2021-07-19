@@ -620,7 +620,7 @@ const styles = StyleSheet.create({
         borderBottomLeftRadius: 10,
         borderTopLeftRadius:10,
         width: normalize(200),
-        height: normalize(45),
+        height: normalize(50),
         alignSelf: 'flex-end',
         marginLeft: normalize(140),
         marginTop: normalize(10)
@@ -634,6 +634,7 @@ const styles = StyleSheet.create({
         fontSize: normalize(24),
         fontWeight: 'bold',
         color: '#000000',
+        marginTop: normalize(-20)
 
 
     },
@@ -772,6 +773,7 @@ const styles = StyleSheet.create({
         width: normalize(380),
         height: normalize(174),
         alignSelf: 'center',
+      
     },
     rectangle2: {
         backgroundColor: 'white',

@@ -7,7 +7,7 @@ import AsyncStorage from '@react-native-community/async-storage';
 import GeoFencing from 'react-native-geo-fencing';
 import { request, PERMISSIONS } from 'react-native-permissions'
 import Geolocation from 'react-native-geolocation-service';
-
+import Toast from 'react-native-simple-toast';
 export default class Paiment extends React.Component {
 
 
@@ -247,7 +247,7 @@ ici"
         const choix = this.state.choix.label
         const user = this.state.user
         const coordonnees = this.state.marker
-        fetch("http://192.168.1.4:4000/envoyercommande", {
+        fetch("http://mysterious-badlands-16665.herokuapp.com/envoyercommande", {
             method: "POST",
             headers: {
                 'Content-Type': 'application/json'
@@ -274,7 +274,7 @@ ici"
                 }
             })
 
-        fetch("http://192.168.1.4:4000/envoyerAdminCommande", {
+        fetch("http://mysterious-badlands-16665.herokuapp.com/envoyerAdminCommande", {
             method: "POST",
             headers: {
                 'Content-Type': 'application/json'
@@ -302,7 +302,7 @@ ici"
             })
 
 
-        alert("Votre commande a ete bien passe")
+        Toast.show("Votre commande a ete bien passe")
         this.props.navigation.replace("MyTabs")
         const CMD = {
             "date": date,

@@ -1,6 +1,6 @@
-import React from 'react';
-import {StyleSheet, Text, View, Image, TouchableOpacity } from 'react-native';
-
+import React, { useEffect , useState }from 'react';
+import { StyleSheet, Text, View, Image, TouchableOpacity, Modal, ActivityIndicator } from 'react-native';
+import NetInfo from "@react-native-community/netinfo";
 import 'react-native-gesture-handler';
 import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
@@ -52,8 +52,34 @@ const styles = StyleSheet.create({
     
 });
 const OnBoarding = ({ navigation }) => {
+    const [loading, setLoading] = useState(false);
+    useEffect(() => {
+        NetInfo.addEventListener(state => {
+            if (state.isConnected == false) {
+                setLoading(true)
+            } else if (state.isConnected == true) {
+                setLoading(false)
+
+            }
+        });
+    }, [])
+
+
+
     return (
-        <View style={ styles.container }>
+        <View style={styles.container}>
+            <Modal
+
+                transparent={true}
+                visible={loading}
+            >
+
+                <View style={{ flex: 1, backgroundColor: '#000000aa', }}>
+                    <View style={{ flex: 1, position: 'absolute', left: 0, right: 0, top: 0, bottom: 0, alignItems: 'center', justifyContent: 'center' }}>
+                        <ActivityIndicator animating={loading} size="large" color="red" />
+                    </View>
+                </View>
+            </Modal>
             <Image style={styles.tinyLogo}
                 source={require('../assets/TacosLogo.png')} />
             <View style={styles.headline}>
