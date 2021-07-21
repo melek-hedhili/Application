@@ -12,13 +12,13 @@ export default class Commandes extends Component {
         super(props);
         this.state = {
             CmdInfo: [],
-            id: ""
+            id: "",
+            condition:false
 
 
         };
     }
-
-    componentDidMount() {
+    getCommande() {
         fetch("http://mysterious-badlands-16665.herokuapp.com/getCommande", {
             method: "GET",
             headers: {
@@ -36,6 +36,15 @@ export default class Commandes extends Component {
                     console.log(e)
                 }
             })
+    }
+    componentDidMount() {
+        this.getCommande()
+    }
+    componentDidUpdate() {
+        if (this.state.condition == true) {
+            this.getCommande()
+            this.setState({ condition: false })
+        }
     }
     render() {
         return (
@@ -57,7 +66,7 @@ export default class Commandes extends Component {
                                         <View style={{ flexDirection: 'row', justifyContent: 'space-between' }}>
                                             <Text style={{ fontWeight: "bold", fontSize: 20 }}>Tacos {item.data.map((elem) => elem.Viande)} </Text>
                                             <TouchableOpacity >
-                                                <Ionicons name="close-sharp" size={30} color={'#D05A0B'} onPress={() => this.DeleteCmd(i)} />
+                                                <Ionicons name="close-sharp" size={30} color={'#D05A0B'} onPress={() => this.DeleteCmd(i, item._id)} />
                                             </TouchableOpacity>
                                         </View>
 
@@ -81,36 +90,28 @@ export default class Commandes extends Component {
         );
     }
 
-    DeleteCmd(i) {
-        const dataCar = this.state.CmdInfo
+    DeleteCmd(i,id) {
         fetch("http://mysterious-badlands-16665.herokuapp.com/deleteCommande", {
             method: "DELETE",
             headers: {
                 'Content-Type': 'application/json'
             },
             body: JSON.stringify({
-                "id": this.state.id,
+                "id": id,
             })
         })
             .then(res => res.json())
             .then(async (data) => {
                 try {
                     console.log(data)
-
-
+                    alert("item removed !")
+                    this.setState({ condition: true })
                 } catch (e) {
 
                     console.log(e)
                 }
             })
-
-        dataCar.splice(i, 1)
-        this.setState({ CmdInfo: dataCar })
-
-
-        alert("item removed !")
     }
-
 }
 
 const styles = StyleSheet.create({

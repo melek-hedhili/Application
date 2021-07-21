@@ -1,5 +1,5 @@
-import React, { useState,useEffect} from 'react';
-import { StyleSheet, Text, View, Image, TouchableOpacity,  } from 'react-native';
+import React, { useState, useEffect } from 'react';
+import { StyleSheet, Text, View, Image, TouchableOpacity, Alert } from 'react-native';
 import 'react-native-gesture-handler';
 import normalize from 'react-native-normalize';
 import { NavigationContainer } from '@react-navigation/native';
@@ -42,6 +42,28 @@ const Profile = ({ navigation }) => {
                 navigation.replace('Login')
             })
     }
+    const showConfirmationDialog = () => {
+
+        return Alert.alert(
+            "Deconnection",
+            "Voulez vous vraiment deconnecter?",
+            [
+                // The "Yes" button
+                {
+                    text: "Oui",
+                    onPress: () => {
+                        logout()
+                    },
+                },
+                // The "No" button
+                // Does nothing but dismiss the dialog when tapped
+                {
+                    text: "Non",
+                },
+            ]
+        );
+
+    }
     var new_email = email.replace(/"/g, '');
     console.log(new_email, ' new email')
 
@@ -59,7 +81,7 @@ const Profile = ({ navigation }) => {
 
 
                 </View>
-                <TouchableOpacity onPress={()=>logout() } >
+                <TouchableOpacity onPress={() => showConfirmationDialog()} >
                     <Text style={styles.text}>Log out</Text>
                 </TouchableOpacity>
                 <Text style={styles.profileA}>{nom} {prenom}</Text>

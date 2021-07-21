@@ -1,21 +1,31 @@
 import 'react-native-gesture-handler';
 import React, { Component } from 'react';
-import { StyleSheet, Text, View, Image, TouchableOpacity, ScrollView, Dimensions, FlatList } from 'react-native';
+import { StyleSheet, Text, View, Image, TouchableOpacity, ScrollView, Dimensions, FlatList, Alert, TextInput } from 'react-native';
 import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
 import AntDesign from 'react-native-vector-icons/AntDesign';
 import normalize from 'react-native-normalize';
+import Toast from 'react-native-simple-toast';
 export default class Client extends Component {
     constructor(props) {
         super(props);
         this.state = {
             ClientInfo: [],
-            id:""
+            id: "",
+            filetredData: [],
+            condition:false,
+            nom: '',
+            prenom: '',
+            email: '',
+            telephone: '',
+            password: '',
+            recherche: '',
+
 
         };
     }
+    getUser() {
 
-    componentDidMount() {
         fetch("http://mysterious-badlands-16665.herokuapp.com/getUser", {
             method: "GET",
             headers: {
@@ -26,22 +36,46 @@ export default class Client extends Component {
             .then(async (results) => {
                 try {
                     this.setState({ ClientInfo: results })
+                    this.setState({ filetredData: results })
                     this.setState({ id: this.state.ClientInfo.map((x) => x._id) })
                     console.log("ID", this.state.id)
                     //console.log("Users", this.state.ClientInfo)
-                    
+
                 } catch (e) {
                     console.log(e)
                 }
             })
     }
+    componentDidMount() {
+        this.getUser()
+    }
+    componentDidUpdate() {
+        if (this.state.condition == true) {
+            this.getUser()
+            this.setState({ condition: false })
+
+        }
+    }
 
     render() {
         return (
             <View style={styles.container}>
+                <View style={{ flexDirection: 'row', justifyContent: 'space-between', marginTop: normalize(15) }}>
+                    <TextInput
+                        style={{ borderWidth: 1, backgroundColor: 'white', borderColor: 'red', height: normalize(50), width: normalize(270) }}
+                        value={this.state.recherche}
+                        onChangeText={(recherche_text) => this.searchFilter(recherche_text)}
+                        placeholder="Recherche..."
+                        placeholderTextColor={'#9FA5C0'}
+                    />
+
+
+
+                </View>
+               
                 <FlatList style={styles.list}
                     contentContainerStyle={styles.listContainer}
-                    data={this.state.ClientInfo}
+                    data={this.state.filetredData}
                     horizontal={false}
                     numColumns={2}
                     keyExtractor={(item) => {
@@ -57,7 +91,7 @@ export default class Client extends Component {
                                         <Text style={styles.name}>{item.nom} {item.prenom}</Text>
                                         <Text style={styles.position}>{item.email}</Text>
                                         <Text style={styles.position}>{item.telephone}</Text>
-                                        <TouchableOpacity style={styles.followButton} onPress={() => this.DeleteUser(i)}>
+                                        <TouchableOpacity style={styles.followButton} onPress={() => this.showConfirmationDialog(i, item._id)}>
                                             <AntDesign name="deleteuser" color={"white"} size={normalize(26)} />
                                         </TouchableOpacity>
                                     </View>
@@ -68,22 +102,22 @@ export default class Client extends Component {
             </View>
         );
     }
-    DeleteUser (i) {
-        const dataCar = this.state.ClientInfo
+    DeleteUser (i,id) {
         fetch("http://mysterious-badlands-16665.herokuapp.com/deleteUser", {
             method: "DELETE",
             headers: {
                 'Content-Type': 'application/json'
             },
             body: JSON.stringify({
-                "id": this.state.id,
+                "id": id,
             })
         })
             .then(res => res.json())
             .then(async (data) => {
                 try {
                     console.log(data)
-                   
+                    this.setState({condition:true})
+                    Toast.show("Client supprime !")
 
                 } catch (e) {
 
@@ -91,15 +125,53 @@ export default class Client extends Component {
                 }
             })
 
-        dataCar.splice(i, 1)
-        this.setState({ ClientInfo: dataCar })
 
 
-        alert("item removed !")
+
+
+
     }
 
+    showConfirmationDialog = (i, id) => {
 
+        return Alert.alert(
+            "Supression client",
+            "Voulez vous supprimer ce client?",
+            [
+                // The "Yes" button
+                {
+                    text: "Oui",
+                    onPress: () => {
+                        this.DeleteUser(i, id)
+                    },
+                },
+                // The "No" button
+                // Does nothing but dismiss the dialog when tapped
+                {
+                    text: "Non",
+                },
+            ]
+        );
 
+    }
+    searchFilter = (recherche_text) => {
+        if (recherche_text) {
+            const newData = this.state.ClientInfo.filter((item) => {
+                console.log(item.telephone)
+                const itemData = item.prenom.toUpperCase() + item.nom.toUpperCase() + item.email.toUpperCase() + item.telephone.toUpperCase()
+
+                const textData = recherche_text.toUpperCase();
+                return itemData.indexOf(textData) > -1;
+
+            })
+            this.setState({ filetredData: newData })
+            this.setState({ recherche: recherche_text })
+
+        } else {
+            this.setState({ filetredData: this.state.ClientInfo })
+            this.setState({ recherche: recherche_text })
+        }
+    }
 }
 
 const styles = StyleSheet.create({

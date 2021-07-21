@@ -63,12 +63,7 @@ const Navigation = () => {
         <NavigationContainer>
             <Stack.Navigator>
                 {
-                    isLoggedin == null && deliveryLoggedin == null && adminLoggedin==null ?
-                        (
-                            <Stack.Screen name="Splash" component={Splash} options={{ headerShown: false }} />
-                            
-                        )
-                        : isLoggedin == true ? //user token exist
+                    isLoggedin == true ? //user token exist
                             (<>
                                 <Stack.Screen name="Splash" component={Splash} options={{ headerShown: false }} />
                                 <Stack.Screen name="MyTabs" component={MyTabs} options={{ headerShown: false }} />

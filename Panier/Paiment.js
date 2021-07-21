@@ -67,6 +67,11 @@ export default class Paiment extends React.Component {
         ];
         
     }
+    cleanStorage() {
+        AsyncStorage.removeItem("STORAGE_Data").then((result_remove) => {
+            console.log('AsyncStorage STORAGE_Data removed and panier is empty')
+        })
+    }
     componentDidMount = async () => {
 
 
@@ -122,9 +127,18 @@ export default class Paiment extends React.Component {
             console.log(error)
 
         }
+
     }
 
-    
+    checBox(e) {
+        this.setState({ choix: e })
+        if (this.state.choix.label == 'livraison à domicile') {
+            this.setState({ Total: this.state.Total - 3 })
+            console.log(this.state.Total)
+        } else {
+            this.setState({ Total: this.state.Total + 3 })
+        }
+    }
 
 
 
@@ -211,14 +225,16 @@ ici"
 
                             <RadioButtonRN
 
-                                activeColor={'#FA4A0C'}
+                            activeColor={'#FA4A0C'}
                             deactiveColor={'#FA4A0C'}
                             style={{ justifyContent: 'space-between', marginTop: normalize(15) }}
-                                data={this.colors}
-                                initial={1}
-                                box={false}
-                                selectedBtn={(e) => this.setState({ choix: e })}
-                                circleSize={normalize(11)}
+                            data={this.colors}
+                            initial={1}
+                            box={false}
+                            selectedBtn={(e) => this.checBox(e)}
+                            circleSize={normalize(11)}
+
+
                             />
 
 
@@ -226,6 +242,7 @@ ici"
 
                     <View style={{ flexDirection: 'row', marginLeft: normalize(20), marginTop: normalize(10) }}>
                         <Text style={{ fontSize: 17, }}>Totale</Text>
+
                         <Text style={{ fontSize: normalize(22), marginLeft: normalize(220) }}>{this.state.Total} DT</Text>
                     </View>
                     <TouchableOpacity style={styles.btnSuivant} onPress={() => this.verif()} >
@@ -294,7 +311,9 @@ ici"
             .then(async (data) => {
                 try {
                     console.log("command sent to admin", data)
-
+                    Toast.show("Votre commande a ete bien passe")
+                    this.cleanStorage()
+                    this.props.navigation.replace("MyTabs")
                 } catch (e) {
 
                     console.log(e)
@@ -302,8 +321,7 @@ ici"
             })
 
 
-        Toast.show("Votre commande a ete bien passe")
-        this.props.navigation.replace("MyTabs")
+
         const CMD = {
             "date": date,
             "user": user,

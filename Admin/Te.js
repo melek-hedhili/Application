@@ -63,47 +63,7 @@ function Clients({ navigation }) {
 }
 
 function Livreurs({ navigation }) {
-    const [show, setShow] = useState(false)
-    const [email, setEmail] = useState('');
-    const [password, setPassword] = useState('');
-    const [nom, setNom] = useState('');
-    const [prenom, setPrenom] = useState('');
-    const [telephone, setTelephone] = useState("")
 
-    const AddDelivery = async () => {
-
-
-
-        fetch("http://192.168.1.4:4000/addDelivery", {
-                method: "POST",
-                headers: {
-                    'Content-Type': 'application/json'
-                },
-                body: JSON.stringify({
-                    "nom": nom,
-                    "prenom": prenom,
-                    "email": email,
-                    "password": password,
-                    "telephone": telephone
-
-                })
-            })
-                .then(res => res.json())
-                .then(async (data) => {
-                    try {
-
-                        console.log(data)
-                        alert("Succées")
-                    } catch (e) {
-                     
-                        console.log(e)
-                    }
-                })
-            console.log("delivery added")
-        
-
-
-    }
     const Logout = async () => {
 
         AsyncStorage.removeItem("admin_token").then(() => {
@@ -131,56 +91,8 @@ function Livreurs({ navigation }) {
                 </TouchableOpacity>
 
             </View>
-            <TouchableOpacity style={{ alignItems: 'flex-end', margin: normalize(16), marginVertical: 50 }} onPress={() => setShow(true)}>
-                <Entypo name="add-user" color={"black"} size={normalize(26)} />
-            </TouchableOpacity>
-            <Modal
 
-                transparent={true}
-                visible={show}
-            >
-                <View style={{ flex: 1, backgroundColor: '#000000aa' }}>
-
-                    <View style={{ flex: 1, backgroundColor: 'white', margin: 50, padding: 40, borderRadius: 10, flex: 1, justifyContent: 'space-around' }}>                                            
-
-                        <TextInput
-                            style={{height: normalize(56),width: normalize(250),flexDirection: 'column',backgroundColor: '#FFFFFF',alignItems: 'center',alignSelf: 'center',textAlign: 'center',justifyContent: 'center',paddingHorizontal: normalize(20),borderWidth: 1,}}
-                            value={ nom}
-                            onChangeText={(text) => setNom(text)}
-                            placeholder="nom"
-                            placeholderTextColor={'#9FA5C0'} />
-                        <TextInput
-                            style={{ height: normalize(56), width: normalize(250), flexDirection: 'column', backgroundColor: '#FFFFFF', alignItems: 'center', alignSelf: 'center', textAlign: 'center', justifyContent: 'center', paddingHorizontal: normalize(20), borderWidth: 1, }}
-                            value={prenom}
-                            onChangeText={(text) => setPrenom(text)}
-                            placeholder="prenom"
-                            placeholderTextColor={'#9FA5C0'} />
-                        <TextInput
-                            style={{ height: normalize(56), width: normalize(250), flexDirection: 'column', backgroundColor: '#FFFFFF', alignItems: 'center', alignSelf: 'center', textAlign: 'center', justifyContent: 'center', paddingHorizontal: normalize(20), borderWidth: 1, }}
-                            value={telephone}
-                            onChangeText={(text) => setTelephone(text)}
-                            placeholder="telephone"
-                            placeholderTextColor={'#9FA5C0'} 
-                        />
-                        <TextInput
-                            style={{ height: normalize(56), width: normalize(250), flexDirection: 'column', backgroundColor: '#FFFFFF', alignItems: 'center', alignSelf: 'center', textAlign: 'center', justifyContent: 'center', paddingHorizontal: normalize(20), borderWidth: 1, }}
-                            value={email}
-                            onChangeText={(text) => setEmail(text)}
-                            placeholder="email"
-                            placeholderTextColor={'#9FA5C0'} />
-                        <TextInput
-                            style={{ height: normalize(56), width: normalize(250), flexDirection: 'column', backgroundColor: '#FFFFFF', alignItems: 'center', alignSelf: 'center', textAlign: 'center', justifyContent: 'center', paddingHorizontal: normalize(20), borderWidth: 1, }}
-                            value={password}
-                            onChangeText={(text) => setPassword(text)}
-                            placeholder="mot de passe"
-                            secureTextEntry={true}
-                            placeholderTextColor={'#9FA5C0'} />
-                        <Button title="Ajouter" onPress={() => AddDelivery()} />
-                        <Button title="close" onPress={() => setShow(false)} />
-                    </View>
-                </View>
-            </Modal> 
-            <Livreur />
+            <Livreur/>
         </View>
     );
 }
