@@ -98,7 +98,10 @@ const Signup = ({ navigation }) => {
     };
 
     const SendUserInfo = async () => {
-        console.log(
+        {
+            /*
+             
+              console.log(
             'DATA SENT :',
             'name',
             nom,
@@ -113,6 +116,10 @@ const Signup = ({ navigation }) => {
             'image',
             image,
         );
+             
+             */
+
+        }
         if (validateInput() == true) {
             fetch('http://mysterious-badlands-16665.herokuapp.com/signup', {
                 method: 'POST',
@@ -131,8 +138,9 @@ const Signup = ({ navigation }) => {
                 .then(res => res.json())
                 .then(async data => {
                     try {
-                        navigation.navigate('Login');
                         console.log('data:', data);
+                        navigation.navigate('Login');
+                        
                     } catch (e) {
                         console.log(e);
                     }

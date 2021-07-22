@@ -3,14 +3,14 @@
     "",
     "\\Accueil",
     "\\Admin",
-    "\\Login",
-    "\\Navbar",
-    "\\Navigation",
-    "\\Order",
-    "\\Panier",
-    "\\PasswordRecovery",
-    "\\Rate"
+    "\\Connection",
+    "\\ios\\application",
+    "\\ios\\application.xcodeproj",
+    "\\ios\\application.xcodeproj\\xcshareddata",
+    "\\ios\\applicationTests",
+    "\\JSON",
+    "\\Panier"
   ],
-  "SelectedNode": "\\Admin\\Commandes.js",
+  "SelectedNode": "\\Admin\\Clients.js",
   "PreviewInSolutionExplorer": false
 }

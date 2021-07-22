@@ -110,12 +110,6 @@ export default  class Panier extends Component {
             )
     }
     notEmpty() {
-
-
-
-        
-
-
         return this.state.dataCart.map((item, i) => {
                 return (
                     
@@ -157,10 +151,7 @@ export default  class Panier extends Component {
 
                     
                 )
- 
-        })
-
-        
+        })      
     }
     Verify() {
 
