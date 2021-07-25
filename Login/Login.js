@@ -35,7 +35,8 @@ const styles = StyleSheet.create({
         fontSize: normalize(15),
         marginLeft:normalize(180),
         fontWeight: 'bold',
-        marginTop: normalize(60),
+        
+        
 
 
     },
@@ -262,7 +263,7 @@ const Login = ({ navigation }) => {
                 />
                 <SimpleLineIcons name="lock" color={'#2E3E5C'} size={normalize(26)} style={{ alignSelf: 'flex-start', marginTop: normalize(-38), marginLeft: normalize( 47), }} />
                 <TouchableOpacity onPress={() =>
-                    navigation.navigate('Recovery')}>
+                    navigation.navigate('Recovery')} style={{ marginTop: normalize(60),}}>
                     <Text
                         style={styles.mdp}
                     >Mot de passe oublie?</Text>

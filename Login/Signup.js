@@ -121,7 +121,7 @@ const Signup = ({ navigation }) => {
 
         }
         if (validateInput() == true) {
-            fetch('http://mysterious-badlands-16665.herokuapp.com/signup', {
+            fetch('http://192.168.1.8:4000/signup', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
@@ -158,6 +158,7 @@ const Signup = ({ navigation }) => {
         storageOptions: {
             skipBackup: true,
             path: 'images',
+
         },
     };
 

@@ -28,7 +28,8 @@ const Profile = ({ navigation }) => {
                     setPreom(data.prenom)
                     setTelephone(data.telephone)
                 }
-                )
+            )
+            
         }
         useEffect(() => {
             Boiler()
@@ -76,8 +77,12 @@ const Profile = ({ navigation }) => {
                 <Text style={styles.profile}>Profile</Text>
                 
                 <View style={styles.avatarPlaceholder} >
-                    <Image source={ require('../assets/user.png')}
-                        style={styles.avatar} />
+                    {
+                        image == null | image == undefined ?
+                        <Image style={styles.avatar} source={{ uri: "https://bootdey.com/img/Content/avatar/avatar1.png" }} />
+                        : <Image style={styles.avatar} source={{ uri: `data:image/gif;base64,${image}` }} />
+                    }
+
 
 
                 </View>

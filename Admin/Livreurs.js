@@ -7,25 +7,132 @@ import AntDesign from 'react-native-vector-icons/AntDesign';
 import normalize from 'react-native-normalize';
 import Toast from 'react-native-simple-toast';
 import Entypo from 'react-native-vector-icons/Entypo';
+
+import { launchImageLibrary } from 'react-native-image-picker';
+import ImgToBase64 from 'react-native-image-base64';
+
 export default class Livreur extends Component {
     constructor(props) {
         super(props);
         this.state = {
             LivreurInfo: [],
-            filetredData:[],
+            filetredData: [],
             id: "",
             show: false,
-            nom:'',
-            prenom:'',
-            email:'',
-            telephone:'',
+            nom: '',
+            prenom: '',
+            email: '',
+            telephone: '',
             password: '',
+            image: '',
             recherche: '',
-            condition:false,
-
-
+            condition: false,
+            focusednom: false,
+            focusedemail: false,
+            focusedprenom: false,
+            focusednum: false,
+            focusedpass: false,
         };
+
     }
+
+    handleFocusNom = () => { this.setState({ focusednom: true }); }
+    handleBlurNom = () => { this.setState({ focusednom: false }); }
+
+    handleFocusEmail = () => { this.setState({ focusedemail: true }); }
+    handleBlurEmail = () => { this.setState({ focusedemail: false }); }
+
+    handleFocusPrenom = () => { this.setState({ focusedprenom: true }); }
+    handleBlurPrenom = () => { this.setState({ focusedprenom: false }); }
+
+    handleFocusNum = () => { this.setState({ focusednum: true }); }
+    handleBlurNum = () => { this.setState({ focusednum: false }); }
+
+    handleFocusPassword = () => { this.setState({ focusedpass: true }); }
+    handleBlurPassword = () => { this.setState({ focusedpass: false }); }
+
+
+    validateInput = () => {
+        const hasNumber = /\d/;
+        console.log(
+            "value",
+            !this.state.password.length >= 6 || !hasNumber.test(this.state.password) == true
+        );
+        if (this.state.nom.length <= 2) {
+            alert("Veuiller verifier votre nom");
+            return false;
+        } else {
+            if (this.state.prenom.length <= 2) {
+                alert("Veuiller verifier votre Prenom");
+                return false;
+            } else {
+                if (this.state.telephone.length !== 8 || /^[0-9]+$/.test(this.state.telephone) == false) {
+                    alert("Veuiller verifier votre numero de telephone");
+                    return false;
+                } else {
+                    if (!/^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/.test(this.state.email)) {
+                        alert("Veuiller verifier votre Email");
+                    } else {
+                        if (!this.state.password.length >= 6 || !hasNumber.test(this.state.password) == true) {
+                            alert("Veuillez verifier les conditions pour  votre mot de passe");
+                            console.log("has number ?", hasNumber.test(this.state.password));
+                            console.log(this.state.password.length);
+                            return false;
+                        } else {
+                            if (this.state.image.length == 0) {
+                                alert("veuillez choisir une image");
+                                return false;
+                            }
+                        }
+                    }
+                }
+            }
+        }
+        return true;
+    };
+
+
+    getImage = () => {
+        const options = {
+            title: "Select Avatar",
+
+            customButtons: [{ name: "fb", title: "Choose Photo from Facebook" }],
+            storageOptions: {
+                skipBackup: true,
+                path: "images",
+            },
+        };
+        launchImageLibrary(options, response => {
+            console.log('Response = ', response);
+
+            if (response.didCancel) {
+                console.log('User cancelled image picker');
+            } else if (response.error) {
+                console.log('ImagePicker Error: ', response.error);
+            } else if (response.customButton) {
+                console.log('User tapped custom button: ', response.customButton);
+            } else {
+                // const source = {uri: response.uri};
+                ImgToBase64.getBase64String(response.assets[0].uri)
+                    .then(base64String => {
+                        this.setState({ image: base64String });
+                    })
+                    .catch(err => console.log(err));
+                // You can also display the image using data:
+            }
+        });
+    };
+
+
+
+
+
+
+
+
+
+
+
     getLivreur() {
         fetch("http://mysterious-badlands-16665.herokuapp.com/getLivreur", {
             method: "GET",
@@ -60,44 +167,61 @@ export default class Livreur extends Component {
     }
     AddDelivery = async () => {
 
+        console.log(
+            "DATA SENT :",
+            "name",
+            this.state.nom,
+            "prenom",
+            this.state.prenom,
+            "email",
+            this.state.email,
+            "password",
+            this.state.password,
+            "telephone",
+            this.state.telephone,
+            // "image",
+            // this.state.image
+        );
+        console.log("whyyyyyyyyyyyyyyyyyyyy", this.validateInput() == true)
+        if (this.validateInput() == true) {
+            fetch("http://mysterious-badlands-16665.herokuapp.com/addDelivery", {
+                method: "POST",
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({
+                    "nom": this.state.nom,
+                    "prenom": this.state.prenom,
+                    "email": this.state.email,
+                    "password": this.state.password,
+                    "telephone": this.state.telephone,
+                    "image": this.state.image
 
-
-        fetch("https://mysterious-badlands-16665.herokuapp.com/addDelivery", {
-            method: "POST",
-            headers: {
-                'Content-Type': 'application/json'
-            },
-            body: JSON.stringify({
-                "nom": this.state.nom,
-                "prenom": this.state.prenom,
-                "email": this.state.email,
-                "password": this.state.password,
-                "telephone": this.state.telephone
-
+                })
             })
-        })
-            .then(res => res.json())
-            .then(async (data) => {
-                try {
+                .then(res => res.json())
+                .then(async (data) => {
+                    try {
 
-                    console.log(data)
-                    alert("Succées")
+                        console.log(data)
+                        alert("Succées")
 
-                    this.setState({ nom: '' })
-                    this.setState({ prenom: '' })
-                    this.setState({ email: '' })
-                    this.setState({ telephone: '' })
-                    this.setState({ password: '' })
-                    this.setState({ condition:true })
-                } catch (e) {
+                        this.setState({ nom: '' })
+                        this.setState({ prenom: '' })
+                        this.setState({ email: '' })
+                        this.setState({ telephone: '' })
+                        this.setState({ password: '' })
+                        this.setState({ image: '' })
+                        this.setState({ condition: true })
+                    } catch (e) {
 
-                    console.log(e)
-                }
-            })
-        console.log("delivery added")
+                        console.log(e)
+                    }
+                })
+            console.log("delivery added")
 
 
-
+        }
     }
 
     render() {
@@ -110,7 +234,7 @@ export default class Livreur extends Component {
                         value={this.state.recherche}
                         onChangeText={(recherche_text) => this.searchFilter(recherche_text)}
                         placeholder="Recherche..."
-                        placeholderTextColor={'#9FA5C0'} 
+                        placeholderTextColor={'#9FA5C0'}
                     />
                     <TouchableOpacity style={{ alignItems: 'flex-end', margin: normalize(16), marginLeft: normalize(30) }} onPress={() => this.setState({ show: true })}>
                         <AntDesign name="adduser" color={"black"} size={normalize(26)} />
@@ -125,45 +249,193 @@ export default class Livreur extends Component {
                 >
                     <View style={{ flex: 1, backgroundColor: '#000000aa' }}>
 
-                        <View style={{ flex: 1, backgroundColor: 'white', margin: 50, padding: 40, borderRadius: 10, flex: 1, justifyContent: 'space-around' }}>
+                        <ScrollView>
+                            <View style={{ flex: 1, backgroundColor: 'white', margin: 50, padding: 40, borderRadius: 10, flex: 1, justifyContent: 'space-around' }}>
 
-                            <TextInput
-                                style={{ height: normalize(56), width: normalize(250), flexDirection: 'column', backgroundColor: '#FFFFFF', alignItems: 'center', alignSelf: 'center', textAlign: 'center', justifyContent: 'center', paddingHorizontal: normalize(20), borderWidth: 1, }}
-                                value={this.state.nom}
-                                onChangeText={(text) => this.setState({ nom: text })}
-                                placeholder="nom"
-                                placeholderTextColor={'#9FA5C0'} />
-                            <TextInput
-                                style={{ height: normalize(56), width: normalize(250), flexDirection: 'column', backgroundColor: '#FFFFFF', alignItems: 'center', alignSelf: 'center', textAlign: 'center', justifyContent: 'center', paddingHorizontal: normalize(20), borderWidth: 1, }}
-                                value={this.state.prenom}
-                                onChangeText={(text) => this.setState({ prenom: text })}
-                                placeholder="prenom"
-                                placeholderTextColor={'#9FA5C0'} />
-                            <TextInput
-                                style={{ height: normalize(56), width: normalize(250), flexDirection: 'column', backgroundColor: '#FFFFFF', alignItems: 'center', alignSelf: 'center', textAlign: 'center', justifyContent: 'center', paddingHorizontal: normalize(20), borderWidth: 1, }}
-                                value={this.state.telephone}
-                                onChangeText={(text) => this.setState({ telephone: text })}
-                                placeholder="telephone"
-                                placeholderTextColor={'#9FA5C0'}
-                            />
-                            <TextInput
-                                style={{ height: normalize(56), width: normalize(250), flexDirection: 'column', backgroundColor: '#FFFFFF', alignItems: 'center', alignSelf: 'center', textAlign: 'center', justifyContent: 'center', paddingHorizontal: normalize(20), borderWidth: 1, }}
-                                value={this.state.email}
-                                onChangeText={(text) => this.setState({ email: text })}
-                                placeholder="email"
-                                placeholderTextColor={'#9FA5C0'} />
-                            <TextInput
-                                style={{ height: normalize(56), width: normalize(250), flexDirection: 'column', backgroundColor: '#FFFFFF', alignItems: 'center', alignSelf: 'center', textAlign: 'center', justifyContent: 'center', paddingHorizontal: normalize(20), borderWidth: 1, }}
-                                value={this.state.password}
-                                onChangeText={(text) => this.setState({ password: text })}
-                                placeholder="mot de passe"
-                                secureTextEntry={true}
-                                placeholderTextColor={'#9FA5C0'} />
-                            <Button title="Ajouter" onPress={() => this.AddDelivery()} />
-                            <Button title="close" onPress={() => this.setState({ show: false })} />
-                        </View>
+
+
+                                <TextInput
+                                    style={{
+                                        height: normalize(56),
+                                        width: normalize(250),
+                                        borderRadius: 30,
+                                        flexDirection: 'column',
+                                        backgroundColor: '#FFFFFF',
+                                        alignItems: 'center',
+                                        alignSelf: 'center',
+                                        justifyContent: 'center',
+                                        //resizeMode: 'contain',
+                                        marginTop: normalize(44),
+                                        paddingHorizontal: normalize(20),
+                                        borderWidth: 1,
+                                        borderColor: this.state.focusednom ? '#CB5C17' : '#D0DBEA',
+                                    }}
+                                    placeholder="Nom "
+                                    placeholderTextColor={'#9FA5C0'}
+                                    value={this.state.nom}
+                                    onChangeText={text => this.setState({ nom: text.trim() })}
+                                    onFocus={this.handleFocusNom}
+                                    onBlur={this.handleBlurNom}
+                                />
+
+                                {/* ///////////////////////// */}
+                                <TextInput
+                                    style={{
+                                        height: normalize(56),
+                                        width: normalize(250),
+                                        borderRadius: 30,
+                                        flexDirection: 'column',
+                                        backgroundColor: '#FFFFFF',
+                                        alignItems: 'center',
+                                        alignSelf: 'center',
+                                        justifyContent: 'center',
+                                        //resizeMode: 'contain',
+                                        marginTop: normalize(16),
+                                        paddingHorizontal: normalize(20),
+                                        borderWidth: 1,
+                                        borderColor: this.state.focusedprenom ? '#CB5C17' : '#D0DBEA',
+                                    }}
+                                    placeholder="Prenom"
+                                    placeholderTextColor={'#9FA5C0'}
+                                    value={this.state.prenom}
+                                    onChangeText={(text) => this.setState({ prenom: text.trim() })}
+                                    onFocus={this.handleFocusPrenom}
+                                    onBlur={this.handleBlurPrenom}
+                                />
+                                {/* //////////////////// */}
+                                <TextInput
+                                    style={{
+                                        height: normalize(56),
+                                        width: normalize(250),
+                                        borderRadius: 30,
+                                        flexDirection: 'column',
+                                        backgroundColor: '#FFFFFF',
+                                        alignItems: 'center',
+                                        alignSelf: 'center',
+                                        justifyContent: 'center',
+                                        //resizeMode: 'contain',
+                                        marginTop: normalize(16),
+                                        paddingHorizontal: normalize(20),
+                                        borderWidth: 1,
+                                        borderColor: this.state.focusednum ? '#CB5C17' : '#D0DBEA',
+                                    }}
+                                    placeholder="Telephone "
+                                    placeholderTextColor={'#9FA5C0'}
+                                    value={this.state.telephone}
+                                    onChangeText={text => this.setState({ telephone: text.trim() })}
+                                    onFocus={this.handleFocusNum}
+                                    onBlur={this.handleBlurNum}
+                                />
+                                {/* /////////////////////////////// */}
+                                <TextInput
+                                    style={{
+                                        height: normalize(56),
+                                        width: normalize(250),
+                                        borderRadius: 30,
+                                        flexDirection: 'column',
+                                        backgroundColor: '#FFFFFF',
+                                        alignItems: 'center',
+                                        alignSelf: 'center',
+                                        justifyContent: 'center',
+                                        //resizeMode: 'contain',
+                                        marginTop: normalize(16),
+                                        paddingHorizontal: normalize(20),
+                                        borderWidth: 1,
+                                        borderColor: this.state.focusedemail ? '#CB5C17' : '#D0DBEA',
+                                    }}
+                                    placeholder="Email"
+                                    placeholderTextColor={'#9FA5C0'}
+                                    value={this.state.email}
+                                    onChangeText={(text) => this.setState({ email: text.trim() })}
+                                    onFocus={this.handleFocusEmail}
+                                    onBlur={this.handleBlurEmail}
+                                />
+                                {/* /////////////////////////////// */}
+                                <TextInput
+                                    style={{
+                                        height: normalize(56),
+                                        width: normalize(250),
+                                        borderRadius: 30,
+                                        flexDirection: 'column',
+                                        backgroundColor: '#FFFFFF',
+                                        alignItems: 'center',
+                                        alignSelf: 'center',
+                                        justifyContent: 'center',
+                                        //resizeMode: 'contain',
+                                        marginTop: normalize(16),
+                                        paddingHorizontal: normalize(20),
+                                        borderWidth: 1,
+                                        borderColor: this.state.focusedpass ? '#CB5C17' : '#D0DBEA',
+                                    }}
+                                    secureTextEntry={true}
+                                    placeholder="Mot de passe"
+                                    placeholderTextColor={'#9FA5C0'}
+                                    value={this.state.password}
+                                    onChangeText={text => this.setState({ password: text.trim() })}
+                                    onFocus={this.handleFocusPassword}
+                                    onBlur={this.handleBlurPassword}
+                                />
+                                {/* ///////////////////////////// */}
+
+                                <TouchableOpacity
+                                    activeOpacity={0.8}
+                                    style={styles.btnContainerRetour}
+                                    onPress={() => {
+                                        this.getImage();
+                                    }}>
+                                    <Text
+                                        style={{
+                                            color: '#9FA5C0',
+                                            fontSize: normalize(15),
+                                            fontWeight: 'bold',
+                                            letterSpacing: 0.7,
+                                            fontFamily: 'arial',
+                                        }}>
+                                        Ajouter Image
+        </Text>
+                                </TouchableOpacity>
+                                <TouchableOpacity
+                                    activeOpacity={0.8}
+                                    style={styles.btnContainer}
+                                    onPress={() => {
+                                        console.log('lulululullulululululul')
+                                        this.AddDelivery()
+                                    }}>
+                                    <Text
+                                        style={{
+                                            color: 'white',
+                                            fontSize: normalize(15),
+                                            fontWeight: 'bold',
+                                            letterSpacing: 0.7,
+                                            fontFamily: 'arial',
+                                            marginLeft: normalize(10),
+                                        }}>
+                                        Ajouter Livreur
+        </Text>
+                                </TouchableOpacity>
+                                <TouchableOpacity
+                                    activeOpacity={0.8}
+                                    style={styles.btnContainer}
+                                    onPress={() => {
+                                        this.setState({ show: false })
+                                    }}>
+                                    <Text
+                                        style={{
+                                            color: 'white',
+                                            fontSize: normalize(15),
+                                            fontWeight: 'bold',
+                                            letterSpacing: 0.7,
+                                            fontFamily: 'arial',
+                                            marginLeft: normalize(10),
+                                        }}>Retour
+                    </Text>
+                                </TouchableOpacity>
+
+
+                            </View>
+                        </ScrollView>
                     </View>
-                </Modal> 
+                </Modal>
                 <FlatList style={styles.list}
                     contentContainerStyle={styles.listContainer}
                     data={this.state.filetredData}
@@ -175,15 +447,18 @@ export default class Livreur extends Component {
                     renderItem={({ item, i }) => {
                         return (
                             <TouchableOpacity style={styles.card}>
+                                {item.image == null | item.image == undefined ?
+                                    <Image style={styles.userImage} source={{ uri: "https://bootdey.com/img/Content/avatar/avatar1.png" }} />
+                                    : <Image style={styles.userImage} source={{ uri: `data:image/gif;base64,${item.image}` }} />
+                                }
 
-                                <Image style={styles.userImage} source={{ uri: "https://bootdey.com/img/Content/avatar/avatar1.png" }} />
                                 <View style={styles.cardFooter}>
                                     <View style={{ alignItems: "center", justifyContent: "center" }}>
                                         <Text style={styles.name}>{item.nom} {item.prenom}</Text>
                                         <Text style={styles.position}>{item.email}</Text>
                                         <Text style={styles.position}>{item.telephone}</Text>
                                         <TouchableOpacity style={styles.followButton} onPress={() => this.showConfirmationDialog(i, item._id)}>
-                                            <AntDesign name="deleteuser" color={"white"} size={normalize(26)}  />
+                                            <AntDesign name="deleteuser" color={"white"} size={normalize(26)} />
                                         </TouchableOpacity>
                                     </View>
                                 </View>
@@ -194,7 +469,7 @@ export default class Livreur extends Component {
         );
     }
 
-    DeleteLivreur(i,id) {
+    DeleteLivreur(i, id) {
         fetch("http://mysterious-badlands-16665.herokuapp.com/deleteLivreur", {
             method: "DELETE",
             headers: {
@@ -214,9 +489,9 @@ export default class Livreur extends Component {
                     console.log(e)
                 }
             })
-        
+
     }
-    showConfirmationDialog = (i,id) => {
+    showConfirmationDialog = (i, id) => {
 
         return Alert.alert(
             "Supression livreur",
@@ -226,7 +501,7 @@ export default class Livreur extends Component {
                 {
                     text: "Oui",
                     onPress: () => {
-                        this.DeleteLivreur(i,id)
+                        this.DeleteLivreur(i, id)
                     },
                 },
                 // The "No" button
@@ -250,7 +525,7 @@ export default class Livreur extends Component {
             })
             this.setState({ filetredData: newData })
             this.setState({ recherche: recherche_text })
-            
+
         } else {
             this.setState({ filetredData: this.state.LivreurInfo })
             this.setState({ recherche: recherche_text })
@@ -349,6 +624,31 @@ const styles = StyleSheet.create({
     icon: {
         height: 20,
         width: 20,
-    }
+    },
+    btnContainerRetour: {
+        backgroundColor: '#FFFFFF',
+        height: normalize(56),
+        width: normalize(250),
+        resizeMode: 'contain',
+        borderRadius: 30,
+        justifyContent: 'center',
+        alignItems: 'center',
+        alignSelf: 'center',
+        borderColor: '#D0DBEA',
+        borderWidth: 1,
+
+        marginTop: normalize(30),
+    }, btnContainer: {
+        backgroundColor: '#CB5C17',
+        height: normalize(56),
+        width: normalize(250),
+        //resizeMode: 'contain',
+        borderRadius: 30,
+        justifyContent: 'center',
+        alignItems: 'center',
+        alignSelf: 'center',
+
+        marginTop: normalize(54),
+    },
 });
 
