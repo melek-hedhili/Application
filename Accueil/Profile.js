@@ -14,6 +14,7 @@ const Profile = ({ navigation }) => {
     const [nom, setNom] = useState("loading")
     const [prenom, setPreom] = useState("loading")
     const [telephone, setTelephone] = useState("loading")
+    const [image, setImage] = useState("loading")
         const Boiler = async () => {
             const token = await AsyncStorage.getItem("token")
             fetch('http://mysterious-badlands-16665.herokuapp.com/', {
@@ -27,6 +28,7 @@ const Profile = ({ navigation }) => {
                     setNom(data.nom)
                     setPreom(data.prenom)
                     setTelephone(data.telephone)
+                    setImage(data.image)
                 }
             )
             

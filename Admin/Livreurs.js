@@ -392,7 +392,7 @@ export default class Livreur extends Component {
                                             fontFamily: 'arial',
                                         }}>
                                         Ajouter Image
-        </Text>
+                                        </Text>
                                 </TouchableOpacity>
                                 <TouchableOpacity
                                     activeOpacity={0.8}
@@ -410,8 +410,7 @@ export default class Livreur extends Component {
                                             fontFamily: 'arial',
                                             marginLeft: normalize(10),
                                         }}>
-                                        Ajouter Livreur
-        </Text>
+                                        Ajouter Livreur</Text>
                                 </TouchableOpacity>
                                 <TouchableOpacity
                                     activeOpacity={0.8}

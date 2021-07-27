@@ -1,3 +1,4 @@
+/* eslint-disable react-native/no-inline-styles */
 import React, { useState, useEffect } from 'react';
 import 'react-native-gesture-handler';
 import { NavigationContainer } from '@react-navigation/native';
@@ -9,6 +10,7 @@ import {
     Image,
     TouchableOpacity,
     TextInput,
+    ActivityIndicator,
 } from 'react-native';
 import normalize from 'react-native-normalize';
 import AsyncStorage from '@react-native-community/async-storage';
@@ -25,6 +27,7 @@ const Signup = ({ navigation }) => {
     const [prenom, setPrenom] = useState('');
     const [telephone, setTelephone] = useState('');
     const [image, setImage] = useState('');
+    const [enabled, setEnabled] = useState(true);
 
     const hasNumber = /\d/;
 
@@ -100,28 +103,32 @@ const Signup = ({ navigation }) => {
     const SendUserInfo = async () => {
         {
             /*
-             
-              console.log(
-            'DATA SENT :',
-            'name',
-            nom,
-            'prenom',
-            prenom,
-            'email',
-            email,
-            'password',
-            password,
-            'telephone',
-            telephone,
-            'image',
-            image,
-        );
-             
-             */
-
+                   
+                    console.log(
+                  'DATA SENT :',
+                  'name',
+                  nom,
+                  'prenom',
+                  prenom,
+                  'email',
+                  email,
+                  'password',
+                  password,
+                  'telephone',
+                  telephone,
+                  'image',
+                  image,
+              );
+                   
+                   */
         }
+        //check how many clicks were made
+
+        console.log('clicked');
+
         if (validateInput() == true) {
-            fetch('http://192.168.1.8:4000/signup', {
+            setEnabled(false);
+            fetch('https://mysterious-badlands-16665.herokuapp.com/signup', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
@@ -138,14 +145,16 @@ const Signup = ({ navigation }) => {
                 .then(res => res.json())
                 .then(async data => {
                     try {
+                        setEnabled(true);
                         console.log('data:', data);
                         navigation.navigate('Login');
-                        
                     } catch (e) {
+                        setEnabled(true);
                         console.log(e);
                     }
                 })
                 .catch(err => {
+                    setEnabled(true);
                     console.log(err);
                 });
         }
@@ -153,12 +162,13 @@ const Signup = ({ navigation }) => {
 
     const options = {
         title: 'Select Avatar',
-
+        quality: 0.5,
+        maxWidth: 500,
+        maxHeight: 500,
         customButtons: [{ name: 'fb', title: 'Choose Photo from Facebook' }],
         storageOptions: {
             skipBackup: true,
             path: 'images',
-
         },
     };
 
@@ -363,18 +373,23 @@ const Signup = ({ navigation }) => {
                 style={styles.btnContainer}
                 onPress={() => {
                     SendUserInfo();
-                }}>
-                <Text
-                    style={{
-                        color: 'white',
-                        fontSize: normalize(15),
-                        fontWeight: 'bold',
-                        letterSpacing: 0.7,
-                        fontFamily: 'arial',
-                        marginLeft: normalize(10),
-                    }}>
-                    S'inscrire
-        </Text>
+                }}
+                enabled={enabled}>
+                {enabled ? (
+                    <Text
+                        style={{
+                            color: 'white',
+                            fontSize: normalize(15),
+                            fontWeight: 'bold',
+                            letterSpacing: 0.7,
+                            fontFamily: 'arial',
+                            marginLeft: normalize(10),
+                        }}>
+                        S'inscrire
+                    </Text>
+                ) : (
+                        <ActivityIndicator size={normalize(40)} color="white" />
+                    )}
             </TouchableOpacity>
         </View>
     );

@@ -22,6 +22,7 @@ export default class Client extends Component {
             recherche: '',
 
 
+
         };
     }
     getUser() {
@@ -38,8 +39,8 @@ export default class Client extends Component {
                     this.setState({ ClientInfo: results })
                     this.setState({ filetredData: results })
                     this.setState({ id: this.state.ClientInfo.map((x) => x._id) })
-                    console.log("ID", this.state.id)
-                    //console.log("Users", this.state.ClientInfo)
+                    console.log("ClientInfo", this.state.ClientInfo.telephone)
+                    //console.log("ClientInfo", this.state.ClientInfo)
 
                 } catch (e) {
                     console.log(e)
@@ -85,7 +86,10 @@ export default class Client extends Component {
                         return (
                             <TouchableOpacity style={styles.card}>
 
-                                <Image style={styles.userImage} source={{ uri: "https://bootdey.com/img/Content/avatar/avatar1.png" }} />
+                                {item.image == null | item.image == undefined ?
+                                    <Image style={styles.userImage} source={{ uri: "https://bootdey.com/img/Content/avatar/avatar1.png" }} />
+                                    : <Image style={styles.userImage} source={{ uri: `data:image/gif;base64,${item.image}` }} />
+                                }
                                 <View style={styles.cardFooter}>
                                     <View style={{ alignItems: "center", justifyContent: "center" }}>
                                         <Text style={styles.name}>{item.nom} {item.prenom}</Text>
